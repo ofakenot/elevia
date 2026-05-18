@@ -1456,7 +1456,12 @@
                 </div>
             </div>
 
-            <h2 class="profile-main-name luxury-gold-text">@goelevia</h2>
+           <h2 class="profile-main-name luxury-gold-text" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                @goelevia
+                <svg class="instagram-verified-badge" viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: #0095f6; flex-shrink: 0; display: inline-block;" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </h2>
             <div class="profile-brand-badge">Comunidade Oficial</div>
             
             <p class="profile-bio-text">
@@ -1531,7 +1536,7 @@
         z-index: 10;
     }
 
-    /* ALTERADO: Card modificado de translúcido para Branco Sólido de Alta Costura */
+    /* Card Branco Sólido de Alta Costura */
     .apple-ios-icon-card {
         position: relative;
         width: 100%;
@@ -1541,19 +1546,13 @@
         align-items: center;
         padding: 55px 40px;
         border-radius: 44px; /* Proporção Squircle iOS */
-        
-        /* Fundo Branco Opaque com leve refração sutil */
         background: #ffffff;
-        
-        /* Bordas polidas acetinadas */
         border: 1px solid rgba(179, 147, 77, 0.15);
         border-top: 1px solid rgba(179, 147, 77, 0.25);
-        
         box-shadow: 
             0 40px 90px rgba(255, 42, 133, 0.12),
             0 20px 40px rgba(0, 0, 0, 0.04),
             inset 0 1px 2px rgba(255, 255, 255, 0.9);
-            
         overflow: hidden;
         transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
     }
@@ -1566,7 +1565,6 @@
         border-color: rgba(179, 147, 77, 0.4);
     }
 
-    /* Brilho Especular Cromado na superfície */
     .card-glass-specular-reflection {
         position: absolute;
         top: -100%;
@@ -1615,14 +1613,28 @@
         font-weight: 700;
         letter-spacing: -0.03em;
         text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px; /* Espaço milimétrico para o selo */
     }
 
-    /* ALTERADO: Efeito de Cor Ouro Líquido Realista para o Arroba */
+    /* Efeito de Cor Ouro Líquido Realista */
     .luxury-gold-text {
         background: linear-gradient(135deg, #a3823c 0%, #e7d08c 35%, #b3934d 75%, #967631 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         filter: drop-shadow(0px 1px 1px rgba(163, 130, 60, 0.15));
+    }
+
+    /* NOVO: Selo Verificado do Instagram Estilizado e Proporcional */
+    .instagram-verified-badge {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        display: inline-block;
+        color: #0095f6; /* Azul oficial de verificação do Instagram */
+        filter: drop-shadow(0px 2px 4px rgba(0, 149, 246, 0.15));
     }
 
     .profile-brand-badge {
@@ -1655,7 +1667,6 @@
         margin: 26px 0;
     }
 
-    /* Botões Sociais Harmonizados com Ouro */
     .profile-social-row {
         display: flex;
         align-items: center;
@@ -1694,7 +1705,6 @@
         height: 18px;
     }
 
-    /* Tooltips Exclusivos */
     .css-native-tooltip {
         position: absolute;
         bottom: 56px;
@@ -1729,7 +1739,6 @@
         transform: translateX(-50%) translateY(0);
     }
 
-    /* Botão de Ação Imperial Premium */
     .apple-action-button {
         display: inline-flex;
         align-items: center;
@@ -1749,7 +1758,7 @@
     }
 
     .apple-action-button:hover {
-        background-color: #ff2a85; /* Respiro elegante no magenta da marca ao pairar */
+        background-color: #ff2a85; 
         border-color: #ff2a85;
         transform: scale(1.02);
         box-shadow: 0 12px 35px rgba(255, 42, 133, 0.3);
@@ -1758,13 +1767,13 @@
     .arrow-up-right-icon {
         width: 15px;
         height: 15px;
-        color: #e7d08c; /* Detalhe da seta em dourado */
+        color: #e7d08c;
         transition: transform 0.3s ease, color 0.3s ease;
     }
 
     .apple-action-button:hover .arrow-up-right-icon {
         transform: translate(2px, -2px);
-        color: #ffffff; /* Seta vira branca quando o botão acende em rosa */
+        color: #ffffff;
     }
 </style>
 
