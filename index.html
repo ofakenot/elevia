@@ -5,33 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELEVIA | Lançamento Oficial</title>
     
-    <!-- Importando Fontes: Syncopate para o Título e Inter para o restante do texto -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
 
-    <!-- Importando Three.js via CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
-        /* ==========================================
-           VARIÁVEIS DE COR E CONFIGURAÇÕES GERAIS
-           ========================================== */
         :root {
-            --background: #1a0613;       /* Rosa ultra profundo/quase preto para o fundo */
-            --foreground: #ffffff;       /* Branco puro para textos principais */
-            --pink-primary: #ff2a85;     /* Rosa Elevia vibrante e moderno */
-            --pink-glow: rgba(255, 42, 133, 0.4);
-            --white-muted: rgba(255, 255, 255, 0.65);
+            --background: #f8a1d0;
+            --foreground: #1a0613;
+            --pink-primary: #ff2a85;
+            --pink-glow: rgba(255, 42, 133, 0.2);
+            --text-muted: #5a4953;
             --font-title: 'Syncopate', sans-serif;
             --font-sans: 'Inter', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--background);
@@ -40,15 +31,49 @@
             overflow-x: hidden;
         }
 
- /* ==========================================
-           HEADER / TOPO COM A LOGO ELEVIA
-           ========================================== */
+        /* ── LANGUAGE SWITCHER ── */
+        .lang-switcher {
+            position: fixed;
+            top: 18px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 6px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 999px;
+            padding: 5px 8px;
+            box-shadow: 0 8px 28px rgba(26,6,19,0.10);
+            border: 1px solid rgba(26,6,19,0.06);
+        }
+
+        .lang-btn {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: var(--foreground);
+            color: #fff;
+        }
+
+        /* ── HEADER / LOGO ── */
         .site-header {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
-            padding: 2rem 1.5rem;
+            padding: 0 1.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -56,2245 +81,865 @@
         }
 
         .logo-container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0.6rem 2rem;
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 15px rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
+            background: rgba(255,255,255,0.95);
+            padding: 1.2rem 2.5rem 1.4rem 2.5rem;
+            border-radius: 0 0 40px 40px;
+            position: relative; top: 0;
+            box-shadow: 0 15px 35px rgba(26,6,19,0.06), 0 0 15px rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
         }
 
-        .logo-container:hover {
-            transform: scale(1.03);
-        }
+        .logo-container:hover { transform: scale(1.015) translateY(2px); background: #ffffff; }
 
-        .logo-elevia {
-            height: 70px; /* Tamanho padrão para Mobile */
-            width: auto;
-            display: block;
-        }
+        .logo-elevia { height: 80px; width: auto; display: block; }
 
         @media (min-width: 768px) {
-            .logo-elevia {
-                height: 70px; /* Mantém exatamente os mesmos 70px no Desktop */
-            }
+            .logo-container { border-radius: 0 0 48px 48px; padding: 1.4rem 3.5rem 1.6rem 3.5rem; }
+            .logo-elevia { height: 85px; }
         }
 
-        /* ==========================================
-           ESTRUTURA DA SEÇÃO HERO
-           ========================================== */
+        /* ── HERO ── */
         .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            position: relative; width: 100%; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background-color: var(--background);
         }
 
-        /* Container do Canvas Three.js */
         .canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; z-index: 0;
         }
 
-        /* Máscara de Gradiente sobre o 3D */
         .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, var(--background) 10%, rgba(26, 6, 19, 0.6) 50%, transparent 100%);
-            z-index: 1;
-            pointer-events: none;
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, var(--background) 0%, rgba(253,238,246,0.4) 60%, rgba(253,238,246,0) 100%);
+            z-index: 1; pointer-events: none;
         }
 
-        /* Conteúdo Centralizado */
         .hero-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-            width: 100%;
-            height: 100%;
-            padding-bottom: 6rem;
-            text-align: center;
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-end;
+            width: 100%; height: 100%;
+            padding-bottom: 4rem; text-align: center;
         }
 
-        @media (min-width: 768px) {
-            .hero-content {
-                padding-bottom: 8rem;
-            }
-        }
+        @media (min-width: 768px) { .hero-content { padding-bottom: 5rem; } }
 
         .hero-text-wrapper {
-            max-width: 850px;
-            padding: 0 1.5rem;
+            max-width: 850px; padding: 0 1.5rem;
             opacity: 0;
-            animation: fadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeInUp 1.8s cubic-bezier(0.16,1,0.3,1) forwards;
         }
 
-        /* Elementos de Texto Alterados */
         .hero-tagline {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.35em;
-            color: var(--foreground); /* Mudado para branco */
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            display: block;
-            margin-bottom: 1.2rem;
+            font-size: 0.85rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.35em;
+            color: var(--pink-primary); display: block; margin-bottom: 1.2rem;
         }
 
         .hero-title {
-            font-family: var(--font-title); /* Fonte futurista importada */
-            font-size: 3.2rem;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            margin-bottom: 1rem;
-            color: var(--foreground);
-            text-transform: uppercase;
+            position: relative;
+            font-family: var(--font-title); font-size: 3.5rem; font-weight: 700;
+            color: #1a0613; letter-spacing: 0.08em; margin-bottom: 1rem;
+            text-transform: uppercase; display: inline-block; cursor: default;
+            background: linear-gradient(120deg, #1a0613 40%, #5a4953 50%, #1a0613 60%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-position: 100% 0;
+            transition: background-position 0.8s ease;
         }
 
-        @media (min-width: 768px) {
-            .hero-title {
-                font-size: 6rem;
-                letter-spacing: -0.02em;
-            }
-        }
+        .hero-title:hover { background-position: -100% 0; }
+
+        @media (min-width: 768px) { .hero-title { font-size: 6.5rem; letter-spacing: 0.12em; } }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            font-weight: 400;
-            line-height: 1.4;
-            color: var(--foreground);
-            margin-bottom: 1.5rem;
+            font-size: 1.25rem; font-weight: 600; line-height: 1.4;
+            color: var(--foreground); margin-bottom: 1.5rem;
         }
 
-        @media (min-width: 768px) {
-            .hero-subtitle {
-                font-size: 1.6rem;
-            }
-        }
+        @media (min-width: 768px) { .hero-subtitle { font-size: 1.75rem; } }
 
         .hero-description {
-            font-size: 0.95rem;
-            line-height: 1.8;
-            font-weight: 300;
-            color: var(--white-muted);
-            max-width: 580px;
+            font-size: 1rem; line-height: 1.8; font-weight: 400;
+            color: var(--text-muted); max-width: 620px;
             margin: 0 auto 3rem auto;
         }
 
-        /* Botão de Call to Action */
-        .btn-primary {
-            display: inline-block;
-            padding: 0.95rem 2.8rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--background);
-            background-color: var(--foreground);
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--pink-primary);
-            color: var(--foreground);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px var(--pink-glow);
-        }
-
-        /* Animação de Entrada do Conteúdo */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes arrowBounce {
+            0%,100% { transform: translateY(0); opacity: 0.6; }
+            50%      { transform: translateY(6px); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- TOPO DO SITE COM LOGO -->
+    <!-- ── LANGUAGE SWITCHER ── -->
+    <nav class="lang-switcher" aria-label="Language switcher">
+        <button class="lang-btn active" data-lang="pt" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn"        data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn"        data-lang="es" onclick="setLang('es')">ES</button>
+    </nav>
+
+    <!-- ── HEADER ── -->
     <header class="site-header">
         <div class="logo-container">
             <img src="https://bropharmaceutical.com/images/logoelevia.png" alt="ELEVIA Logo" class="logo-elevia">
         </div>
     </header>
 
- <section class="hero" role="banner">
+    <!-- ── HERO SECTION ── -->
+    <section class="hero" role="banner">
         <div id="canvas-container" class="canvas-container"></div>
-        
         <div class="hero-overlay"></div>
-
         <div class="hero-content">
             <div class="hero-text-wrapper">
-                <span class="hero-tagline">Lançamento Oficial</span>
-                
-                <h1 class="hero-title" style="
-                    font-family: 'Syncopate', sans-serif;
-                    font-size: calc(3.5rem + 4vw); 
-                    font-weight: 700;
-                    background: linear-gradient(135deg, #b3934d 0%, #e7d08c 35%, #b3934d 75%, #ebd79b 100%);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    filter: drop-shadow(0px 4px 12px rgba(179, 147, 77, 0.15));
-                    letter-spacing: -0.02em;
-                    margin-bottom: 1rem;
-                ">ELEVIA</h1>
-                
-                <p class="hero-subtitle">A ELEVIA está chegando para redefinir o seu ritmo.</p>
-                <p class="hero-description">
-                    Prepare-se para testemunhar a união perfeita entre alta performance, tecnologia e comunidade. Estamos desenhando o amanhã do movimento. O próximo nível está prestes a começar.
+                <span class="hero-tagline">@GoElevia</span>
+                <h1 class="hero-title">ELEVIA</h1>
+                <p class="hero-subtitle" data-i18n="hero.subtitle">O lançamento oficial chegou para revolucionar o seu ritmo.</p>
+                <p class="hero-description" data-i18n="hero.description">
+                    A união definitiva entre alta performance, biotecnologia molecular e comunidade. O amanhã do movimento e da regeneração celular já começou e você está convidado a vivenciar esse novo nível agora.
                 </p>
-                
-                <div class="hero-cta-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 2.5rem;">
-                    <style>
-                        @keyframes arrowBounce {
-                            0%, 100% { transform: translateY(0); opacity: 0.5; }
-                            50% { transform: translateY(8px); opacity: 1; }
-                        }
-                    </style>
-                    <span style="font-family: 'Syncopate', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: #b3934d; margin-bottom: 10px;">Desça para explorar</span>
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 28px; height: 28px; color: #b3934d; animation: arrowBounce 1.6s infinite ease-in-out;">
-                        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <div class="hero-cta-container" style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-top:2.5rem;">
+                    <span data-i18n="hero.scroll" style="font-family:'Syncopate',sans-serif;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.25em;color:var(--foreground);margin-bottom:12px;">Desça para explorar</span>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:26px;height:26px;color:var(--pink-primary);animation:arrowBounce 1.6s infinite ease-in-out;">
+                        <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- INTERATIVIDADE COM THREE.JS -->
+    <!-- Three.js -->
     <script>
         const container = document.getElementById('canvas-container');
-
-        // Configuração da Cena e Câmera
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            container.clientWidth / container.clientHeight,
-            0.1,
-            1000
-        );
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
         camera.position.z = 3;
-
-        // Renderizador WebGL de alta performance
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
-
-        // Geometria da Matéria Esférica Dinâmica (Icosaedro denso)
         const geometry = new THREE.IcosahedronGeometry(1.2, 64);
-
-        // Definição de Variáveis dos Shaders (Customizadas para a ELEVIA - Tema Rosa)
         const uniforms = {
             time: { value: 0 },
             pointLightPosition: { value: new THREE.Vector3(0, 0, 5) },
-            color: { value: new THREE.Color("#ff2a85") } // Rosa Base da marca
+            color: { value: new THREE.Color("#ff2a85") }
         };
-
-        // Material customizado via Shaders (Simulação de deformação orgânica e física)
         const material = new THREE.ShaderMaterial({
-            uniforms: uniforms,
+            uniforms,
             vertexShader: `
                 uniform float time;
                 varying vec3 vNormal;
                 varying vec3 vPosition;
-                
-                // Algoritmo clássico de Perlin Noise 3D para deformação matemática fluida
-                vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-                vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-                vec4 permute(vec4 x) { return mod289(((x*34.0)+1.0)*x); }
-                vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
-                
-                float snoise(vec3 v) {
-                    const vec2 C = vec2(1.0/6.0, 1.0/3.0);
-                    const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
-                    vec3 i = floor(v + dot(v, C.yyy));
-                    vec3 x0 = v - i + dot(i, C.xxx);
-                    vec3 g = step(x0.yzx, x0.xyz);
-                    vec3 l = 1.0 - g;
-                    vec3 i1 = min(g.xyz, l.zxy);
-                    vec3 i2 = max(g.xyz, l.zxy);
-                    vec3 x1 = x0 - i1 + C.xxx;
-                    vec3 x2 = x0 - i2 + C.yyy;
-                    vec3 x3 = x0 - D.yyy;
-                    i = mod289(i);
-                    vec4 p = permute(permute(permute(
-                                i.z + vec4(0.0, i1.z, i2.z, 1.0))
-                            + i.y + vec4(0.0, i1.y, i2.y, 1.0))
-                            + i.x + vec4(0.0, i1.x, i2.x, 1.0));
-                    float n_ = 0.142857142857;
-                    vec3 ns = n_ * D.wyz - D.xzx;
-                    vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-                    vec4 x_ = floor(j * ns.z);
-                    vec4 y_ = floor(j - 7.0 * x_);
-                    vec4 x = x_ * ns.x + ns.yyyy;
-                    vec4 y = y_ * ns.x + ns.yyyy;
-                    vec4 h = 1.0 - abs(x) - abs(y);
-                    vec4 b0 = vec4(x.xy, y.xy);
-                    vec4 b1 = vec4(x.zw, y.zw);
-                    vec4 s0 = floor(b0) * 2.0 + 1.0;
-                    vec4 s1 = floor(b1) * 2.0 + 1.0;
-                    vec4 sh = -step(h, vec4(0.0));
-                    vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-                    vec4 a1 = b1.xzyw + s1.zzww * sh.zzww;
-                    vec3 p0 = vec3(a0.xy, h.x);
-                    vec3 p1 = vec3(a0.zw, h.y);
-                    vec3 p2 = vec3(a1.xy, h.z);
-                    vec3 p3 = vec3(a1.zw, h.w);
-                    vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
-                    p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
-                    vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
-                    m = m * m;
-                    return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+                vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
+                vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
+                vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
+                vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+                float snoise(vec3 v){
+                    const vec2 C=vec2(1.0/6.0,1.0/3.0);
+                    const vec4 D=vec4(0.0,0.5,1.0,2.0);
+                    vec3 i=floor(v+dot(v,C.yyy));
+                    vec3 x0=v-i+dot(i,C.xxx);
+                    vec3 g=step(x0.yzx,x0.xyz);
+                    vec3 l=1.0-g;
+                    vec3 i1=min(g.xyz,l.zxy);
+                    vec3 i2=max(g.xyz,l.zxy);
+                    vec3 x1=x0-i1+C.xxx;
+                    vec3 x2=x0-i2+C.yyy;
+                    vec3 x3=x0-D.yyy;
+                    i=mod289(i);
+                    vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
+                    float n_=0.142857142857;
+                    vec3 ns=n_*D.wyz-D.xzx;
+                    vec4 j=p-49.0*floor(p*ns.z*ns.z);
+                    vec4 x_=floor(j*ns.z);
+                    vec4 y_=floor(j-7.0*x_);
+                    vec4 x=x_*ns.x+ns.yyyy;
+                    vec4 y=y_*ns.x+ns.yyyy;
+                    vec4 h=1.0-abs(x)-abs(y);
+                    vec4 b0=vec4(x.xy,y.xy);
+                    vec4 b1=vec4(x.zw,y.zw);
+                    vec4 s0=floor(b0)*2.0+1.0;
+                    vec4 s1=floor(b1)*2.0+1.0;
+                    vec4 sh=-step(h,vec4(0.0));
+                    vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;
+                    vec4 a1=b1.xzyw+s1.zzww*sh.zzww;
+                    vec3 p0=vec3(a0.xy,h.x);
+                    vec3 p1=vec3(a0.zw,h.y);
+                    vec3 p2=vec3(a1.xy,h.z);
+                    vec3 p3=vec3(a1.zw,h.w);
+                    vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+                    p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
+                    vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);
+                    m=m*m;
+                    return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
                 }
-
-                void main() {
-                    vNormal = normal;
-                    vPosition = position;
-                    // Gera o deslocamento orgânico contínuo da malha 3D
-                    float displacement = snoise(position * 2.0 + time * 0.5) * 0.25;
-                    vec3 newPosition = position + normal * displacement;
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-                }
-            `,
+                void main(){
+                    vNormal=normal; vPosition=position;
+                    float displacement=snoise(position*1.8+time*0.4)*0.22;
+                    vec3 newPosition=position+normal*displacement;
+                    gl_Position=projectionMatrix*modelViewMatrix*vec4(newPosition,1.0);
+                }`,
             fragmentShader: `
                 uniform vec3 color;
                 uniform vec3 pointLightPosition;
                 varying vec3 vNormal;
                 varying vec3 vPosition;
-                
-                void main() {
-                    vec3 normal = normalize(vNormal);
-                    vec3 lightDir = normalize(pointLightPosition - vPosition);
-                    float diffuse = max(dot(normal, lightDir), 0.0);
-                    
-                    // Efeito Fresnel para criar um brilho esbranquiçado de borda
-                    float fresnel = 1.0 - dot(normal, vec3(0.0, 0.0, 1.0));
-                    fresnel = pow(fresnel, 2.5);
-                    
-                    // Combinação final das luzes (Rosa + Brilho Branco nas bordas)
-                    vec3 glowColor = vec3(1.0, 1.0, 1.0) * fresnel * 0.6;
-                    vec3 finalColor = color * diffuse + color * fresnel * 0.4 + glowColor;
-                    
-                    gl_FragColor = vec4(finalColor, 1.0);
-                }
-            `,
-            wireframe: true // Estilo em linhas digitais para representar tecnologia/movimento
+                void main(){
+                    vec3 normal=normalize(vNormal);
+                    vec3 viewDir=normalize(vec3(0.0,0.0,3.0)-vPosition);
+                    float fresnel=1.0-max(dot(normal,viewDir),0.0);
+                    fresnel=pow(fresnel,2.0);
+                    vec3 baseWhite=vec3(1.0,1.0,1.0);
+                    vec3 highlightPink=vec3(1.0,0.45,0.72);
+                    vec3 finalColor=mix(baseWhite,color,fresnel)+(highlightPink*fresnel*0.3);
+                    gl_FragColor=vec4(finalColor,0.65);
+                }`,
+            wireframe: true, transparent: true
         });
-
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);
-
-        // Luz pontual interativa (seguirá as coordenadas do ponteiro)
-        const pointLight = new THREE.PointLight(0xffffff, 1.5, 100);
+        const pointLight = new THREE.PointLight(0xffffff, 2.0, 100);
         pointLight.position.set(0, 0, 5);
         scene.add(pointLight);
-
-        // Loop de Animação constante executado via GPU
         function animate(timestamp) {
             material.uniforms.time.value = timestamp * 0.0004;
-            
-            // Rotação sutil da esfera conceitual no centro
-            mesh.rotation.y += 0.0008;
-            mesh.rotation.x += 0.0004;
-            
+            mesh.rotation.y += 0.0006;
+            mesh.rotation.x += 0.0003;
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         }
         requestAnimationFrame(animate);
-
-        // Redimensionamento Inteligente (Responsividade da Janela)
         window.addEventListener('resize', () => {
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
-
-        // Captura do movimento do mouse para mover a iluminação
         window.addEventListener('mousemove', (e) => {
             const x = (e.clientX / window.innerWidth) * 2 - 1;
             const y = -(e.clientY / window.innerHeight) * 2 + 1;
-            
             const vec = new THREE.Vector3(x, y, 0.5).unproject(camera);
             const dir = vec.sub(camera.position).normalize();
             const dist = -camera.position.z / dir.z;
             const pos = camera.position.clone().add(dir.multiplyScalar(dist));
-            
             pointLight.position.copy(pos);
             material.uniforms.pointLightPosition.value.copy(pos);
         });
     </script>
 
-    <!-- =================================================================
-     SEÇÃO DO PRODUTO (COLE ABAIXO DA TAG </section> DO HERO)
-     ================================================================= -->
-<section id="product-presentation" class="elevia-product-section">
-    <div class="sticky-viewport">
-        
-        <!-- Partículas de Luz de Fundo (Glow sofisticado) -->
-        <div class="gold-light-glow"></div>
-        
-        <!-- Selo de Linha Exclusiva no Topo da Seção -->
-        <div class="exclusive-brand-badge">
-            <span class="gold-dash"></span>
-            Linha Exclusiva Elevia
-            <span class="gold-dash"></span>
+    <!-- ── PRODUCT SECTION ── -->
+    <section id="product-presentation" class="elevia-product-section">
+        <div class="sticky-viewport">
+            <div class="gold-light-glow"></div>
+            <div class="exclusive-brand-badge">
+                <span class="gold-dash"></span>
+                <span data-i18n="product.badge">Linha Exclusiva Elevia</span>
+                <span class="gold-dash"></span>
+            </div>
+            <div class="product-split-title">
+                <h2 id="el-text-left" class="title-part luxury-black-text">GHK-CU &amp;</h2>
+                <h2 id="el-text-right" class="title-part luxury-black-text">PDRN SÉRUM</h2>
+            </div>
+            <div id="el-media-box" class="media-box-frame">
+                <img src="./images/elevianew.png" alt="GHK-CU &amp; PDRN SÉRUM" class="product-img">
+            </div>
+            <div id="el-scroll-hint" class="scroll-indicator" data-i18n="product.scrollhint">Gire para desvendar a fórmula</div>
+            <div id="el-next-arrow" class="scroll-down-arrow-wrapper">
+                <span class="arrow-text" data-i18n="product.continue">Continue descendo</span>
+                <svg class="down-arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
         </div>
-        
-        <!-- Textos laterais em Dourado Metálico de Luxo -->
-        <div class="product-split-title">
-            <h2 id="el-text-left" class="title-part gold-text">GHK-CU &</h2>
-            <h2 id="el-text-right" class="title-part gold-text">PDRN SÉRUM</h2>
-        </div>
+    </section>
 
-        <!-- Moldura Controlada e Sofisticada da Foto -->
-        <div id="el-media-box" class="media-box-frame">
-            <img src="https://bropharmaceutical.com/images/eleviaverify.png" alt="GHK-CU & PDRN SÉRUM" class="product-img">
-        </div>
-
-        <!-- Indicador Inicial Dinâmico -->
-        <div id="el-scroll-hint" class="scroll-indicator">Role para baixo e desvende a fórmula</div>
-
-        <!-- NOVO: Seta de navegação revelada no final do efeito -->
-        <div id="el-next-arrow" class="scroll-down-arrow-wrapper">
-            <span class="arrow-text">Continue descendo</span>
-            <svg class="down-arrow-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    </div>
-</section>
-
-<!-- =================================================================
-     ESTILOS EXCLUSIVOS DA SEÇÃO (CENÁRIO BRANCO & DOURADO)
-     ================================================================= -->
-<style>
-    /* Base e Fundo Branco Minimalista */
-    .elevia-product-section {
-        position: relative;
-        width: 100%;
-        height: 170vh; /* Mantido para cadência ideal de transição */
-        background-color: #ffffff;
-    }
-
-    .sticky-viewport {
-        position: sticky;
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background-color: #ffffff;
-    }
-
-    /* Brilho dourado suave de fundo para dar atmosfera premium */
-    .gold-light-glow {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
-        border-radius: 50%;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    /* Selo de Linha Exclusiva Elevia */
-    .exclusive-brand-badge {
-        position: absolute;
-        top: 6rem;
-        z-index: 10;
-        font-family: 'Syncopate', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.25em;
-        color: #bfa15f; 
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        pointer-events: none;
-    }
-
-    .gold-dash {
-        display: inline-block;
-        width: 20px;
-        height: 1px;
-        background-color: #d4af37;
-        opacity: 0.6;
-    }
-
-    /* Posicionamento do Título Splitted */
-    .product-split-title {
-        position: absolute;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        z-index: 5;
-        pointer-events: none;
-    }
-
-    .title-part {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 2.4rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: -0.01em;
-        text-align: center;
-        width: 100%;
-        transition: transform 0.05s ease-out, opacity 0.08s ease-out;
-        will-change: transform, opacity;
-    }
-
-    @media (min-width: 768px) {
+    <style>
+        .elevia-product-section {
+            position: relative; width: 100%; height: 170vh;
+            background: linear-gradient(to bottom, #f8a1d0 0%, #ffffff 20%, #ffffff 100%);
+        }
+        .sticky-viewport {
+            position: sticky; top: 0; width: 100%; height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: transparent;
+        }
+        .gold-light-glow {
+            position: absolute; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,42,133,0.04) 0%, transparent 70%);
+            border-radius: 50%; z-index: 1; pointer-events: none;
+        }
+        .exclusive-brand-badge {
+            position: absolute; top: 6rem; z-index: 10;
+            font-family: 'Syncopate', sans-serif; font-size: 0.75rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em;
+            color: #ff2a85; display: flex; align-items: center; gap: 12px;
+            pointer-events: none;
+        }
+        .gold-dash { display: inline-block; width: 20px; height: 1px; background-color: #ff2a85; opacity: 0.4; }
+        .product-split-title {
+            position: absolute; width: 100%; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 0.5rem;
+            z-index: 5; pointer-events: none;
+        }
         .title-part {
-            font-size: 5.2rem;
+            font-family: 'Syncopate', sans-serif; font-size: 2.4rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em; text-align: center;
+            width: 100%; transition: transform 0.05s ease-out, opacity 0.08s ease-out;
+            will-change: transform, opacity;
         }
-    }
+        @media (min-width: 768px) { .title-part { font-size: 5.2rem; letter-spacing: 0.12em; } }
+        .luxury-black-text {
+            color: #1a0613;
+            background: linear-gradient(120deg, #1a0613 40%, #5a4953 50%, #1a0613 60%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-position: 100% 0; transition: background-position 0.8s ease;
+        }
+        .elevia-product-section:hover .luxury-black-text { background-position: -100% 0; }
+        .media-box-frame {
+            position: absolute; width: 230px; height: 320px; border-radius: 2rem;
+            z-index: 2; display: flex; align-items: center; justify-content: center;
+            will-change: width, height, box-shadow; background-color: #ffffff;
+            box-shadow: 0 30px 70px rgba(26,6,19,0.05);
+        }
+        .product-img { width: 100%; height: 100%; object-fit: contain; padding: 1rem; filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.03)); }
+        .scroll-indicator {
+            position: absolute; bottom: 4rem; font-size: 0.7rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.3em; color: #5a4953;
+            z-index: 6; opacity: 0.7; transition: opacity 0.2s ease; font-family: system-ui, sans-serif;
+        }
+        .scroll-down-arrow-wrapper {
+            position: absolute; bottom: 3.5rem; display: flex; flex-direction: column;
+            align-items: center; gap: 8px; z-index: 15; opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease; pointer-events: none;
+        }
+        .arrow-text {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.2em; color: #1a0613; font-family: 'Syncopate', sans-serif;
+        }
+        .down-arrow-icon { width: 24px; height: 24px; color: var(--pink-primary); animation: arrowBounce 1.6s infinite ease-in-out; }
+        @keyframes arrowBounce { 0%,100%{transform:translateY(0);opacity:0.5} 50%{transform:translateY(8px);opacity:1} }
+    </style>
 
-    /* Efeito de Cor Dourada Premium Realista */
-    .gold-text {
-        background: linear-gradient(135deg, #b3934d 0%, #e7d08c 30%, #b3934d 70%, #ebd79b 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0px 2px 10px rgba(179, 147, 77, 0.1);
-    }
-
-    /* Caixa da Foto com Acabamento Limpo e Flutuante */
-    .media-box-frame {
-        position: absolute;
-        width: 230px;
-        height: 320px;
-        border-radius: 2rem;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        will-change: width, height, box-shadow;
-        background-color: #ffffff;
-        box-shadow: 0 20px 50px rgba(179, 147, 77, 0.08);
-    }
-
-    .product-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 1rem;
-        filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.04)); 
-    }
-
-    /* Indicador de Ação Inicial */
-    .scroll-indicator {
-        position: absolute;
-        bottom: 4rem;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.3em;
-        color: #bfa15f;
-        z-index: 6;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
-        font-family: system-ui, sans-serif;
-    }
-
-    /* Estilização da Seta de Scroll Final */
-    .scroll-down-arrow-wrapper {
-        position: absolute;
-        bottom: 3.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        z-index: 15;
-        opacity: 0; /* Começa oculta */
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-        pointer-events: none;
-    }
-
-    .arrow-text {
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        color: #bfa15f;
-        font-family: 'Syncopate', sans-serif;
-    }
-
-    .down-arrow-icon {
-        width: 24px;
-        height: 24px;
-        color: #bfa15f;
-        animation: arrowBounce 1.6s infinite ease-in-out;
-    }
-
-    /* Movimento cíclico elegante para atrair o clique/scroll */
-    @keyframes arrowBounce {
-        0%, 100% { transform: translateY(0); opacity: 0.5; }
-        50% { transform: translateY(8px); opacity: 1; }
-    }
-</style>
-
-<!-- =================================================================
-     SCRIPT DE MOVIMENTO DA SEÇÃO (COM GESTÃO DA SETA REVELADA)
-     ================================================================= -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const productSection = document.getElementById('product-presentation');
-        const textLeft = document.getElementById('el-text-left');
-        const textRight = document.getElementById('el-text-right');
-        const mediaBox = document.getElementById('el-media-box');
-        const scrollHint = document.getElementById('el-scroll-hint');
-        const nextArrow = document.getElementById('el-next-arrow');
-
-        window.addEventListener('scroll', () => {
-            const sectionRect = productSection.getBoundingClientRect();
-            const sectionHeight = productSection.offsetHeight;
-            
-            const totalScrollable = sectionHeight - window.innerHeight;
-            let progress = -sectionRect.top / totalScrollable;
-            progress = Math.min(Math.max(progress, 0), 1);
-
-            const isMobile = window.innerWidth < 768;
-
-            if (progress > 0 && progress <= 1) {
-                const startWidth = 230;
-                const endWidth = isMobile ? 300 : 450; 
-                const startHeight = 320;
-                const endHeight = isMobile ? 410 : 590;
-
-                const currentWidth = startWidth + (endWidth - startWidth) * progress;
-                const currentHeight = startHeight + (endHeight - startHeight) * progress;
-
-                mediaBox.style.width = `${currentWidth}px`;
-                mediaBox.style.height = `${currentHeight}px`;
-
-                mediaBox.style.boxShadow = `0 ${20 + progress * 20}px ${50 + progress * 30}px rgba(179, 147, 77, ${0.08 + progress * 0.07})`;
-
-                const shiftDistance = progress * (isMobile ? 180 : 420);
-                textLeft.style.transform = `translateX(-${shiftDistance}px)`;
-                textRight.style.transform = `translateX(${shiftDistance}px)`;
-                
-                const textOpacity = 1 - (progress * 1.4);
-                textLeft.style.opacity = Math.max(textOpacity, 0);
-                textRight.style.opacity = Math.max(textOpacity, 0);
-                
-                // Gerencia o switch visual entre o texto guia inicial e a seta final
-                if (progress > 0.15) {
-                    scrollHint.style.opacity = '0';
-                } else {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productSection = document.getElementById('product-presentation');
+            const textLeft = document.getElementById('el-text-left');
+            const textRight = document.getElementById('el-text-right');
+            const mediaBox = document.getElementById('el-media-box');
+            const scrollHint = document.getElementById('el-scroll-hint');
+            const nextArrow = document.getElementById('el-next-arrow');
+            window.addEventListener('scroll', () => {
+                const sectionRect = productSection.getBoundingClientRect();
+                const sectionHeight = productSection.offsetHeight;
+                const totalScrollable = sectionHeight - window.innerHeight;
+                let progress = -sectionRect.top / totalScrollable;
+                progress = Math.min(Math.max(progress, 0), 1);
+                const isMobile = window.innerWidth < 768;
+                if (progress > 0 && progress <= 1) {
+                    const startWidth = 230, endWidth = isMobile ? 300 : 450;
+                    const startHeight = 320, endHeight = isMobile ? 410 : 590;
+                    mediaBox.style.width = `${startWidth + (endWidth - startWidth) * progress}px`;
+                    mediaBox.style.height = `${startHeight + (endHeight - startHeight) * progress}px`;
+                    mediaBox.style.boxShadow = `0 ${20 + progress * 20}px ${50 + progress * 30}px rgba(179,147,77,${0.08 + progress * 0.07})`;
+                    const shift = progress * (isMobile ? 180 : 420);
+                    textLeft.style.transform = `translateX(-${shift}px)`;
+                    textRight.style.transform = `translateX(${shift}px)`;
+                    const alpha = 1 - (progress * 1.4);
+                    textLeft.style.opacity = Math.max(alpha, 0);
+                    textRight.style.opacity = Math.max(alpha, 0);
+                    scrollHint.style.opacity = progress > 0.15 ? '0' : '0.7';
+                    nextArrow.style.opacity = progress >= 0.90 ? '1' : '0';
+                    nextArrow.style.visibility = progress >= 0.90 ? 'visible' : 'hidden';
+                } else if (progress === 0) {
+                    mediaBox.style.width = '230px'; mediaBox.style.height = '320px';
+                    textLeft.style.transform = 'translateX(0px)'; textRight.style.transform = 'translateX(0px)';
+                    textLeft.style.opacity = 1; textRight.style.opacity = 1;
                     scrollHint.style.opacity = '0.7';
+                    nextArrow.style.opacity = '0'; nextArrow.style.visibility = 'hidden';
                 }
-
-                // Revela a seta apenas nos últimos instantes da expansão (acima de 90%)
-                if (progress >= 0.90) {
-                    nextArrow.style.opacity = '1';
-                    nextArrow.style.visibility = 'visible';
-                } else {
-                    nextArrow.style.opacity = '0';
-                    nextArrow.style.visibility = 'hidden';
-                }
-
-            } else if (progress === 0) {
-                // Resets de segurança
-                mediaBox.style.width = '230px';
-                mediaBox.style.height = '320px';
-                textLeft.style.transform = 'translateX(0px)';
-                textRight.style.transform = 'translateX(0px)';
-                textLeft.style.opacity = 1;
-                textRight.style.opacity = 1;
-                scrollHint.style.opacity = '0.7';
-                nextArrow.style.opacity = '0';
-                nextArrow.style.visibility = 'hidden';
-            }
+            });
         });
-    });
-</script>
+    </script>
 
-<section id="elevia-benefits" class="benefits-editorial-section">
-    <div class="editorial-grid-container">
-        
-        <div class="editorial-image-block">
-            <div class="editorial-frame">
-                <img src="./images/modelo.png" alt="Ritual ELEVIA" class="editorial-img">
+    <!-- ── BENEFITS SECTION ── -->
+    <section id="elevia-benefits" class="benefits-editorial-section">
+        <div class="editorial-grid-container">
+            <div class="editorial-image-block">
+                <div class="editorial-frame">
+                    <img src="./images/modelonew.png" alt="Ritual ELEVIA" class="editorial-img">
+                </div>
             </div>
-        </div>
-
-        <div class="editorial-text-block">
-            <div class="editorial-header">
-                <span class="editorial-subtitle">A Ciência por Trás da Fórmula</span>
-                <h2 class="editorial-main-title">Três Pilares de <br><span class="brand-pink">Alta Performance</span></h2>
-            </div>
-
-            <div class="editorial-cards-list">
-                
-                <div class="editorial-card">
-                    <div class="card-editorial-num">01</div>
-                    <div class="card-editorial-content">
-                        <h3 class="gold-luxury-title">DNA Celular PDRN</h3>
-                        <p>Atua diretamente na matriz e no ciclo de regeneração celular. Devolve a textura ultra uniforme e refinada, promovendo o efeito de pele renovada e revigorada.</p>
+            <div class="editorial-text-block">
+                <div class="editorial-header">
+                    <span class="editorial-subtitle" data-i18n="benefits.subtitle">A Ciência por Trás da Fórmula</span>
+                    <h2 class="editorial-main-title">
+                        <span data-i18n="benefits.title1">Três Pilares de</span><br>
+                        <span class="luxury-black-blend" data-i18n="benefits.title2">Alta Performance</span>
+                    </h2>
+                </div>
+                <div class="editorial-cards-list">
+                    <div class="editorial-card">
+                        <div class="card-editorial-num">01</div>
+                        <div class="card-editorial-content">
+                            <h3 class="luxury-black-title" data-i18n="benefits.card1.title">DNA Celular PDRN</h3>
+                            <p data-i18n="benefits.card1.text">Atua diretamente na matriz e no ciclo de regeneração celular. Devolve a textura ultra uniforme e refinada, promovendo o efeito de pele renovada e revigorada.</p>
+                        </div>
+                    </div>
+                    <div class="editorial-card">
+                        <div class="card-editorial-num">02</div>
+                        <div class="card-editorial-content">
+                            <h3 class="luxury-black-title" data-i18n="benefits.card2.title">Sustentação GHK-CU</h3>
+                            <p data-i18n="benefits.card2.text">Peptídeos de cobre estruturados que guiam os fibroblastos a estimularem colágeno e elastina de forma imediata, devolvendo a firmeza física e diminuindo linhas superficiais.</p>
+                        </div>
+                    </div>
+                    <div class="editorial-card">
+                        <div class="card-editorial-num">03</div>
+                        <div class="card-editorial-content">
+                            <h3 class="luxury-black-title" data-i18n="benefits.card3.title">Luminosidade Inata</h3>
+                            <p data-i18n="benefits.card3.text">Neutralização activa do estresse oxidativo e fadiga cutânea. Uma infusão de viço que libera um brilho limpo, saudável e magnético desde o primeiro contato.</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="editorial-card">
-                    <div class="card-editorial-num">02</div>
-                    <div class="card-editorial-content">
-                        <h3 class="gold-luxury-title">Sustentação GHK-CU</h3>
-                        <p>Peptídeos de cobre estruturados que guiam os fibroblastos a estimularem colágeno e elastina de forma imediata, devolvendo a firmeza física e diminuindo linhas superficiais.</p>
+    <style>
+        .benefits-editorial-section { background-color: #ffffff; position: relative; width: 100%; padding: 100px 0; overflow: hidden; }
+        .editorial-grid-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 50px; padding: 0 24px; }
+        .editorial-image-block { position: relative; width: 100%; }
+        .editorial-frame { position: relative; width: 100%; height: 400px; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 70px rgba(26,6,19,0.06); background-color: #fcfcfc; transform: translateY(0); will-change: transform; }
+        .editorial-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .editorial-text-block { display: flex; flex-direction: column; justify-content: center; }
+        .editorial-header { margin-bottom: 45px; }
+        .editorial-subtitle { font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3em; color: #ff2a85; margin-bottom: 16px; display: block; }
+        .editorial-main-title { font-family: 'Syncopate', sans-serif; font-size: 1.8rem; font-weight: 700; color: #1a0613; line-height: 1.3; letter-spacing: 0.06em; text-transform: uppercase; }
+        .luxury-black-blend { background: linear-gradient(120deg, #1a0613 40%, #5a4953 50%, #1a0613 60%); background-size: 200% 100%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-position: 100% 0; transition: background-position 0.8s ease; display: inline-block; }
+        .benefits-editorial-section:hover .luxury-black-blend { background-position: -100% 0; }
+        .editorial-cards-list { display: flex; flex-direction: column; gap: 24px; }
+        .editorial-card { display: flex; gap: 24px; align-items: start; padding: 30px; background: rgba(253,238,246,0.15); border: 1px solid rgba(26,6,19,0.03); border-radius: 20px; opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1), background 0.4s ease, border-color 0.4s ease; will-change: transform, opacity; }
+        .editorial-card.revealed { opacity: 1; transform: translateY(0); }
+        .editorial-card:hover { background: rgba(253,238,246,0.35); border-color: rgba(255,42,133,0.12); }
+        .card-editorial-num { font-family: 'Syncopate', sans-serif; font-size: 1.6rem; font-weight: 700; color: #ff2a85; line-height: 1; transform: translateY(-1px); filter: drop-shadow(0 2px 8px rgba(255,42,133,0.25)); flex-shrink: 0; }
+        .luxury-black-title { font-family: 'Syncopate', sans-serif; font-size: 1.05rem; font-weight: 700; color: #1a0613; margin-bottom: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .card-editorial-content p { font-family: 'Inter', sans-serif; font-size: 0.92rem; line-height: 1.75; color: #5a4953; }
+        @media (min-width: 992px) {
+            .benefits-editorial-section { padding: 160px 0; }
+            .editorial-grid-container { grid-template-columns: 1fr 1.2fr; gap: 100px; align-items: center; }
+            .editorial-frame { height: 680px; border-radius: 32px; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+            .editorial-main-title { font-size: 2.4rem; letter-spacing: 0.08em; }
+            .editorial-header { margin-bottom: 60px; }
+            .editorial-cards-list { gap: 24px; }
+            .editorial-card { padding: 35px 40px; gap: 35px; }
+            .card-editorial-num { font-size: 2.2rem; }
+            .luxury-black-title { font-size: 1.15rem; letter-spacing: 0.1em; }
+            .card-editorial-content p { font-size: 0.98rem; line-height: 1.8; }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editorialFrame = document.querySelector('.editorial-frame');
+            const editorialCards = document.querySelectorAll('.editorial-card');
+            let isTargetVisible = false, scrollYTarget = 0, scrollYCurrent = 0;
+            const sectionObserver = new IntersectionObserver(entries => { entries.forEach(e => { isTargetVisible = e.isIntersecting; }); }, { threshold: 0.01 });
+            if (editorialFrame) sectionObserver.observe(editorialFrame);
+            function smoothParallaxLoop() {
+                if (isTargetVisible && window.innerWidth >= 992 && editorialFrame) {
+                    const rect = editorialFrame.getBoundingClientRect();
+                    scrollYTarget = (window.innerHeight - rect.top) * 0.05;
+                    scrollYCurrent += (scrollYTarget - scrollYCurrent) * 0.1;
+                    editorialFrame.style.transform = `translate3d(0,${scrollYCurrent}px,0)`;
+                }
+                requestAnimationFrame(smoothParallaxLoop);
+            }
+            requestAnimationFrame(smoothParallaxLoop);
+            const cardsObserver = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); }); }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+            editorialCards.forEach(card => cardsObserver.observe(card));
+        });
+    </script>
+
+    <!-- ── INSTAGRAM / FOOTER SECTION ── -->
+    <section class="instagram-premium-section">
+        <canvas id="js-elevia-warp-canvas" class="webgl-warp-background"></canvas>
+        <div class="instagram-profile-wrapper">
+            <div class="apple-ios-icon-card">
+                <div class="card-glass-specular-reflection"></div>
+                <div class="apple-avatar-housing">
+                    <div class="avatar-glass-inner">
+                        <img src="https://bropharmaceutical.com/images/logoelevia.png" alt="ELEVIA Logo" class="avatar-brand-logo">
                     </div>
                 </div>
-
-                <div class="editorial-card">
-                    <div class="card-editorial-num">03</div>
-                    <div class="card-editorial-content">
-                        <h3 class="gold-luxury-title">Luminosidade Inata</h3>
-                        <p>Neutralização ativa do estresse oxidativo e fadiga cutânea. Uma infusão de viço que libera um brilho limpo, saudável e magnético desde o primeiro contato.</p>
+                <h2 class="profile-main-name luxury-gold-text" style="display:inline-flex;align-items:center;justify-content:center;gap:6px;">
+                    @goelevia
+                    <svg class="instagram-verified-badge" viewBox="0 0 24 24" style="width:18px;height:18px;fill:#0095f6;flex-shrink:0;display:inline-block;" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </h2>
+                <div class="profile-brand-badge" data-i18n="social.badge">Instagram Oficial</div>
+                <p class="profile-bio-text" data-i18n="social.bio">
+                    Acompanhe os bastidores do nosso laboratório molecular, rituais de performance e faça parte da construção da nova era do movimento.
+                </p>
+                <div class="profile-mini-divider"></div>
+                <div class="profile-social-row">
+                    <div class="social-button-item">
+                        <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Instagram">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <div class="css-native-tooltip" role="tooltip">Instagram<div class="tooltip-arrow"></div></div>
+                    </div>
+                    <div class="social-button-item">
+                        <a href="https://bropharmaceutical.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="BRO Pharmaceuticals">
+                            <svg class="social-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        </a>
+                        <div class="css-native-tooltip" role="tooltip">BRO Pharmaceuticals<div class="tooltip-arrow"></div></div>
                     </div>
                 </div>
-
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<style>
-    .benefits-editorial-section {
-        background-color: #ffffff;
-        position: relative;
-        width: 100%;
-        padding: 80px 0; /* Padding reduzido no mobile para evitar vácuos grandes */
-        overflow: hidden;
-    }
-
-    .editorial-grid-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 0 24px;
-    }
-
-    /* MOLDURA EDITORIAL AJUSTADA */
-    .editorial-image-block {
-        position: relative;
-        width: 100%;
-    }
-
-    .editorial-frame {
-        position: relative;
-        width: 100%;
-        height: 380px; /* Altura ideal para telas de celular */
-        border-radius: 2rem;
-        overflow: hidden;
-        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.04);
-        background-color: #fcfcfc;
-        will-change: transform;
-    }
-
-    .editorial-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    /* TEXTOS E CABEÇALHO */
-    .editorial-text-block {
-        padding-top: 10px;
-    }
-
-    .editorial-header {
-        margin-bottom: 40px;
-    }
-
-    .editorial-subtitle {
-        font-family: system-ui, -apple-system, sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        color: #ff2a85;
-        margin-bottom: 12px;
-        display: block;
-    }
-
-    .editorial-main-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.6rem;
-        font-weight: 700;
-        color: #1a0613;
-        line-height: 1.3;
-        letter-spacing: -0.03em;
-    }
-
-    .brand-pink {
-        color: #ff2a85;
-    }
-
-    /* LISTA EDITORIAL RESPONSIVA */
-    .editorial-cards-list {
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .editorial-card {
-        display: flex;
-        gap: 20px;
-        align-items: start;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform, opacity;
-    }
-
-    .editorial-card.revealed {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Números Estilizados */
-    .card-editorial-num {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #f0eef1;
-        line-height: 1;
-        transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    .editorial-card:hover .card-editorial-num {
-        color: #ff2a85;
-        transform: translateY(-2px);
-    }
-
-    /* DOURADO LUXO CHAMPANHE */
-    .gold-luxury-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.05rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        letter-spacing: -0.02em;
-        background: linear-gradient(135deg, #a3823c 0%, #e7d08c 40%, #b3934d 70%, #967631 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
-    }
-
-    .card-editorial-content p {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.92rem;
-        line-height: 1.7;
-        color: #60505a;
-    }
-
-    /* ==========================================
-       MEDIA QUERIES: RECALIBRAÇÃO PARA DESKTOP
-       ========================================== */
-    @media (min-width: 992px) {
-        .benefits-editorial-section {
-            padding: 160px 0;
-        }
-
-        .editorial-grid-container {
-            grid-template-columns: 1fr 1.1fr;
-            gap: 120px;
-            align-items: start;
-        }
-
-        .editorial-frame {
-            height: 720px;
-            /* No desktop o navegador tem fôlego para rodar o efeito paralaxe por script suave */
-            transition: transform 0.1s cubic-bezier(0.1, 1, 0.1, 1); 
-        }
-
-        .editorial-main-title {
-            font-size: 2rem;
-        }
-
-        .editorial-header {
-            margin-bottom: 70px;
-        }
-
-        .editorial-cards-list {
-            gap: 60px;
-        }
-
-        .editorial-card {
-            gap: 35px;
-        }
-
-        .card-editorial-num {
-            font-size: 2.5rem;
-        }
-
-        .gold-luxury-title {
-            font-size: 1.15rem;
-        }
-
-        .card-editorial-content p {
-            font-size: 0.98rem;
-            line-height: 1.8;
-        }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const editorialFrame = document.querySelector('.editorial-frame');
-        const editorialCards = document.querySelectorAll('.editorial-card');
-
-        // 1. MOTOR DE PARALAXE (Ativado INTELIGENTEMENTE apenas em telas grandes/Desktop)
-        // Evita travamentos de GPU nos processadores de celular
-        let isMobile = window.innerWidth < 992;
-
-        window.addEventListener('resize', () => {
-            isMobile = window.innerWidth < 992;
-            if (isMobile && editorialFrame) {
-                editorialFrame.style.transform = 'none'; // Reseta o estilo no celular
-            }
-        });
-
-        window.addEventListener('scroll', () => {
-            if (!isMobile && editorialFrame) {
-                const bounding = editorialFrame.getBoundingClientRect();
-                // Calcula o deslocamento baseado no topo visível
-                const yTranslation = bounding.top * 0.08; 
-                editorialFrame.style.transform = `translateY(${yTranslation}px)`;
-            }
-        });
-
-        // 2. APARIÇÃO DOS TEXTOS (Nativa, leve e funciona 100% no Mobile por hardware)
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                }
-            });
-        }, { 
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px" // Dispara um pouco antes de entrar totalmente na tela
-        });
-
-        editorialCards.forEach(card => revealObserver.observe(card));
-    });
-</script>
-
-<section id="elevia-corporate" class="corporate-tech-section">
-    
-    <svg class="bg-tech-grid" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-            <pattern id="gridDarkTech" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255, 42, 133, 0.04)" stroke-width="0.5"/>
-            </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#gridDarkTech)" />
-        <line x1="0" y1="20%" x2="100%" y2="20%" class="grid-tech-line" style="animation-delay: 0.5s;" />
-        <line x1="0" y1="80%" x2="100%" y2="80%" class="grid-tech-line" style="animation-delay: 1s;" />
-        <line x1="20%" y1="0" x2="20%" y2="100%" class="grid-tech-line" style="animation-delay: 1.5s;" />
-        <line x1="80%" y1="0" x2="80%" y2="100%" class="grid-tech-line" style="animation-delay: 2s;" />
-        
-        <circle cx="20%" cy="20%" r="2" class="tech-detail-dot" style="animation-delay: 2.2s;" />
-        <circle cx="80%" cy="20%" r="2" class="tech-detail-dot" style="animation-delay: 2.4s;" />
-        <circle cx="20%" cy="80%" r="2" class="tech-detail-dot" style="animation-delay: 2.6s;" />
-        <circle cx="80%" cy="80%" r="2" class="tech-detail-dot" style="animation-delay: 2.8s;" />
-    </svg>
-
-    <div class="tech-corner top-left" style="animation-delay: 3s;"><div class="dot"></div></div>
-    <div class="tech-corner top-right" style="animation-delay: 3.2s;"><div class="dot"></div></div>
-    <div class="tech-corner bottom-left" style="animation-delay: 3.4s;"><div class="dot"></div></div>
-    <div class="tech-corner bottom-right" style="animation-delay: 3.6s;"><div class="dot"></div></div>
-
-    <div class="floating-particle" style="top: 25%; left: 12%; animation-delay: 0.5s;"></div>
-    <div class="floating-particle" style="top: 65%; left: 88%; animation-delay: 1s;"></div>
-    <div class="floating-particle" style="top: 35%; left: 82%; animation-delay: 1.5s;"></div>
-    <div class="floating-particle" style="top: 75%; left: 18%; animation-delay: 2s;"></div>
-
-    <div class="corporate-content-wrapper">
-        
-        <div class="corporate-hero-branding">
-            <div class="bro-logo-transparent-wrapper">
-                <img src="https://bropharmaceutical.com/images/logo-brx.png" alt="BRO Pharmaceuticals" class="bro-giant-logo">
-            </div>
-            <h2 class="bro-text-title">
-                <span class="label-animate-word" data-delay="200">BRO</span>
-                <span class="label-animate-word" data-delay="450">PHARMACEUTICALS</span>
-            </h2>
-            <div class="gold-minimal-divider"></div>
-        </div>
-
-        <div class="corporate-manifesto-text">
-            <h1 class="main-heading-decoration">
-                <div class="heading-line">
-                    <span class="label-animate-word" data-delay="900">A</span>
-                    <span class="label-animate-word text-pink" data-delay="1050">ELEVIA</span>
-                    <span class="label-animate-word" data-delay="1200">nasce</span>
-                    <span class="label-animate-word" data-delay="1350">sob</span>
-                    <span class="label-animate-word" data-delay="1500">a</span>
-                </div>
-                <div class="heading-line">
-                    <span class="label-animate-word" data-delay="1700">chancela</span>
-                    <span class="label-animate-word" data-delay="1850">e</span>
-                    <span class="label-animate-word" data-delay="2000">rigor</span>
-                    <span class="label-animate-word text-pink" data-delay="2150">médico-estético</span>
-                </div>
-                <div class="heading-line-sub">
-                    <span class="label-animate-word" data-delay="2400">do</span>
-                    <span class="label-animate-word" data-delay="2550">nosso</span>
-                    <span class="label-animate-word" data-delay="2700">centro</span>
-                    <span class="label-animate-word" data-delay="2850">de</span>
-                    <span class="label-animate-word" data-delay="3000">engenharia</span>
-                    <span class="label-animate-word" data-delay="3150">molecular.</span>
-                </div>
-            </h1>
-            
-            <p class="brand-text-description">
-                <span class="label-animate-word" data-delay="3400">Garantia</span>
-                <span class="label-animate-word" data-delay="3550">de</span>
-                <span class="label-animate-word" data-delay="3700">alta</span>
-                <span class="label-animate-word" data-delay="3850">performance,</span>
-                <span class="label-animate-word" data-delay="4000">biomimética</span>
-                <span class="label-animate-word" data-delay="4150">celular</span>
-                <span class="label-animate-word" data-delay="4300">e</span>
-                <span class="label-animate-word" data-delay="4450">autenticidade.</span>
-            </p>
-        </div>
-
-    </div>
-
-    <div id="js-corporate-mouse-glow" class="corporate-lantern-glow"></div>
-</section>
-
-<style>
-    .corporate-tech-section {
-        position: relative;
-        width: 100%;
-        min-height: 110vh;
-        background: linear-gradient(135deg, #0d0309 0%, #050104 50%, #11040c 100%);
-        color: #f1f5f9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        padding: 120px 24px;
-    }
-
-    /* Grade SVG Reativa */
-    .bg-tech-grid {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-    }
-
-    .grid-tech-line {
-        stroke: #ff2a85;
-        stroke-width: 0.5;
-        opacity: 0;
-        stroke-dasharray: 4 4;
-        stroke-dashoffset: 1000;
-        will-change: stroke-dashoffset, opacity;
-    }
-    
-    .corporate-tech-section.active-scrolled .grid-tech-line {
-        animation: techGridDraw 2.5s ease-out forwards;
-    }
-
-    .tech-detail-dot {
-        fill: #ff2a85;
-        opacity: 0;
-    }
-    
-    .corporate-tech-section.active-scrolled .tech-detail-dot {
-        animation: techPulseGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes techGridDraw {
-        0% { stroke-dashoffset: 1000; opacity: 0; }
-        50% { opacity: 0.15; }
-        100% { stroke-dashoffset: 0; opacity: 0.08; }
-    }
-
-    @keyframes techPulseGlow {
-        0%, 100% { opacity: 0.1; transform: scale(1); }
-        50% { opacity: 0.3; transform: scale(1.2); }
-    }
-
-    /* Elementos Estilizados dos Cantos */
-    .tech-corner {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        border: 1px solid rgba(255, 42, 133, 0.12);
-        opacity: 0;
-    }
-    
-    .corporate-tech-section.active-scrolled .tech-corner {
-        animation: techWordAppear 1s ease-out forwards;
-    }
-
-    .tech-corner .dot {
-        position: absolute;
-        width: 4px;
-        height: 4px;
-        background-color: #ff2a85;
-        opacity: 0.3;
-        border-radius: 50%;
-    }
-
-    .top-left { top: 32px; left: 32px; border-right: none; border-bottom: none; }
-    .top-left .dot { top: -2px; left: -2px; }
-    
-    .top-right { top: 32px; right: 32px; border-left: none; border-bottom: none; }
-    .top-right .dot { top: -2px; right: -2px; }
-    
-    .bottom-left { bottom: 32px; left: 32px; border-right: none; border-top: none; }
-    .bottom-left .dot { bottom: -2px; left: -2px; }
-    
-    .bottom-right { bottom: 32px; right: 32px; border-left: none; border-top: none; }
-    .bottom-right .dot { bottom: -2px; right: -2px; }
-
-    /* Partículas Flutuantes */
-    .floating-particle {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: #ff2a85;
-        border-radius: 50%;
-        opacity: 0;
-    }
-    
-    .corporate-tech-section.active-scrolled .floating-particle {
-        animation: techFloatParticle 5s ease-in-out infinite;
-    }
-
-    @keyframes techFloatParticle {
-        0%, 100% { transform: translateY(0) translateX(0); opacity: 0.1; }
-        25% { transform: translateY(-15px) translateX(8px); opacity: 0.4; }
-        50% { transform: translateY(-7px) translateX(-5px); opacity: 0.2; }
-        75% { transform: translateY(-22px) translateX(12px); opacity: 0.5; }
-    }
-
-    /* Estrutura Central de Layout */
-    .corporate-content-wrapper {
-        position: relative;
-        z-index: 10;
-        width: 100%;
-        max-width: 950px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 60px;
-    }
-
-    /* NOVO LAYOUT CENTRAL DA LOGO (Sem fundo e Gigante) */
-    .corporate-hero-branding {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-
-    .bro-logo-transparent-wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: transform;
-    }
-
-    .bro-logo-transparent-wrapper:hover {
-        transform: scale(1.03);
-    }
-
-    .bro-giant-logo {
-        height: 110px; /* Logo significativamente maior */
-        width: auto;
-        display: block;
-        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
-    }
-
-    @media (min-width: 768px) {
-        .bro-giant-logo {
-            height: 150px;
-        }
-    }
-
-    /* Texto Oficial Branco */
-    .bro-text-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1rem;
-        font-weight: 700;
-        letter-spacing: 0.4em;
-        color: #ffffff !important; /* Forçado Letra Branca */
-        margin-top: 30px;
-        text-align: center;
-        text-indent: 0.4em; /* Compensa o letter-spacing na última letra */
-    }
-
-    @media (min-width: 768px) {
-        .bro-text-title {
-            font-size: 1.4rem;
-        }
-    }
-
-    .gold-minimal-divider {
-        width: 80px;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #b3934d, transparent);
-        margin-top: 25px;
-    }
-
-    /* Manifesto Inferior */
-    .corporate-manifesto-text {
-        width: 100%;
-        text-align: center;
-    }
-
-    .main-heading-decoration {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        line-height: 1.5;
-        letter-spacing: -0.03em;
-    }
-
-    @media (min-width: 768px) {
-        .main-heading-decoration {
-            font-size: 2.6rem;
-            line-height: 1.4;
-        }
-    }
-
-    .heading-line-sub {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 300;
-        letter-spacing: -0.01em;
-        color: rgba(255, 255, 255, 0.65);
-        margin-top: 20px;
-    }
-
-    @media (min-width: 768px) {
-        .heading-line-sub {
-            font-size: 1.8rem;
-        }
-    }
-
-    .text-pink { color: #ff2a85; }
-
-    /* Animação Sequencial das Palavras */
-    .label-animate-word {
-        display: inline-block;
-        opacity: 0;
-        margin: 0 0.15em;
-        will-change: transform, opacity, filter;
-        transition: text-shadow 0.3s ease, color 0.3s ease;
-    }
-
-    .label-animate-word:hover {
-        transform: translateY(-2px);
-    }
-
-    .corporate-tech-section.active-scrolled .label-animate-word.run-trigger {
-        animation: techWordAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    @keyframes techWordAppear {
-        0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(6px); }
-        100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-    }
-
-    .brand-text-description {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
-        line-height: 1.8;
-        color: rgba(255, 255, 255, 0.45);
-        max-width: 580px;
-        margin: 35px auto 0 auto;
-    }
-
-    /* Lanterna que segue o cursor */
-    .corporate-lantern-glow {
-        position: fixed;
-        width: 350px;
-        height: 350px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 42, 133, 0.03) 0%, rgba(179, 147, 77, 0.01) 60%, transparent 75%);
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        opacity: 0;
-        will-change: left, top, opacity;
-        transition: opacity 0.4s ease-out;
-    }
-
-    /* Ondulações de Clique */
-    .tech-click-ripple {
-        position: fixed;
-        width: 6px;
-        height: 6px;
-        background: rgba(255, 42, 133, 0.3);
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        animation: techRippleExpand 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-    }
-
-    @keyframes techRippleExpand {
-        0% { width: 0px; height: 0px; opacity: 1; }
-        100% { width: 80px; height: 80px; opacity: 0; }
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const corporateSection = document.querySelector('.corporate-tech-section');
-        const words = document.querySelectorAll('.label-animate-word');
-        const lantern = document.getElementById('js-corporate-mouse-glow');
-        let scrollTriggered = false;
-
-        // 1. DISPARADOR DE ANIMAÇÃO POR SCROLL
-        const corporateObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !scrollTriggered) {
-                    scrollTriggered = true;
-                    corporateSection.classList.add('active-scrolled');
-                    
-                    // Dispara a cadeia de surgimento milimétrico de cada palavra
-                    words.forEach(word => {
-                        const delay = parseInt(word.getAttribute('data-delay')) || 0;
-                        setTimeout(() => {
-                            if (word) word.classList.add('run-trigger');
-                        }, delay);
-                    });
-                }
-            });
-        }, { threshold: 0.12 });
-
-        if (corporateSection) {
-            corporateObserver.observe(corporateSection);
-        }
-
-        // 2. LANTERNA SEGUIDORA (Mouse Tracking)
-        document.addEventListener('mousemove', (e) => {
-            if (lantern) {
-                lantern.style.left = `${e.clientX}px`;
-                lantern.style.top = `${e.clientY}px`;
-                lantern.style.opacity = '1';
-            }
-        });
-
-        document.addEventListener('mouseleave', () => {
-            if (lantern) lantern.style.opacity = '0';
-        });
-
-        // 3. EFEITO DE ONDULAÇÃO AO CLICAR
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.className = 'tech-click-ripple';
-            ripple.style.left = `${e.clientX}px`;
-            ripple.style.top = `${e.clientY}px`;
-            
-            document.body.appendChild(ripple);
-            setTimeout(() => { ripple.remove(); }, 800);
-        });
-
-        // 4. MICRO-INTERAÇÃO DE GLOW NO HOVER
-        words.forEach(word => {
-            word.addEventListener('mouseenter', () => {
-                word.style.textShadow = '0 0 20px rgba(255, 42, 133, 0.5)';
-            });
-            word.addEventListener('mouseleave', () => {
-                word.style.textShadow = 'none';
-            });
-        });
-    });
-</script>
-
-<section class="instagram-premium-section">
-    
-    <canvas id="js-elevia-warp-canvas" class="webgl-warp-background"></canvas>
-
-    <div class="instagram-profile-wrapper">
-        
-        <div class="apple-ios-icon-card">
-            <div class="card-glass-specular-reflection"></div>
-            
-            <div class="apple-avatar-housing">
-                <div class="avatar-glass-inner">
-                    <img src="https://bropharmaceutical.com/images/logoelevia.png" alt="ELEVIA Logo" class="avatar-brand-logo">
-                </div>
-            </div>
-
-           <h2 class="profile-main-name luxury-gold-text" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
-                @goelevia
-                <svg class="instagram-verified-badge" viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: #0095f6; flex-shrink: 0; display: inline-block;" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-            </h2>
-            <div class="profile-brand-badge">Comunidade Oficial</div>
-            
-            <p class="profile-bio-text">
-                Acompanhe os bastidores do nosso laboratório molecular, rituais de performance e faça parte da construção da nova era do movimento.
-            </p>
-
-            <div class="profile-mini-divider"></div>
-
-            <div class="profile-social-row">
-                
-                <div class="social-button-item">
-                    <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Acessar Instagram">
-                        <svg class="social-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <div class="action-buttons-group">
+                    <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="apple-action-button primary-btn">
+                        <span data-i18n="social.btn1">Seguir Perfil</span>
+                        <svg class="arrow-up-right-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     </a>
-                    <div class="css-native-tooltip" role="tooltip">
-                        Instagram
-                        <div class="tooltip-arrow"></div>
-                    </div>
-                </div>
-
-                <div class="social-button-item">
-                    <a href="https://bropharmaceutical.com" target="_blank" rel="noopener noreferrer" class="social-circle-btn" aria-label="Acessar BRO Pharmaceuticals">
-                        <svg class="social-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <a href="https://bropharmaceutical.com/app" target="_blank" rel="noopener noreferrer" class="apple-action-button secondary-btn">
+                        <span data-i18n="social.btn2">Acessar App</span>
+                        <svg class="arrow-up-right-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
-                    <div class="css-native-tooltip" role="tooltip">
-                        BRO Pharmaceuticals
-                        <div class="tooltip-arrow"></div>
+                    <a href="https://bropharmaceutical.com/verify" target="_blank" rel="noopener noreferrer" class="apple-action-button secondary-btn">
+                        <span data-i18n="social.btn3">Verificar Produto</span>
+                        <svg class="arrow-up-right-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="elevia-main-footer">
+            <div class="footer-max-container">
+                <div class="footer-minimal-content" style="display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:30px!important;">
+                    <div class="footer-logo-block" style="display:flex!important;flex-direction:column!important;align-items:center!important;gap:10px!important;">
+                        <img src="https://bropharmaceutical.com/images/logo-brx.png" alt="BRO PHARMACEUTICALS" class="footer-logo-img" style="margin-bottom:0!important;">
+                        <span class="footer-brand-name" style="font-family:'Syncopate',sans-serif!important;font-size:0.95rem!important;font-weight:700!important;letter-spacing:0.12em!important;color:#1a0613!important;text-transform:uppercase!important;display:block!important;margin-top:2px!important;">BRO PHARMACEUTICALS</span>
+                    </div>
+                    <div class="footer-info-row" style="display:flex!important;flex-direction:column!important;align-items:center!important;gap:20px!important;width:100%!important;">
+                        <div class="footer-info-item" style="display:flex!important;justify-content:center!important;align-items:center!important;">
+                            <div id="js-location-tag" style="position:relative!important;display:flex!important;align-items:center!important;gap:12px!important;border-radius:9999px!important;border:1px solid #1a0613!important;padding:10px 20px!important;cursor:pointer!important;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)!important;background:#1a0613!important;overflow:hidden!important;user-select:none!important;box-shadow:0 10px 25px rgba(26,6,19,0.12)!important;">
+                                <div style="position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;width:8px!important;height:8px!important;flex-shrink:0!important;">
+                                    <span style="position:absolute!important;display:inline-flex!important;height:100%!important;width:100%!important;border-radius:50%!important;background-color:#10b981!important;opacity:0.75!important;animation:locationPulse 2s cubic-bezier(0,0,0.2,1) infinite!important;"></span>
+                                    <span style="position:relative!important;display:inline-flex!important;border-radius:50%!important;width:8px!important;height:8px!important;background-color:#10b981!important;"></span>
+                                </div>
+                                <div style="position:relative!important;display:flex!important;align-items:center!important;height:20px!important;overflow:hidden!important;min-width:170px!important;text-align:left!important;">
+                                    <span id="js-loc-text" style="font-size:0.88rem!important;font-weight:500!important;color:#ffffff!important;transform:translateY(0);opacity:1!important;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)!important;white-space:nowrap!important;display:block!important;">72TH Innovation Ave, Houston TX</span>
+                                    <span id="js-time-text" style="position:absolute!important;left:0!important;font-size:0.88rem!important;font-weight:500!important;color:#ffffff!important;transform:translateY(100%);opacity:0!important;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)!important;white-space:nowrap!important;display:block!important;">00:00 PST</span>
+                                </div>
+                                <svg id="js-loc-arrow" style="width:12px!important;height:12px!important;color:#ffffff!important;opacity:0.6!important;transition:all 0.3s ease!important;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+                            </div>
+                        </div>
+                        <div class="footer-info-item" style="display:flex!important;justify-content:center!important;align-items:center!important;">
+                            <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-instagram-link" style="display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;color:#5a4953;text-decoration:none!important;">
+                                <svg class="footer-mini-icon" style="width:16px;height:16px;color:#ff2a85;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                <span style="font-size:0.88rem!important;font-weight:500!important;">@goelevia</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
+                <div class="footer-bottom-bar">
+                    <div class="footer-bottom-flex" style="display:flex!important;flex-direction:column!important;align-items:center!important;text-align:center!important;gap:12px!important;">
+                        <p class="copyright-text-main" style="margin:0!important;" data-i18n="footer.copyright">&copy; 2026 ELEVIA. Todos os direitos reservados.</p>
+                        <p class="copyright-sub-tag" style="margin:0!important;" data-i18n="footer.brand">Marca Oficial BRO PHARMACEUTICALS</p>
+                    </div>
+                </div>
             </div>
+        </footer>
+    </section>
 
-            <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="apple-action-button">
-                <span>Seguir Perfil</span>
-                <svg class="arrow-up-right-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-            </a>
-
-        </div>
-        
-    </div>
-</section>
-
-<style>
-    .instagram-premium-section {
-        background-color: #ffffff;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .webgl-warp-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        display: block;
-        pointer-events: none;
-    }
-
-    .instagram-profile-wrapper {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 160px 24px;
-        z-index: 10;
-    }
-
-    /* Card Branco Sólido de Alta Costura */
-    .apple-ios-icon-card {
-        position: relative;
-        width: 100%;
-        max-width: 390px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 55px 40px;
-        border-radius: 44px; /* Proporção Squircle iOS */
-        background: #ffffff;
-        border: 1px solid rgba(179, 147, 77, 0.15);
-        border-top: 1px solid rgba(179, 147, 77, 0.25);
-        box-shadow: 
-            0 40px 90px rgba(255, 42, 133, 0.12),
-            0 20px 40px rgba(0, 0, 0, 0.04),
-            inset 0 1px 2px rgba(255, 255, 255, 0.9);
-        overflow: hidden;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
-    }
-
-    .apple-ios-icon-card:hover {
-        transform: scale(1.015) translateY(-3px);
-        box-shadow: 
-            0 55px 110px rgba(255, 42, 133, 0.2),
-            0 25px 50px rgba(0, 0, 0, 0.06);
-        border-color: rgba(179, 147, 77, 0.4);
-    }
-
-    .card-glass-specular-reflection {
-        position: absolute;
-        top: -100%;
-        left: -100%;
-        width: 300%;
-        height: 300%;
-        background: radial-gradient(circle at center, rgba(179, 147, 77, 0.04) 0%, transparent 60%);
-        pointer-events: none;
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .apple-ios-icon-card:hover .card-glass-specular-reflection {
-        transform: translate(30px, 30px);
-    }
-
-    .apple-avatar-housing {
-        width: 105px;
-        height: 105px;
-        margin-bottom: 24px;
-        border-radius: 50%;
-        padding: 1px;
-        background: linear-gradient(135deg, rgba(179, 147, 77, 0.4), rgba(255, 255, 255, 0.8));
-        box-shadow: 0 10px 25px rgba(179, 147, 77, 0.08);
-    }
-
-    .avatar-glass-inner {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 18px;
-    }
-
-    .avatar-brand-logo {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .profile-main-name {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.45rem;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        text-align: center;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px; /* Espaço milimétrico para o selo */
-    }
-
-    /* Efeito de Cor Ouro Líquido Realista */
-    .luxury-gold-text {
-        background: linear-gradient(135deg, #a3823c 0%, #e7d08c 35%, #b3934d 75%, #967631 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0px 1px 1px rgba(163, 130, 60, 0.15));
-    }
-
-    /* NOVO: Selo Verificado do Instagram Estilizado e Proporcional */
-    .instagram-verified-badge {
-        width: 18px;
-        height: 18px;
-        flex-shrink: 0;
-        display: inline-block;
-        color: #0095f6; /* Azul oficial de verificação do Instagram */
-        filter: drop-shadow(0px 2px 4px rgba(0, 149, 246, 0.15));
-    }
-
-    .profile-brand-badge {
-        font-family: system-ui, -apple-system, sans-serif;
-        font-size: 0.68rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: #b3934d;
-        background: rgba(179, 147, 77, 0.08);
-        border: 1px solid rgba(179, 147, 77, 0.15);
-        padding: 4px 14px;
-        border-radius: 30px;
-        margin-top: 10px;
-    }
-
-    .profile-bio-text {
-        font-family: 'Inter', sans-serif;
-        font-size: 0.92rem;
-        line-height: 1.6;
-        color: #5a4953;
-        text-align: center;
-        margin-top: 22px;
-    }
-
-    .profile-mini-divider {
-        width: 40px;
-        height: 1px;
-        background-color: rgba(179, 147, 77, 0.2);
-        margin: 26px 0;
-    }
-
-    .profile-social-row {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-    }
-
-    .social-button-item {
-        position: relative;
-    }
-
-    .social-circle-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        background-color: rgba(179, 147, 77, 0.04);
-        color: #a3823c;
-        text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        border: 1px solid rgba(179, 147, 77, 0.12);
-    }
-
-    .social-circle-btn:hover {
-        background-color: #1a0613;
-        color: #ffffff;
-        border-color: #1a0613;
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(26, 6, 19, 0.12);
-    }
-
-    .social-svg-icon {
-        width: 18px;
-        height: 18px;
-    }
-
-    .css-native-tooltip {
-        position: absolute;
-        bottom: 56px;
-        left: 50%;
-        transform: translateX(-50%) translateY(6px);
-        background: #1a0613;
-        color: #e7d08c;
-        padding: 6px 14px;
-        border-radius: 8px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.7rem;
-        font-weight: 600;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    }
-
-    .tooltip-arrow {
-        position: absolute;
-        bottom: -3px;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-        width: 6px;
-        height: 6px;
-        background: #1a0613;
-    }
-
-    .social-button-item:hover .css-native-tooltip {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-
-    .apple-action-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 14px 44px;
-        margin-top: 35px;
-        border-radius: 50px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #ffffff;
-        background-color: #1a0613;
-        text-decoration: none;
-        box-shadow: 0 10px 30px rgba(26, 6, 19, 0.15);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        border: 1px solid #1a0613;
-    }
-
-    .apple-action-button:hover {
-        background-color: #ff2a85; 
-        border-color: #ff2a85;
-        transform: scale(1.02);
-        box-shadow: 0 12px 35px rgba(255, 42, 133, 0.3);
-    }
-
-    .arrow-up-right-icon {
-        width: 15px;
-        height: 15px;
-        color: #e7d08c;
-        transition: transform 0.3s ease, color 0.3s ease;
-    }
-
-    .apple-action-button:hover .arrow-up-right-icon {
-        transform: translate(2px, -2px);
-        color: #ffffff;
-    }
-</style>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        const fsWarpSource = `#version 300 es
-        precision highp float;
-        out vec4 fragColor;
-        uniform float time;
-        uniform vec2 resolution;
-
-        #define iTime time
-        #define iResolution resolution
-
-        const float proportion = 0.45;
-        const float softness = 1.0;
-        const float distortion = 0.22;
-        const float swirl = 0.6;
-
-        vec3 color1 = vec3(1.0, 1.0, 1.0);           
-        vec3 color2 = vec3(1.0, 0.85, 0.92);         
-        vec3 color3 = vec3(1.0, 0.16, 0.52);         
-        vec3 color4 = vec3(1.0, 0.96, 0.98);         
-
-        mat2 rotate2d(float angle) {
-            return mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+    <style>
+        @keyframes locationPulse { 0%{transform:scale(1);opacity:0.8} 100%{transform:scale(3.5);opacity:0} }
+        #js-location-tag:hover { background:#24111d!important; border-color:#24111d!important; box-shadow:0 12px 30px rgba(26,6,19,0.2)!important; }
+        .instagram-premium-section { background-color: #fdeef6; width: 100%; position: relative; overflow: hidden; }
+        .webgl-warp-background { position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; display:block; pointer-events:none; }
+        .instagram-profile-wrapper { position:relative; display:flex; justify-content:center; align-items:center; width:100%; padding:140px 24px 60px 24px; z-index:10; }
+        .apple-ios-icon-card { position:relative; width:100%; max-width:390px; display:flex; flex-direction:column; align-items:center; padding:55px 40px; border-radius:44px; background:#ffffff; border:1px solid rgba(26,6,19,0.05); box-shadow:0 40px 90px rgba(255,42,133,0.06),0 20px 40px rgba(26,6,19,0.02),inset 0 1px 2px rgba(255,255,255,0.9); overflow:hidden; transition:transform 0.5s cubic-bezier(0.16,1,0.3,1),box-shadow 0.5s ease,border-color 0.5s ease; }
+        .apple-ios-icon-card:hover { transform:scale(1.015) translateY(-3px); box-shadow:0 55px 110px rgba(255,42,133,0.12),0 25px 50px rgba(26,6,19,0.04); border-color:rgba(255,42,133,0.15); }
+        .card-glass-specular-reflection { position:absolute; top:-100%; left:-100%; width:300%; height:300%; background:radial-gradient(circle at center, rgba(255,42,133,0.02) 0%, transparent 60%); pointer-events:none; transition:transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+        .apple-ios-icon-card:hover .card-glass-specular-reflection { transform:translate(30px,30px); }
+        .apple-avatar-housing { width:105px; height:105px; margin-bottom:24px; border-radius:50%; padding:1px; background:linear-gradient(135deg, rgba(255,42,133,0.2), rgba(255,255,255,0.8)); box-shadow:0 10px 25px rgba(26,6,19,0.03); }
+        .avatar-glass-inner { width:100%; height:100%; border-radius:50%; background:#ffffff; display:flex; align-items:center; justify-content:center; padding:18px; }
+        .avatar-brand-logo { width:100%; height:auto; object-fit:contain; }
+        .profile-main-name { font-family:'Syncopate',sans-serif; font-size:1.45rem; font-weight:700; color:#1a0613; letter-spacing:-0.03em; text-align:center; }
+        .luxury-gold-text { background:linear-gradient(120deg,#1a0613 40%,#5a4953 50%,#1a0613 60%); background-size:200% 100%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-position:100% 0; transition:background-position 0.8s ease; }
+        .apple-ios-icon-card:hover .luxury-gold-text { background-position:-100% 0; }
+        .profile-brand-badge { font-family:system-ui,-apple-system,sans-serif; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:#ff2a85; background:rgba(255,42,133,0.05); border:1px solid rgba(255,42,133,0.12); padding:4px 14px; border-radius:30px; margin-top:10px; }
+        .profile-bio-text { font-family:'Inter',sans-serif; font-size:0.92rem; line-height:1.6; color:#5a4953; text-align:center; margin-top:22px; }
+        .profile-mini-divider { width:40px; height:1px; background-color:rgba(26,6,19,0.08); margin:26px 0; }
+        .profile-social-row { display:flex; align-items:center; justify-content:center; gap:16px; margin-bottom:30px; }
+        .social-button-item { position:relative; }
+        .social-circle-btn { display:flex; align-items:center; justify-content:center; width:46px; height:46px; border-radius:50%; background-color:rgba(26,6,19,0.02); color:#1a0613; text-decoration:none; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); border:1px solid rgba(26,6,19,0.06); }
+        .social-circle-btn:hover { background-color:#1a0613; color:#ffffff; border-color:#1a0613; transform:translateY(-2px); box-shadow:0 10px 20px rgba(26,6,19,0.12); }
+        .social-svg-icon { width:18px; height:18px; }
+        .css-native-tooltip { position:absolute; bottom:56px; left:50%; transform:translateX(-50%) translateY(6px); background:#1a0613; color:#ffffff; padding:6px 14px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.7rem; font-weight:600; white-space:nowrap; opacity:0; pointer-events:none; transition:all 0.25s cubic-bezier(0.16,1,0.3,1); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+        .tooltip-arrow { position:absolute; bottom:-3px; left:50%; transform:translateX(-50%) rotate(45deg); width:6px; height:6px; background:#1a0613; }
+        .social-button-item:hover .css-native-tooltip { opacity:1; transform:translateX(-50%) translateY(0); }
+        .action-buttons-group { display:flex; flex-direction:column; width:100%; gap:12px; }
+        .apple-action-button { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:14px 32px; border-radius:50px; font-family:'Inter',sans-serif; font-size:0.9rem; font-weight:600; text-decoration:none; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); width:100%; }
+        .primary-btn { color:#ffffff; background-color:#1a0613; border:1px solid #1a0613; box-shadow:0 10px 30px rgba(26,6,19,0.1); }
+        .primary-btn:hover { background-color:#ff2a85; border-color:#ff2a85; transform:scale(1.02); box-shadow:0 12px 35px rgba(255,42,133,0.25); }
+        .secondary-btn { color:#1a0613; background-color:transparent; border:1px solid rgba(26,6,19,0.15); }
+        .secondary-btn:hover { background-color:rgba(26,6,19,0.03); border-color:#1a0613; transform:scale(1.02); }
+        .arrow-up-right-icon { width:15px; height:15px; transition:transform 0.3s ease; }
+        .apple-action-button:hover .arrow-up-right-icon { transform:translate(2px,-2px); }
+        .secondary-btn:hover .arrow-up-right-icon { transform:translate(3px,0px); }
+        .elevia-main-footer { background-color:transparent; width:100%; border-top:none; padding-top:50px; padding-bottom:35px; font-family:'Inter',sans-serif; color:#1a0613; position:relative; z-index:10; }
+        .footer-max-container { max-width:1200px; margin:0 auto; padding:0 24px; }
+        .footer-logo-img { width:65px; height:65px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(26,6,19,0.02)); }
+        .footer-instagram-link { display:flex; align-items:center; gap:8px; color:#5a4953; text-decoration:none; transition:color 0.25s ease,transform 0.25s ease; }
+        .footer-instagram-link:hover { color:#ff2a85; transform:translateY(-1px); }
+        .footer-bottom-bar { margin-top:40px; border-top:1px solid rgba(26,6,19,0.05); padding-top:25px; }
+        .copyright-text-main { font-size:0.8rem; color:#5a4953; opacity:0.7; margin:0; }
+        .copyright-sub-tag { font-size:0.8rem; color:#1a0613; font-weight:600; margin:0; letter-spacing:0.02em; }
+        @media (min-width: 768px) {
+            .footer-info-row { flex-direction:row!important; justify-content:center; gap:40px!important; }
+            .footer-bottom-flex { flex-direction:row!important; justify-content:space-between; text-align:left!important; }
         }
+    </style>
 
-        void main() {
-            vec2 uv = gl_FragCoord.xy / iResolution.xy;
-            vec2 p = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
-            
-            float t = iTime * 0.3;
-
-            for(float i = 1.0; i < 11.0; i++) {
-                p.x += sin(p.y + t + i) * distortion;
-                p.y += cos(p.x + t + i * swirl) * distortion;
-                p = p * rotate2d(0.04);
+    <!-- WebGL Warp -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fsWarpSource = `#version 300 es
+            precision highp float;
+            out vec4 fragColor;
+            uniform float time;
+            uniform vec2 resolution;
+            #define iTime time
+            #define iResolution resolution
+            const float proportion = 0.6;
+            const float softness = 0.85;
+            const float distortion = 0.22;
+            const float swirl = 0.6;
+            vec3 color1 = vec3(1.0, 1.0, 1.0);
+            vec3 color2 = vec3(1.0, 0.88, 0.94);
+            vec3 color3 = vec3(1.0, 0.16, 0.52);
+            vec3 color4 = vec3(0.99, 0.93, 0.96);
+            mat2 rotate2d(float angle){return mat2(cos(angle),-sin(angle),sin(angle),cos(angle));}
+            void main(){
+                vec2 uv = gl_FragCoord.xy / iResolution.xy;
+                vec2 p = (gl_FragCoord.xy - 0.5 * iResolution.xy) / iResolution.y;
+                float t = iTime * 0.22;
+                for(float i = 1.0; i < 8.0; i++){
+                    p.x += sin(p.y + t + i) * distortion;
+                    p.y += cos(p.x + t + i * swirl) * distortion;
+                    p = p * rotate2d(0.04);
+                }
+                float pattern = sin(p.x * 1.4 + t) * cos(p.y * 1.4 - t);
+                pattern = smoothstep(-softness, softness, pattern * proportion);
+                vec3 mix1 = mix(color1, color2, uv.x + pattern);
+                vec3 mix2 = mix(color3, color4, uv.y - pattern);
+                vec3 finalCol = mix(mix1, mix2, pattern * 0.5 + 0.5);
+                finalCol = clamp(finalCol, vec3(0.98, 0.55, 0.70), vec3(1.0));
+                fragColor = vec4(finalCol, 1.0);
+            }`;
+            class WebGLWarpEngine {
+                constructor(canvas) {
+                    this.canvas = canvas;
+                    this.gl = canvas.getContext("webgl2");
+                    if (!this.gl) return;
+                    this.vertexSrc = "#version 300 es\nin vec4 position;\nvoid main(){gl_Position=position;}";
+                    this.vertices = [-1,1,-1,-1,1,1,1,-1];
+                    this.compileAndLink(); this.initBuffers();
+                }
+                updateSize() {
+                    const dpr = Math.min(window.devicePixelRatio, 2);
+                    const rect = this.canvas.getBoundingClientRect();
+                    this.canvas.width = rect.width * dpr; this.canvas.height = rect.height * dpr;
+                    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+                }
+                compileShader(shader, source) { this.gl.shaderSource(shader, source); this.gl.compileShader(shader); }
+                compileAndLink() {
+                    const gl = this.gl;
+                    this.vs = gl.createShader(gl.VERTEX_SHADER); this.fs = gl.createShader(gl.FRAGMENT_SHADER);
+                    this.program = gl.createProgram();
+                    this.compileShader(this.vs, this.vertexSrc); this.compileShader(this.fs, fsWarpSource);
+                    gl.attachShader(this.program, this.vs); gl.attachShader(this.program, this.fs);
+                    gl.linkProgram(this.program);
+                }
+                initBuffers() {
+                    const gl = this.gl;
+                    this.buffer = gl.createBuffer();
+                    gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+                    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
+                    const pos = gl.getAttribLocation(this.program, "position");
+                    gl.enableVertexAttribArray(pos); gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+                    this.resLoc = gl.getUniformLocation(this.program, "resolution");
+                    this.timeLoc = gl.getUniformLocation(this.program, "time");
+                }
+                draw(now) {
+                    const gl = this.gl; if (!this.program) return;
+                    gl.useProgram(this.program); gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
+                    gl.uniform2f(this.resLoc, this.canvas.width, this.canvas.height);
+                    gl.uniform1f(this.timeLoc, now * 0.001);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                }
             }
-
-            float pattern = sin(p.x * 2.0 + t) * cos(p.y * 2.0 - t);
-            pattern = smoothstep(-softness, softness, pattern * proportion);
-
-            vec3 mix1 = mix(color1, color2, uv.x + pattern);
-            vec3 mix2 = mix(color3, color4, uv.y - pattern);
-            vec3 finalCol = mix(mix1, mix2, pattern * 0.5 + 0.5);
-
-            finalCol = clamp(finalCol, vec3(0.85, 0.3, 0.5), vec3(1.0));
-
-            fragColor = vec4(finalCol, 1.0);
-        }`;
-
-        class WebGLWarpEngine {
-            constructor(canvas) {
-                this.canvas = canvas;
-                this.gl = canvas.getContext("webgl2");
-                if (!this.gl) return;
-
-                this.vertexSrc = "#version 300 es\nin vec4 position;\nvoid main(){gl_Position=position;}";
-                this.vertices = [-1, 1, -1, -1, 1, 1, 1, -1];
-
-                this.compileAndLink();
-                this.initBuffers();
-            }
-
-            updateSize() {
-                const dpr = Math.min(window.devicePixelRatio, 2);
-                const rect = this.canvas.getBoundingClientRect();
-                this.canvas.width = rect.width * dpr;
-                this.canvas.height = rect.height * dpr;
-                this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
-            }
-
-            compileShader(shader, source) {
-                this.gl.shaderSource(shader, source);
-                this.gl.compileShader(shader);
-            }
-
-            compileAndLink() {
-                const gl = this.gl;
-                this.vs = gl.createShader(gl.VERTEX_SHADER);
-                this.fs = gl.createShader(gl.FRAGMENT_SHADER);
-                this.program = gl.createProgram();
-
-                this.compileShader(this.vs, this.vertexSrc);
-                this.compileShader(this.fs, fsWarpSource);
-
-                gl.attachShader(this.program, this.vs);
-                gl.attachShader(this.program, this.fs);
-                gl.linkProgram(this.program);
-            }
-
-            initBuffers() {
-                const gl = this.gl;
-                this.buffer = gl.createBuffer();
-                gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertices), gl.STATIC_DRAW);
-
-                const position = gl.getAttribLocation(this.program, "position");
-                gl.enableVertexAttribArray(position);
-                gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-
-                this.resLoc = gl.getUniformLocation(this.program, "resolution");
-                this.timeLoc = gl.getUniformLocation(this.program, "time");
-            }
-
-            draw(now) {
-                const gl = this.gl;
-                if (!this.program) return;
-
-                gl.useProgram(this.program);
-                gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer);
-
-                gl.uniform2f(this.resLoc, this.canvas.width, this.canvas.height);
-                gl.uniform1f(this.timeLoc, now * 0.001);
-
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-            }
-        }
-
-        const canvas = document.getElementById('js-elevia-warp-canvas');
-        if (canvas) {
-            const engine = new WebGLWarpEngine(canvas);
-            
-            const handleResize = () => engine.updateSize();
-            handleResize();
-            window.addEventListener('resize', handleResize);
-
-            function animationLoop(timestamp) {
-                engine.draw(timestamp);
+            const canvas = document.getElementById('js-elevia-warp-canvas');
+            if (canvas) {
+                const engine = new WebGLWarpEngine(canvas);
+                const handleResize = () => engine.updateSize();
+                handleResize(); window.addEventListener('resize', handleResize);
+                function animationLoop(timestamp) { engine.draw(timestamp); requestAnimationFrame(animationLoop); }
                 requestAnimationFrame(animationLoop);
             }
-            requestAnimationFrame(animationLoop);
+        });
+    </script>
+
+    <!-- Footer clock -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tag = document.getElementById('js-location-tag');
+            const locText = document.getElementById('js-loc-text');
+            const timeText = document.getElementById('js-time-text');
+            const arrow = document.getElementById('js-loc-arrow');
+            if (!tag) return;
+            function updateFooterClock() {
+                const now = new Date();
+                timeText.textContent = now.toLocaleTimeString("en-US", { hour:"2-digit", minute:"2-digit", hour12:false }) + " PST";
+            }
+            updateFooterClock(); setInterval(updateFooterClock, 1000);
+            tag.addEventListener('mouseenter', () => {
+                locText.style.transform = 'translateY(-100%)'; locText.style.opacity = '0';
+                timeText.style.transform = 'translateY(0)'; timeText.style.opacity = '1';
+                arrow.style.transform = 'translateX(2px) rotate(-45deg)'; arrow.style.opacity = '1';
+            });
+            tag.addEventListener('mouseleave', () => {
+                locText.style.transform = 'translateY(0)'; locText.style.opacity = '1';
+                timeText.style.transform = 'translateY(100%)'; timeText.style.opacity = '0';
+                arrow.style.transform = 'translateX(0) rotate(0)'; arrow.style.opacity = '0.6';
+            });
+        });
+    </script>
+
+    <!-- ════════════════════════════════════════
+         I18N ENGINE
+    ════════════════════════════════════════ -->
+    <script>
+    const i18n = {
+        pt: {
+            "hero.subtitle":     "O lançamento oficial chegou para revolucionar o seu ritmo.",
+            "hero.description":  "A união definitiva entre alta performance, biotecnologia molecular e comunidade. O amanhã do movimento e da regeneração celular já começou e você está convidado a vivenciar esse novo nível agora.",
+            "hero.scroll":       "Desça para explorar",
+            "product.badge":     "Linha Exclusiva Elevia",
+            "product.scrollhint":"Gire para desvendar a fórmula",
+            "product.continue":  "Continue descendo",
+            "benefits.subtitle": "A Ciência por Trás da Fórmula",
+            "benefits.title1":   "Três Pilares de",
+            "benefits.title2":   "Alta Performance",
+            "benefits.card1.title": "DNA Celular PDRN",
+            "benefits.card1.text":  "Atua diretamente na matriz e no ciclo de regeneração celular. Devolve a textura ultra uniforme e refinada, promovendo o efeito de pele renovada e revigorada.",
+            "benefits.card2.title": "Sustentação GHK-CU",
+            "benefits.card2.text":  "Peptídeos de cobre estruturados que guiam os fibroblastos a estimularem colágeno e elastina de forma imediata, devolvendo a firmeza física e diminuindo linhas superficiais.",
+            "benefits.card3.title": "Luminosidade Inata",
+            "benefits.card3.text":  "Neutralização activa do estresse oxidativo e fadiga cutânea. Uma infusão de viço que libera um brilho limpo, saudável e magnético desde o primeiro contato.",
+            "social.badge":  "Instagram Oficial",
+            "social.bio":    "Acompanhe os bastidores do nosso laboratório molecular, rituais de performance e faça parte da construção da nova era do movimento.",
+            "social.btn1":   "Seguir Perfil",
+            "social.btn2":   "Acessar App",
+            "social.btn3":   "Verificar Produto",
+            "footer.copyright": "© 2026 ELEVIA. Todos os direitos reservados.",
+            "footer.brand":     "Marca Oficial BRO PHARMACEUTICALS",
+        },
+        en: {
+            "hero.subtitle":     "The official launch has arrived to revolutionize your rhythm.",
+            "hero.description":  "The definitive union between high performance, molecular biotechnology and community. The future of movement and cellular regeneration has already begun — you are invited to experience this new level now.",
+            "hero.scroll":       "Scroll to explore",
+            "product.badge":     "Exclusive Elevia Line",
+            "product.scrollhint":"Scroll to unveil the formula",
+            "product.continue":  "Keep scrolling",
+            "benefits.subtitle": "The Science Behind the Formula",
+            "benefits.title1":   "Three Pillars of",
+            "benefits.title2":   "High Performance",
+            "benefits.card1.title": "PDRN Cellular DNA",
+            "benefits.card1.text":  "Acts directly on the matrix and cellular regeneration cycle. Restores ultra-smooth, refined texture — promoting a renewed and revitalized skin effect.",
+            "benefits.card2.title": "GHK-CU Structure",
+            "benefits.card2.text":  "Structured copper peptides that guide fibroblasts to stimulate collagen and elastin immediately, restoring physical firmness and reducing surface lines.",
+            "benefits.card3.title": "Innate Luminosity",
+            "benefits.card3.text":  "Active neutralization of oxidative stress and skin fatigue. A vitality infusion that releases a clean, healthy, and magnetic glow from the very first contact.",
+            "social.badge":  "Official Instagram",
+            "social.bio":    "Follow the behind-the-scenes of our molecular lab, performance rituals and be part of building the new era of movement.",
+            "social.btn1":   "Follow Profile",
+            "social.btn2":   "Access App",
+            "social.btn3":   "Verify Product",
+            "footer.copyright": "© 2026 ELEVIA. All rights reserved.",
+            "footer.brand":     "Official Brand BRO PHARMACEUTICALS",
+        },
+        es: {
+            "hero.subtitle":     "El lanzamiento oficial ha llegado para revolucionar tu ritmo.",
+            "hero.description":  "La unión definitiva entre alto rendimiento, biotecnología molecular y comunidad. El mañana del movimiento y la regeneración celular ya comenzó — y estás invitado a vivir este nuevo nivel ahora.",
+            "hero.scroll":       "Desplázate para explorar",
+            "product.badge":     "Línea Exclusiva Elevia",
+            "product.scrollhint":"Desplázate para revelar la fórmula",
+            "product.continue":  "Seguir bajando",
+            "benefits.subtitle": "La Ciencia detrás de la Fórmula",
+            "benefits.title1":   "Tres Pilares de",
+            "benefits.title2":   "Alto Rendimiento",
+            "benefits.card1.title": "ADN Celular PDRN",
+            "benefits.card1.text":  "Actúa directamente en la matriz y el ciclo de regeneración celular. Devuelve una textura ultra uniforme y refinada, promoviendo el efecto de piel renovada y revigorizada.",
+            "benefits.card2.title": "Soporte GHK-CU",
+            "benefits.card2.text":  "Péptidos de cobre estructurados que guían a los fibroblastos para estimular colágeno y elastina de forma inmediata, devolviendo firmeza y reduciendo líneas superficiales.",
+            "benefits.card3.title": "Luminosidad Innata",
+            "benefits.card3.text":  "Neutralización activa del estrés oxidativo y la fatiga cutánea. Una infusión de vitalidad que libera un brillo limpio, saludable y magnético desde el primer contacto.",
+            "social.badge":  "Instagram Oficial",
+            "social.bio":    "Sigue los bastidores de nuestro laboratorio molecular, rituales de rendimiento y sé parte de la construcción de la nueva era del movimiento.",
+            "social.btn1":   "Seguir Perfil",
+            "social.btn2":   "Acceder a la App",
+            "social.btn3":   "Verificar Producto",
+            "footer.copyright": "© 2026 ELEVIA. Todos los derechos reservados.",
+            "footer.brand":     "Marca Oficial BRO PHARMACEUTICALS",
         }
-    });
-</script>
+    };
 
-<footer class="elevia-main-footer">
-    <div class="footer-max-container">
-        
-        <div class="footer-main-grid">
-            
-            <div class="footer-brand-column">
-                <div class="footer-logo-block">
-                    <img src="https://bropharmaceutical.com/images/logoelevia.png" alt="ELEVIA Logo" class="footer-logo-img">
-                    <span class="footer-brand-name">ELEVIA</span>
-                </div>
-                
-                <p class="footer-brand-description">
-                    Construindo experiências estéticas de alta performance com biotecnologia moderna. Engenharia molecular voltada ao movimento e regeneração celular.
-                </p>
+    let currentLang = 'pt';
 
-                <ul class="footer-social-list">
-                    <li>
-                        <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
-                            <svg class="footer-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://bropharmaceutical.com" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Global Business">
-                            <svg class="footer-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+    function setLang(lang) {
+        if (!i18n[lang]) return;
+        currentLang = lang;
 
-            <div class="footer-links-wrapper">
-                
-                <div class="footer-nav-column">
-                    <p class="footer-column-title">Sobre Nós</p>
-                    <ul class="footer-links-list">
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Nossa História</a></li>
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Corpo Científico</a></li>
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Carreiras</a></li>
-                    </ul>
-                </div>
+        // Update HTML lang attribute
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang === 'es' ? 'es' : 'en';
 
-                <div class="footer-nav-column">
-                    <p class="footer-column-title">Inovação</p>
-                    <ul class="footer-links-list">
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Engenharia Celular</a></li>
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Linha PDRN</a></li>
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Comunidade</a></li>
-                    </ul>
-                </div>
+        // Update page title
+        const titles = { pt: 'ELEVIA | Lançamento Oficial', en: 'ELEVIA | Official Launch', es: 'ELEVIA | Lanzamiento Oficial' };
+        document.title = titles[lang];
 
-                <div class="footer-nav-column">
-                    <p class="footer-column-title">Canais de Ajuda</p>
-                    <ul class="footer-links-list">
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Perguntas Frequentes</a></li>
-                        <li><a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link">Suporte Técnico</a></li>
-                        <li>
-                            <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-item-link chat-indicator-link">
-                                <span>Atendimento Live</span>
-                                <span class="live-ping-container">
-                                    <span class="ping-pulse-bubble"></span>
-                                    <span class="ping-solid-core"></span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        // Translate all data-i18n elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (i18n[lang][key] !== undefined) {
+                // Preserve inner HTML for copyright symbol
+                if (key === 'footer.copyright') {
+                    el.innerHTML = i18n[lang][key];
+                } else {
+                    el.textContent = i18n[lang][key];
+                }
+            }
+        });
 
-                <div class="footer-nav-column">
-                    <p class="footer-column-title">Contato</p>
-                    <ul class="footer-links-list">
-                        <li>
-                            <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-                                <svg class="contact-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                                <span class="contact-text-span">contato@goelevia.com.br</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
-                                <svg class="contact-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                <address class="footer-address-text">EUA / Sede BRO PHARMACEUTICALS</address>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="footer-bottom-bar">
-            <div class="footer-bottom-flex">
-                <p class="copyright-text-main">&copy; 2026 ELEVIA. Todos os direitos reservados.</p>
-                <p class="copyright-sub-tag">Marca Oficial BRO PHARMACEUTICALS</p>
-            </div>
-        </div>
-
-    </div>
-</footer>
-
-<style>
-    .elevia-main-footer {
-        background-color: #fafafc; 
-        width: 100%;
-        border-top: 1px solid rgba(26, 6, 19, 0.05);
-        padding-top: 80px;
-        padding-bottom: 30px;
-        font-family: 'Inter', sans-serif;
-        color: #1a0613;
+        // Toggle active button state
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
     }
 
-    .footer-max-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-    }
+    // Init on load
+    document.addEventListener('DOMContentLoaded', () => setLang('pt'));
+    </script>
 
-    /* Grid do topo: Centralizado por padrão no mobile */
-    .footer-main-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 50px;
-    }
-
-    @media (min-width: 1024px) {
-        .footer-main-grid {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: start;
-        }
-    }
-
-    /* Coluna Principal de Identidade */
-    .footer-brand-column {
-        max-width: 340px;
-        width: 100%;
-        text-align: center; /* Centralizado no Mobile */
-    }
-
-    @media (min-width: 1024px) {
-        .footer-brand-column {
-            text-align: left; /* Mantém alinhado à esquerda no Desktop */
-        }
-    }
-
-    .footer-logo-block {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-    }
-
-    @media (min-width: 1024px) {
-        .footer-logo-block {
-            justify-content: flex-start;
-        }
-    }
-
-    .footer-logo-img {
-        width: 70px;
-        height: 70px;
-        object-fit: contain;
-    }
-
-    .footer-brand-name {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 1.4rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        color: #1a0613;
-    }
-
-    .footer-brand-description {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: #706069;
-        margin-top: 20px;
-    }
-
-    .footer-social-list {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        list-style: none;
-        padding: 0;
-        margin: 25px 0 0 0;
-    }
-
-    @media (min-width: 1024px) {
-        .footer-social-list {
-            justify-content: flex-start;
-        }
-    }
-
-    .footer-social-link {
-        color: #ff2a85;
-        transition: color 0.2s ease, transform 0.2s ease;
-        display: inline-block;
-    }
-
-    .footer-social-link:hover {
-        color: #b3934d;
-        transform: translateY(-2px);
-    }
-
-    .footer-svg-icon {
-        width: 22px;
-        height: 22px;
-    }
-
-    /* Sub-colunas: Centralizadas no mobile e divididas no desktop */
-    .footer-links-wrapper {
-        flex: 1;
-        display: grid;
-        grid-template-columns: 1fr; /* 1 Coluna em telas muito pequenas */
-        gap: 40px;
-        text-align: center; /* Centralizado no Mobile */
-        width: 100%;
-    }
-
-    @media (min-width: 576px) {
-        .footer-links-wrapper {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (min-width: 768px) {
-        .footer-links-wrapper {
-            grid-template-columns: repeat(4, 1fr);
-            text-align: left; /* Alinhamento tradicional no desktop a partir de tablets */
-        }
-    }
-
-    .footer-column-title {
-        font-family: 'Syncopate', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #1a0613;
-        margin: 0 0 25px 0;
-    }
-
-    .footer-links-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    .footer-item-link {
-        font-size: 0.88rem;
-        color: #706069;
-        text-decoration: none;
-        transition: color 0.2s ease;
-    }
-
-    .footer-item-link:hover {
-        color: #ff2a85;
-    }
-
-    /* Elemento de Link com Bolha de Chat */
-    .chat-indicator-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @media (min-width: 768px) {
-        .chat-indicator-link {
-            justify-content: flex-start;
-        }
-    }
-
-    .live-ping-container {
-        position: relative;
-        display: flex;
-        width: 8px;
-        height: 8px;
-        margin-left: 8px;
-    }
-
-    .ping-pulse-bubble {
-        position: absolute;
-        display: inline-flex;
-        height: 100%;
-        width: 100%;
-        background-color: #ff2a85;
-        border-radius: 50%;
-        opacity: 0.75;
-        animation: footerLivePing 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-
-    .ping-solid-core {
-        position: relative;
-        display: inline-flex;
-        width: 8px;
-        height: 8px;
-        background-color: #ff2a85;
-        border-radius: 50%;
-    }
-
-    @keyframes footerLivePing {
-        0% { transform: scale(1); opacity: 0.8; }
-        100% { transform: scale(3.5); opacity: 0; }
-    }
-
-    /* Itens de Contato Físico e Digital */
-    .footer-contact-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        text-decoration: none;
-        color: #706069;
-    }
-
-    @media (min-width: 768px) {
-        .footer-contact-item {
-            justify-content: flex-start;
-            align-items: start;
-        }
-    }
-
-    .contact-svg-icon {
-        width: 16px;
-        height: 16px;
-        color: #ff2a85;
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
-
-    .contact-text-span {
-        font-size: 0.88rem;
-        transition: color 0.2s ease;
-    }
-
-    .footer-contact-item:hover .contact-text-span {
-        color: #ff2a85;
-    }
-
-    .footer-address-text {
-        font-size: 0.88rem;
-        font-style: normal;
-        line-height: 1.5;
-    }
-
-    /* Linha Barra Inferior de Direitos */
-    .footer-bottom-bar {
-        margin-top: 60px;
-        border-top: 1px solid rgba(26, 6, 19, 0.05);
-        padding-top: 30px;
-    }
-
-    .footer-bottom-flex {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        text-align: center;
-    }
-
-    @media (min-width: 768px) {
-        .footer-bottom-flex {
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
-        }
-    }
-
-    .copyright-text-main {
-        font-size: 0.82rem;
-        color: #9c8e96;
-        margin: 0;
-    }
-
-    .copyright-sub-tag {
-        font-size: 0.82rem;
-        color: #706069;
-        font-weight: 500;
-        margin: 0;
-    }
-</style>
 </body>
 </html>
