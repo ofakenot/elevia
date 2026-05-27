@@ -649,7 +649,12 @@
             <div class="animate-spin-slow absolute h-[85%] w-[85%] rounded-full border border-dashed border-rose-300/50 z-0"></div>
             <div class="animate-spin-reverse absolute h-[72%] w-[72%] rounded-full border border-dotted border-amber-300/30 z-0"></div>
             <div class="animate-float-smooth z-10 flex h-full w-full items-center justify-center p-4 relative">
-                <video id="serum-video" src="./images/serumbg.webm" class="h-[82%] w-[82%] object-contain filter drop-shadow-[0_20px_35px_rgba(26,6,19,0.15)] drop-shadow-[0_0_60px_rgba(248,161,208,0.25)]" muted playsinline preload="auto"></video>
+                
+                <video id="serum-video" class="h-[82%] w-[82%] object-contain filter drop-shadow-[0_20px_35px_rgba(26,6,19,0.15)] drop-shadow-[0_0_60px_rgba(248,161,208,0.25)]" muted playsinline autoplay loop preload="auto">
+                    <source src="./images/serumbg.mp4" type="video/mp4; codecs=hvc1">
+                    <source src="./images/serumbg.webm" type="video/webm">
+                </video>
+
             </div>
             <div class="animate-shadow-pulse absolute bottom-12 left-1/2 h-6 w-32 -translate-x-1/2 rounded-full bg-gradient-to-r from-zinc-900/40 via-zinc-800/20 to-transparent z-0"></div>
             <div class="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap">
@@ -667,7 +672,6 @@
                 <span class="inline-block h-[1px] w-6 bg-gradient-to-r from-[#c5a55a] to-transparent"></span>
             </div>
             
-            <!-- TÍTULO CORRIGIDO: Cormorant Garamond, weight 400, preto sólido -->
             <h2 class="mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title">Sérum GHK-CU & PDRN</span>
             </h2>
@@ -730,19 +734,32 @@
  
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        lucide.createIcons();
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
         const video = document.getElementById('serum-video');
         if (!video) return;
-        video.play();
-        video.playbackRate = 1.0;
-        video.addEventListener('timeupdate', () => {
-            const duration = 8.0;
-            const startLimit = 2.0;
-            const buffer = 0.2;
-            if (video.currentTime >= (duration - buffer) && video.playbackRate > 0) { video.playbackRate = -1.0; } 
-            else if (video.currentTime <= startLimit && video.playbackRate < 0) { video.playbackRate = 1.0; }
+
+        // Função robusta de reprodução para evitar bloqueios do Safari/Modo de Economia
+        const forcePlay = () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay retido pelo iOS. Aguardando interação inicial do usuário.");
+                    // Se o sistema bloquear, força o play no primeiro toque do usuário na tela
+                    document.body.addEventListener('touchstart', () => { video.play(); }, { once: true });
+                    document.body.addEventListener('click', () => { video.play(); }, { once: true });
+                });
+            }
+        };
+
+        forcePlay();
+
+        // Evita que o iOS pause permanentemente o vídeo por eventos de sistema
+        video.addEventListener('pause', () => { 
+            forcePlay(); 
         });
-        video.addEventListener('pause', () => { video.play(); });
     });
 </script>
 </section>
