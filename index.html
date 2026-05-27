@@ -650,8 +650,13 @@
             <div class="animate-spin-reverse absolute h-[72%] w-[72%] rounded-full border border-dotted border-amber-300/30 z-0"></div>
             <div class="animate-float-smooth z-10 flex h-full w-full items-center justify-center p-4 relative">
                 
-                <video id="serum-video" class="h-[82%] w-[82%] object-contain filter drop-shadow-[0_20px_35px_rgba(26,6,19,0.15)] drop-shadow-[0_0_60px_rgba(248,161,208,0.25)]" muted playsinline autoplay loop preload="auto">
-                    <source src="./images/iphone.mp4" type="video/mp4; codecs=hvc1">
+                <!-- Forçado atributos nativos para evitar o bloqueio agressivo do iOS -->
+                <video id="serum-video" class="h-[82%] w-[82%] object-contain filter drop-shadow-[0_20px_35px_rgba(26,6,19,0.15)] drop-shadow-[0_0_60px_rgba(248,161,208,0.25)]" 
+                    muted 
+                    playsinline 
+                    autoplay 
+                    loop 
+                    preload="auto">
                     <source src="./images/serumbg.webm" type="video/webm">
                 </video>
 
@@ -734,32 +739,37 @@
  
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
+        if (typeof lucide !== 'undefined') { lucide.createIcons(); }
 
         const video = document.getElementById('serum-video');
         if (!video) return;
 
-        // Função robusta de reprodução para evitar bloqueios do Safari/Modo de Economia
-        const forcePlay = () => {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay retido pelo iOS. Aguardando interação inicial do usuário.");
-                    // Se o sistema bloquear, força o play no primeiro toque do usuário na tela
-                    document.body.addEventListener('touchstart', () => { video.play(); }, { once: true });
-                    document.body.addEventListener('click', () => { video.play(); }, { once: true });
-                });
-            }
-        };
+        // AJAX / Blob Bypass: Força o Safari a baixar o .webm na memória cache para tentar lê-lo localmente
+        const videoSrc = video.querySelector('source').src;
+        
+        fetch(videoSrc)
+            .then(response => response.blob())
+            .then(blob => {
+                const blobURL = URL.createObjectURL(blob);
+                video.src = blobURL;
+                
+                // Disparador de Play robusto anti-bloqueio do iOS
+                const playVideo = () => {
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {
+                            // Se o modo de pouca energia barrar, força o play no toque
+                            const forcePlayTouch = () => { video.play(); };
+                            document.body.addEventListener('touchstart', forcePlayTouch, { once: true });
+                            document.body.addEventListener('click', forcePlayTouch, { once: true });
+                        });
+                    }
+                };
 
-        forcePlay();
-
-        // Evita que o iOS pause permanentemente o vídeo por eventos de sistema
-        video.addEventListener('pause', () => { 
-            forcePlay(); 
-        });
+                playVideo();
+                video.addEventListener('pause', playVideo);
+            })
+            .catch(err => console.error("Erro no bypass do vídeo:", err));
     });
 </script>
 </section>
