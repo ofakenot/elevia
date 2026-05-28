@@ -33,63 +33,76 @@
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; color: #000000; }
         p, span, a, li, input, button, label, textarea { font-family: var(--font-body); color: #333333; }
 
-        /* ==========================================
-            LANGUAGE SELECTOR
-           ========================================== */
-        .lang-selector-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            z-index: 100;
-            padding-top: 8px;
-        }
+ /* ==========================================
+    LANGUAGE SELECTOR (Horizontal, Esquerda, Letras Menores)
+   ========================================== */
+.lang-selector-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    z-index: 100;
+    padding-top: px; /* Mantida a mesma altura do seu código anterior */
+    padding-left: 24px; /* Mantido o espaçamento da esquerda */
+}
 
-        .lang-selector {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(255,255,255,0.92);
-            border-radius: 0 0 16px 16px;
-            padding: 6px 16px 8px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-            backdrop-filter: blur(8px);
-        }
+.lang-selector {
+    display: flex;
+    flex-direction: row; /* Alterado para horizontal (lado a lado) */
+    align-items: center; /* Centraliza verticalmente os itens na linha */
+    gap: 12px; /* Espaçamento horizontal entre os idiomas */
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    border: none;
+    padding: 0;
+}
 
-        .lang-btn {
-            font-family: var(--font-body);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: #888;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
+.lang-btn {
+    font-family: var(--font-body);
+    font-size: 0.65rem; /* REDUZIDO: Era 0.75rem, deixando as letras menores */
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    
+    /* COR: Preto com 40% de opacidade para os idiomas inativos */
+    color: rgba(0, 0, 0, 0.4); 
+    
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 0; /* Ajustado o padding interno */
+    border-radius: 0;
+    transition: all 0.2s ease;
+}
 
-        .lang-btn.active {
-            background: var(--foreground);
-            color: #ffffff;
-        }
+/* Idioma Ativo: Preto sólido (100% de opacidade) */
+.lang-btn.active {
+    background: none;
+    color: #000000; 
+    position: relative;
+}
 
-        .lang-btn:hover:not(.active) {
-            color: var(--foreground);
-            background: rgba(0,0,0,0.06);
-        }
+/* Indicador ajustado para o formato horizontal (um pontinho sutil ACIMA da sigla) */
+.lang-btn.active::before {
+    content: "•";
+    position: absolute;
+    left: 50%;
+    top: -6px; /* Posicionado logo acima do texto */
+    transform: translateX(-50%); /* Centraliza o ponto exatamente no meio da sigla */
+    color: #000000;
+    font-size: 0.6rem;
+}
 
-        .lang-divider {
-            width: 1px;
-            height: 12px;
-            background: rgba(0,0,0,0.15);
-            display: inline-block;
-        }
+/* Efeito ao passar o mouse */
+.lang-btn:hover:not(.active) {
+    color: #000000;
+    background: none;
+}
 
+.lang-divider {
+    display: none; /* Mantido oculto para usar apenas o espaçamento limpo do gap */
+}
         /* ==========================================
             HEADER
            ========================================== */
@@ -101,38 +114,45 @@
         }
 
 .logo-container {
-        background: rgba(255,255,255,0.95);
-        padding: 1.2rem 2.5rem 1.4rem;
-        border-radius: 0 0 40px 40px;
-        position: relative; top: 0;
-        box-shadow: 0 15px 35px rgba(26,6,19,0.06), 0 0 15px rgba(255,255,255,0.1);
-        display: flex; 
-        flex-direction: column;
-        align-items: center; 
-        justify-content: center;
-        gap: 10px;
-        transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
-    }
+    background: rgba(255,255,255,0.95);
+    /* REDUZIDO: padding do topo mudou de 1.2rem para 0.6rem para subir a logo */
+    padding: 0.6rem 2.5rem 1.2rem; 
+    border-radius: 0 0 40px 40px;
+    position: relative; 
+    top: 0;
+    box-shadow: 0 15px 35px rgba(26,6,19,0.06), 0 0 15px rgba(255,255,255,0.1);
+    display: flex; 
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
+}
 
-    .logo-container:hover { transform: scale(1.015) translateY(2px); background: #fff; }
-    
+/* Ajustado o hover para dar o efeito de empurrar sutilmente para baixo sem quebrar o novo alinhamento */
+.logo-container:hover { 
+    transform: scale(1.015) translateY(2px); 
+    background: #fff; 
+}
+
+.logo-elevia { 
+    height: 105px; /* AUMENTADO: Era 80px */
+    width: auto; 
+    display: block; 
+    transform: translateY(0); /* AJUSTADO: Era 25px (empurrava a logo para baixo) */
+}
+
+@media (min-width: 768px) {
+    .logo-container { 
+        border-radius: 0 0 48px 48px;
+        /* REDUZIDO: padding do topo mudou de 1.4rem para 0.8rem */
+        padding: 0.8rem 3.5rem 1.4rem;
+    }
     .logo-elevia { 
-        height: 80px; 
-        width: auto; 
-        display: block; 
-        transform: translateY(25px); 
+        height: 115px; /* AUMENTADO: Era 85px no desktop */
+        transform: translateY(0); /* AJUSTADO: Era 35px */
     }
-
-    @media (min-width: 768px) {
-        .logo-container { 
-            border-radius: 0 0 48px 48px;
-            padding: 1.4rem 3.5rem 1.6rem;
-        }
-        .logo-elevia { 
-            height: 85px; 
-            transform: translateY(35px); 
-        }
-    }
+}
         /* ==========================================
             HERO
            ========================================== */
@@ -611,43 +631,62 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
  
-    <style>
-        .elevia-premium-showcase * { font-family: Arial, Helvetica, sans-serif !important; }
-        .elevia-premium-showcase h2 { font-family: 'Cormorant Garamond', Georgia, serif !important; }
- 
-        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .animate-spin-slow { animation: spin-slow 28s linear infinite; }
-        @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
-        .animate-spin-reverse { animation: spin-reverse 45s linear infinite; }
-        @keyframes float-smooth { 0%, 100% { transform: translateY(-12px) rotate(0deg); } 50% { transform: translateY(8px) rotate(1.5deg); } }
-        .animate-float-smooth { animation: float-smooth 6.5s ease-in-out infinite; }
-        @keyframes shadow-pulse {
-            0%, 100% { transform: scale(0.85); opacity: 0.25; filter: blur(14px); }
-            50% { transform: scale(1.05); opacity: 0.15; filter: blur(18px); }
-        }
-        .animate-shadow-pulse { animation: shadow-pulse 6.5s ease-in-out infinite; }
-        @keyframes soft-glow {
-            0%, 100% { opacity: 0.25; transform: scale(1) translate(-50%, -50%); }
-            50% { opacity: 0.4; transform: scale(1.1) translate(-50%, -50%); }
-        }
-        .animate-soft-glow { animation: soft-glow 5s ease-in-out infinite; }
-        @keyframes fillBar { from { width: 0; } to { width: var(--progress-width); } }
-        .animate-fill { animation: fillBar 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
- 
-        @media (max-width: 991px) {
-            .elevia-premium-showcase .relative.z-10 { text-align: center; }
-            .elevia-premium-showcase .flex.w-full.max-w-md { align-items: center; }
-        }
+ <style>
+    .elevia-premium-showcase * { font-family: Arial, Helvetica, sans-serif !important; }
+    .elevia-premium-showcase h2 { font-family: 'Cormorant Garamond', Georgia, serif !important; }
 
-        @media (max-width: 768px) {
-            .elevia-premium-showcase {
-                padding-top: 8rem !important;
-            }
-            .elevia-video-col {
-                margin-top: 2rem;
-            }
+    @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .animate-spin-slow { animation: spin-slow 28s linear infinite; }
+    @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+    .animate-spin-reverse { animation: spin-reverse 45s linear infinite; }
+    @keyframes float-smooth { 0%, 100% { transform: translateY(-12px) rotate(0deg); } 50% { transform: translateY(8px) rotate(1.5deg); } }
+    .animate-float-smooth { animation: float-smooth 6.5s ease-in-out infinite; }
+    @keyframes shadow-pulse {
+        0%, 100% { transform: scale(0.85); opacity: 0.25; filter: blur(14px); }
+        50% { transform: scale(1.05); opacity: 0.15; filter: blur(18px); }
+    }
+    .animate-shadow-pulse { animation: shadow-pulse 6.5s ease-in-out infinite; }
+    @keyframes soft-glow {
+        0%, 100% { opacity: 0.25; transform: scale(1) translate(-50%, -50%); }
+        50% { opacity: 0.4; transform: scale(1.1) translate(-50%, -50%); }
+    }
+    .animate-soft-glow { animation: soft-glow 5s ease-in-out infinite; }
+    @keyframes fillBar { from { width: 0; } to { width: var(--progress-width); } }
+    .animate-fill { animation: fillBar 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
+
+    @media (max-width: 991px) {
+        .elevia-premium-showcase .relative.z-10 { text-align: center; }
+        .elevia-premium-showcase .flex.w-full.max-w-md { align-items: center; }
+    }
+
+    @media (max-width: 768px) {
+        .elevia-premium-showcase {
+            padding-top: 8rem !important;
         }
-    </style>
+        .elevia-video-col {
+            margin-top: 2rem;
+        }
+    }
+
+    /* ==========================================================
+       QUEBRA DE LINHA PARA O TÍTULO (Sérum na linha de cima)
+       ========================================================== */
+    .elevia-premium-showcase h2 [data-i18n="serum_title"] {
+        display: block;
+    }
+    
+    /* Captura a primeira linha (Sérum) e garante que o resto quebre para baixo */
+    .elevia-premium-showcase h2 [data-i18n="serum_title"]::first-line {
+        line-height: 1.3;
+    }
+
+    /* Adiciona uma quebra de bloco logo após a palavra Sérum */
+    .elevia-premium-showcase h2 [data-i18n="serum_title"] {
+        display: flex;
+        flex-direction: column;
+        align-items: inherit; /* Mantém o alinhamento correto do texto (esquerda ou centro no mobile) */
+    }
+</style>
  
     <div class="pointer-events-none absolute top-1/2 left-1/4 z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full animate-soft-glow" style="background: radial-gradient(circle, rgba(248,161,208,0.4) 0%, rgba(255,255,255,0) 70%);"></div>
  
@@ -690,9 +729,13 @@
                 <span class="inline-block h-[1px] w-6 bg-gradient-to-r from-[#c5a55a] to-transparent"></span>
             </div>
             
-            <h2 class="mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
-                <span data-i18n="serum_title">Sérum GHK-CU & PDRN</span>
-            </h2>
+<h2 class="mb-0" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+    <span data-i18n="serum_title_1">Sérum</span>
+</h2>
+
+<h2 class="mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+    <span data-i18n="serum_title_2">GHK-CU & PDRN</span>
+</h2>
             
             <p class="mb-6 text-sm font-normal leading-relaxed md:text-[15px]" style="color: #444444;">
                 <span data-i18n="serum_desc">Desenvolvido com tecnologia de sincronização celular profunda. Atua diretamente na barreira cutânea para reverter os sinais de fadiga, devolvendo o viço acetinado e a firmeza original à sua pele.</span>
@@ -788,27 +831,26 @@
         <div class="editorial-text-block">
             <div class="editorial-header">
                 <span class="editorial-subtitle" data-i18n="benefits_eyebrow">A Ciência por Trás da Fórmula</span>
-                <!-- TÍTULO CORRIGIDO: Cormorant Garamond, weight 400, preto sólido -->
                 <h2 class="editorial-main-title"><span data-i18n="benefits_title_line1">Três Pilares de</span> <br><span data-i18n="benefits_title_line2">Alta Performance</span></h2>
             </div>
             
             <div class="editorial-cards-list">
                 <div class="editorial-card">
-                    <div class="card-editorial-num">01</div>
+                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">01</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit1_title">DNA Celular PDRN</h3>
-                        <p data-i18n="benefit1_desc">Atua na matriz de regeneração. Devolve textura uniforme e promove um efeito de pele renovada.</p>
+                        <p data-i18n="benefit1_desc">Atua na matriz de regeneração. Devolve textura uniforme e promove um effect de pele renovada.</p>
                     </div>
                 </div>
                 <div class="editorial-card">
-                    <div class="card-editorial-num">02</div>
+                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">02</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit2_title">Sustentação GHK-CU</h3>
                         <p data-i18n="benefit2_desc">Peptídeos estruturados que estimulam colágeno e elastina, devolvendo a firmeza física imediata.</p>
                     </div>
                 </div>
                 <div class="editorial-card">
-                    <div class="card-editorial-num">03</div>
+                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">03</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit3_title">Luminosidade Inata</h3>
                         <p data-i18n="benefit3_desc">Neutralização do estresse oxidativo. Infusão de viço para um brilho saudável e magnético.</p>
@@ -816,12 +858,14 @@
                 </div>
             </div>
         </div>
+    </div>
+
  
         <div class="editorial-image-block">
             <div class="editorial-spin-ring border-[#1a0613]/40"></div>
             <div class="editorial-spin-ring border-amber-300/25" style="width: 74%; height: 74%; animation: editorialSpin 40s linear infinite reverse;"></div>
             <div class="editorial-frame">
-                <img src="./images/serumorena.png" alt="Ritual ELEVIA" class="editorial-img">
+                <img src="./images/garota.png" alt="Ritual ELEVIA" class="editorial-img">
             </div>
             <div class="editorial-ground-shadow"></div>
         </div>
@@ -1032,18 +1076,14 @@
     .ig-btn-secondary:hover { background: rgba(197, 165, 90, 0.08); border-color: rgba(197, 165, 90, 0.4); transform: translateY(-1px); }
 </style>
  
-<!-- ========================================== -->
-<!-- CONTACT SECTION                            -->
-<!-- ========================================== -->
 <section class="ct-section">
     <div class="pointer-events-none absolute top-1/3 right-1/4 z-0 h-[450px] w-[450px] rounded-full opacity-20 blur-[90px]" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
  
     <div class="ct-container">
         <div class="ct-left">
             <div class="ct-left-top">
-                <!-- TÍTULO CORRIGIDO: Cormorant Garamond, weight 400, preto sólido -->
-                <h2 class="ct-title" data-i18n="contact_title">Compartilhe <br>seu Feedback</h2>
-                <p class="ct-desc" data-i18n="contact_desc">Sua experiência é fundamental para nossa evolução. Deixe seu comentário ou sugestão e nos ajude a elevar o padrão de nossos rituais.</p>
+                <h2 class="ct-title" data-i18n="contact_title">Canais de <br>Atendimento</h2>
+                <p class="ct-desc" data-i18n="contact_desc">Entre em contato com nossa equipe corporativa para suporte, esclarecimento de dúvidas ou propostas comerciais. Preencha o formulário e receberá nosso retorno via e-mail.</p>
             </div>
             <div class="ct-details">
                 <h3 class="ct-details-title" data-i18n="contact_privacy_title">Privacidade & Compromisso</h3>
@@ -1065,8 +1105,9 @@
                     <label class="ct-label" for="ct-message" data-i18n="form_message">Mensagem</label>
                     <textarea class="ct-input ct-textarea" id="ct-message" rows="5" data-i18n-placeholder="form_message_ph"></textarea>
                 </div>
+                
                 <button class="ct-submit" type="button">
-                    <span data-i18n="form_submit">Enviar Feedback</span>
+                    <span data-i18n="form_submit">Enviar Mensagem</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
             </div>
@@ -1080,7 +1121,6 @@
  
     .ct-left { display: flex; flex-direction: column; gap: 28px; }
 
-    /* TÍTULO CORRIGIDO: Cormorant Garamond, weight 400, preto sólido — igual à foto */
     .ct-title { 
         font-family: 'Cormorant Garamond', Georgia, serif !important; 
         font-size: clamp(2.6rem, 8vw, 4rem); 
@@ -1107,10 +1147,36 @@
     .ct-label { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #444444; }
     .ct-input { width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 0.95rem; font-family: Arial, Helvetica, sans-serif; color: #000000; background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.09); outline: none; transition: 0.25s; }
     .ct-input::placeholder { color: #999999; }
-    .ct-input:focus { background: #ffffff; border-color: rgba(255,42,133,0.4); box-shadow: 0 0 0 3px rgba(255,42,133,0.08); }
-    .ct-submit { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 28px; border-radius: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; text-transform: uppercase; cursor: pointer; border: none; background: #ff85a1; color: #ffffff; box-shadow: 0 6px 16px rgba(255,42,133,0.2); transition: 0.35s; }
-    .ct-submit:hover { background: #e8607a; box-shadow: 0 8px 22px rgba(255,42,133,0.3); transform: translateY(-2px); }
-    .ct-submit svg { width: 16px; height: 16px; transition: transform 0.3s; }
+    .ct-input:focus { background: #ffffff; border-color: rgba(0,0,0,0.3); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
+    
+    /* MODIFICADO: Estilo premium escuro integrado diretamente na classe base do botão */
+    .ct-submit { 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 10px; 
+        min-height: 52px; 
+        padding: 14px 28px; 
+        border-radius: 50px; 
+        font-family: Arial, Helvetica, sans-serif; 
+        font-weight: 700; 
+        text-transform: uppercase; 
+        cursor: pointer; 
+        border: none !important; 
+        background: #111111 !important; /* Cor escura do fundo */
+        color: #ffffff !important; /* Texto branco */
+        box-shadow: 0 6px 16px rgba(0,0,0,0.15); 
+        transition: 0.35s; 
+    }
+    
+    /* MODIFICADO: Hover escuro sutil e elevação elegante */
+    .ct-submit:hover { 
+        background: #222222 !important; 
+        box-shadow: 0 8px 22px rgba(0,0,0,0.25); 
+        transform: translateY(-2px); 
+    }
+    
+    .ct-submit svg { width: 16px; height: 16px; transition: transform 0.3s; color: #ffffff !important; }
     .ct-submit:hover svg { transform: translateX(4px); }
  
     @media (max-width: 767px) {
