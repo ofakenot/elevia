@@ -451,6 +451,56 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const popupOverlay = document.getElementById("elevia-popup-overlay");
+        const closeBtn = document.getElementById("el-popup-close");
+        const popupForm = document.getElementById("el-popup-form");
+
+        // Verifica se o pop-up já foi visualizado ou fechado nesta sessão de navegação
+        const popupOpenedThisSession = sessionStorage.getItem("eleviaPopupOpened");
+
+        // Só inicia o cronômetro se for a primeira vez carregando a página na sessão
+        if (!popupOpenedThisSession) {
+            setTimeout(() => {
+                popupOverlay.classList.add("active");
+                // Marca imediatamente no navegador que o pop-up já foi exibido uma vez
+                sessionStorage.setItem("eleviaPopupOpened", "true");
+            }, 3000);
+        }
+
+        function closeEleviaPopup() {
+            popupOverlay.classList.remove("active");
+        }
+
+        // Eventos para fechar o pop-up
+        closeBtn.addEventListener("click", closeEleviaPopup);
+        popupOverlay.addEventListener("click", function (e) {
+            if (e.target === popupOverlay) closeEleviaPopup();
+        });
+
+        // Envio do formulário por AJAX
+        popupForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const emailInput = document.getElementById("el-popup-email").value;
+            const payload = { email: emailInput };
+            
+            fetch(popupForm.action, {
+                method: "POST",
+                body: JSON.stringify(payload),
+                mode: "no-cors",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            popupForm.reset();
+            closeEleviaPopup();
+        });
+    });
+</script>
+
 <style>
     .el-popup-overlay {
         position: fixed;
