@@ -748,11 +748,21 @@
         </div>
         
         <div class="hero-side-text" data-i18n="hero_side">High-End Performance &amp; Beauty — 2026 Edition</div>
+        
+        <!-- FOOTER DESKTOP -->
         <div class="hero-footer">
-            <div class="hero-stats">
-                <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
-                <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
-                <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
+            <div class="hero-footer-stack">
+                <!-- As estatísticas ficam no topo -->
+                <div class="hero-stats">
+                    <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
+                    <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
+                    <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
+                </div>
+
+                <!-- O botão fica logo abaixo delas -->
+                <div class="hero-catalog-container">
+                    <a href="COLE_SEU_LINK_AQUI" class="hero-catalog-btn">Catálogo</a>
+                </div>
             </div>
         </div>
     </div>
@@ -772,17 +782,80 @@
             <p data-i18n="hero_desc">A união definitiva entre alta performance, regeneração celular profunda e comunidade. O amanhã do movimento começou.</p>
         </div>
 
+        <!-- FOOTER MOBILE -->
         <div class="hero-mobile-bottom">
             <div class="hero-mobile-stats">
                 <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
                 <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
                 <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
             </div>
+
+            <!-- O botão fica logo abaixo delas no mobile também -->
+            <div class="hero-catalog-container mobile-catalog-margin">
+                <a href="COLE_SEU_LINK_AQUI" class="hero-catalog-btn">Catálogo</a>
+            </div>
         </div>
     </div>
 </section>
 
 <style>
+    /* Container que organiza as estatísticas e o botão um embaixo do outro */
+.hero-footer-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Distância entre o bloco de texto e o botão */
+    width: 100%;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center;
+}
+
+/* Modificadores para ajustar o footer original */
+.hero-footer {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    display: flex;
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Container do botão para garantir centralização perfeita */
+.hero-catalog-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* O ESTILO DO BOTÃO CLEAN (Sem fundo, texto preto, borda preta) */
+.hero-catalog-btn {
+    background: transparent !important; /* Sem cor de fundo */
+    background-color: transparent !important;
+    border: 1px solid #000000 !important; /* Borda fina preta */
+    color: #000000 !important; /* Texto preto */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    padding: 10px 45px; /* Um pouco mais largo para um visual premium */
+    border-radius: 4px; /* Cantos levemente retos e minimalistas */
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Efeito sutil de hover */
+.hero-catalog-btn:hover {
+    background: rgba(0, 0, 0, 0.04) !important; /* Apenas um reflexo cinza ao passar o mouse */
+    letter-spacing: 0.18em;
+}
+
+/* Margem extra apenas no mobile para desgrudar do bloco superior */
+@media (max-width: 767px) {
+    .mobile-catalog-margin {
+        margin-top: 1.5rem;
+    }
+}
     .luxury-text-flipper {
         position: relative;
         display: inline-flex;
@@ -1070,7 +1143,7 @@
     .editorial-ground-shadow { position: absolute; bottom: 0; width: 180px; height: 12px; background: radial-gradient(ellipse, rgba(0,0,0,0.1) 0%, transparent 70%); border-radius: 50%; }
     .editorial-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.28em; color: #888888; text-transform: uppercase; margin-bottom: 10px; display: block; }
     .editorial-main-title {
-        font-family: 'Cormorant Garamond', serif !important;
+        font-family: 'Arial', Helvetica, sans-serif !important;
         font-size: clamp(2.6rem, 5vw, 3.8rem);
         font-weight: 400 !important;
         line-height: 1.1;
@@ -1253,6 +1326,12 @@
                 <h3 class="ct-details-title" data-i18n="contact_privacy_title">Privacidade &amp; Compromisso</h3>
                 <p class="ct-desc" style="font-size: 0.85rem; max-width: 320px;" data-i18n="contact_privacy_desc">Seus dados são tratados com total discrição e utilizados exclusivamente para melhorias em nossos protocolos científicos.</p>
             </div>
+
+            <!-- NOVO BOTÃO WHATSAPP (Abaixo dos textos) -->
+            <a href="https://wa.me/15147536580" target="_blank" class="ct-whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Chamar no WhatsApp</span>
+            </a>
         </div>
  
         <div class="ct-card-outer">
@@ -1284,7 +1363,7 @@
     .ct-container { max-width: 1140px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 10; }
     .ct-left { display: flex; flex-direction: column; gap: 28px; }
     .ct-title {
-        font-family: 'Cormorant Garamond', Georgia, serif !important;
+        font-family: 'Arial', Helvetica, sans-serif !important;
         font-size: clamp(2.6rem, 8vw, 4rem);
         font-weight: 400 !important;
         text-transform: none;
@@ -1299,6 +1378,50 @@
     }
     .ct-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.94rem; line-height: 1.7; color: #444444; max-width: 480px; margin: 0; }
     .ct-details-title { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; margin: 0 0 12px; }
+    
+    /* BOTÃO WHATSAPP - Com garantia de texto branco */
+    .ct-whatsapp-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background-color: #ff859f !important; /* Rosa da foto */
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-decoration: none;
+        padding: 14px 28px;
+        border-radius: 14px;
+        width: 100%;
+        max-width: 320px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 12px rgba(255, 133, 159, 0.2);
+        transition: all 0.3s ease;
+        text-transform: none;
+        
+        /* Força a cor branca no link em si */
+        color: #ffffff !important; 
+    }
+
+    /* Garante blindagem total para que o texto e o ícone fiquem estritamente brancos */
+    .ct-whatsapp-btn,
+    .ct-whatsapp-btn span,
+    .ct-whatsapp-btn i {
+        color: #ffffff !important;
+    }
+
+    .ct-whatsapp-btn:hover {
+        background-color: #ff6b8b !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 133, 159, 0.3);
+    }
+    .ct-whatsapp-btn:active {
+        transform: translateY(0);
+    }
+    .ct-whatsapp-btn i {
+        font-size: 1.2rem;
+    }
+
     .ct-card-outer { width: 100%; padding: 6px; border-radius: 24px; position: relative; isolation: isolate; overflow: hidden; background: rgba(255,255,255,0.4); background-image: linear-gradient(135deg, rgba(255,255,255,0.65) 0%, rgba(253,238,246,0.15) 50%, rgba(255,255,255,0.3) 100%); backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 12px 40px rgba(0,0,0,0.05); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease; }
     .ct-card-outer:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.09); }
     .ct-card-inner { width: 100%; padding: 28px 22px; border-radius: 19px; display: flex; flex-direction: column; gap: 20px; background: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%); border: 1px solid rgba(255,255,255,0.45); }
@@ -1329,9 +1452,11 @@
     .ct-submit span { color: #ffffff !important; }
     .ct-submit svg { width: 16px; height: 16px; transition: transform 0.3s; color: #ffffff !important; }
     .ct-submit:hover svg { transform: translateX(4px); }
+    
     @media (max-width: 767px) {
         .ct-left { align-items: center; text-align: center; }
         .ct-desc { text-align: center; margin: 0 auto; }
+        .ct-whatsapp-btn { margin: 10px auto 0; }
     }
     @media (min-width: 1024px) {
         .ct-container { flex-direction: row; align-items: flex-start; gap: 80px; }
@@ -1361,10 +1486,9 @@
         </div>
     </div>
 
-    <div class="gallery-carousel-viewport">
+  <div class="gallery-carousel-viewport">
         <div id="gallery-track" class="gallery-carousel-track">
             
-            <!-- VÍDEO 1 -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
                     <video class="gallery-card-img" autoplay loop muted playsinline>
@@ -1374,7 +1498,6 @@
                 </div>
             </div>
 
-            <!-- VÍDEO 2 (Troque o nome do arquivo se for diferente) -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
                     <video class="gallery-card-img" autoplay loop muted playsinline>
@@ -1384,7 +1507,6 @@
                 </div>
             </div>
 
-            <!-- VÍDEO 3 (Troque o nome do arquivo se for diferente) -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
                     <video class="gallery-card-img" autoplay loop muted playsinline>
@@ -1394,24 +1516,27 @@
                 </div>
             </div>
             
-            <!-- IMAGEM 1 (Antiga imagem 02) -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
                     <img src="./images/02.webp" alt="Resultado Clínico 02" class="gallery-card-img">
                 </div>
             </div>
             
-            <!-- IMAGEM 2 (Antiga imagem 03) -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
-                    <img src="./images/03.webp" alt="Resultado Clínico 03" class="gallery-card-img">
+                    <video class="gallery-card-img" autoplay loop muted playsinline>
+                        <source src="./images/v4.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
                 </div>
             </div>
             
-            <!-- IMAGEM 3 (Antiga imagem 04) -->
             <div class="gallery-slide">
                 <div class="gallery-card-inner">
-                    <img src="./images/04.png" alt="Resultado Clínico 04" class="gallery-card-img">
+                    <video class="gallery-card-img" autoplay loop muted playsinline>
+                        <source src="./images/v5.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
                 </div>
             </div>
 
