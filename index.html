@@ -761,7 +761,7 @@
 
                 <!-- O botão fica logo abaixo delas -->
                 <div class="hero-catalog-container">
-                    <a href="https://goelevia.com/app/" class="hero-catalog-btn">Catálogo</a>
+                    <a href="https://goelevia.com/app/" class="hero-catalog-btn">produtos elevia</a>
                 </div>
             </div>
         </div>
@@ -792,7 +792,7 @@
 
             <!-- O botão fica logo abaixo delas no mobile também -->
             <div class="hero-catalog-container mobile-catalog-margin">
-                <a href="COLE_SEU_LINK_AQUI" class="hero-catalog-btn">Catálogo</a>
+                <a href="https://goelevia.com/app/" class="hero-catalog-btn">Produtos Elevia</a>
             </div>
         </div>
     </div>
@@ -825,29 +825,56 @@
     width: 100%;
 }
 
-/* O ESTILO DO BOTÃO CLEAN (Sem fundo, texto preto, borda preta) */
+/* O ESTILO DO BOTÃO ULTRA PREMIUM (Marrom com super brilho e texto branco) */
 .hero-catalog-btn {
-    background: transparent !important; /* Sem cor de fundo */
-    background-color: transparent !important;
-    border: 1px solid #000000 !important; /* Borda fina preta */
-    color: #000000 !important; /* Texto preto */
+    /* Gradiente otimizado: Tons externos profundos com um centro bronze ultra iluminado */
+    background: linear-gradient(135deg, #3D2211 0%, #965D34 50%, #29160B 100%) !important;
+    background-size: 200% auto !important;
+    
+    /* Borda em tom ouro velho/bronze para contrastar e emoldurar o brilho */
+    border: 1px solid #85532F !important; 
+    
+    color: #FFFFFF !important; 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     text-decoration: none;
-    padding: 10px 45px; /* Um pouco mais largo para um visual premium */
-    border-radius: 4px; /* Cantos levemente retos e minimalistas */
-    transition: all 0.3s ease;
+    padding: 10px 45px; 
+    border-radius: 4px; 
+    
+    /* Super combo de sombras: Sombra projetada + Aura dourada externa + Friso de luz interno */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 
+                0 0 10px rgba(150, 93, 52, 0.3), 
+                inset 0 1.5px 2px rgba(255, 255, 255, 0.45) !important;
+    
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     text-align: center;
+    display: inline-block;
 }
 
-/* Efeito sutil de hover */
+/* Efeito Hover Ultra Iluminado */
 .hero-catalog-btn:hover {
-    background: rgba(0, 0, 0, 0.04) !important; /* Apenas um reflexo cinza ao passar o mouse */
-    letter-spacing: 0.18em;
+    color: #FFFFFF !important;
+    background-position: right center !important; /* Movimenta a faixa de luz central */
+    letter-spacing: 0.18em; 
+    
+    /* No hover, a aura de brilho bronze se expande, criando o efeito "neon de luxo" */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(180, 115, 68, 0.7), 
+                inset 0 2px 3px rgba(255, 255, 255, 0.6) !important;
+    
+    transform: translateY(-2px); /* Elevação um pouquinho mais visível */
+    filter: brightness(1.1); /* Dá um boost geral na luz de todas as cores */
+}
+
+/* Efeito ao clicar */
+.hero-catalog-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 
+                0 0 5px rgba(150, 93, 52, 0.3);
 }
 
 /* Margem extra apenas no mobile para desgrudar do bloco superior */
@@ -1644,18 +1671,71 @@
      ========================================== -->
 
 <!-- Liquid Background -->
+<div id="fake-pointer-trigger" style="position: fixed; width: 10px; height: 10px; opacity: 0; pointer-events: none; z-index: 9999; top: 0; left: 0;"></div>
+
 <script type="module">
     import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.22/build/backgrounds/liquid1.min.js';
+    
     const canvas = document.getElementById('liquid-canvas');
     if (canvas) {
         const app = LiquidBackground(canvas);
         app.loadImage('https://i.pinimg.com/736x/b0/52/44/b052446b10d00489d1a97d5359254136.jpg');
+        
         app.liquidPlane.material.metalness = 0.75;
         app.liquidPlane.material.roughness = 0.25;
         app.liquidPlane.uniforms.displacementScale.value = 5;
         app.setRain(false);
+        
+        // --- GERADOR DE EVENTOS DE TOQUE/MOUSE REAIS ---
+        const fakePointer = document.getElementById('fake-pointer-trigger');
+        let angle = 0;
+
+        function triggerRealHardwareMovement() {
+            // Define o tamanho da órbita do movimento na tela
+            const radiusX = window.innerWidth * 0.35; 
+            const radiusY = window.innerHeight * 0.25;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            // Calcula a posição física atual do "dedo invisível"
+            const posX = centerX + Math.cos(angle) * radiusX;
+            const posY = centerY + Math.sin(angle) * radiusY;
+
+            // Move a div invisível para a coordenada
+            fakePointer.style.transform = `translate(${posX}px, ${posY}px)`;
+
+            // Altera o ângulo para o próximo frame (0.01 é uma velocidade suave e elegante)
+            angle += 0.01; 
+
+            // Cria um evento nativo do navegador que simula o Mouse/Dedo se movendo
+            const movementEvent = new PointerEvent('pointermove', {
+                clientX: posX,
+                clientY: posY,
+                bubbles: true,
+                cancelable: true,
+                pointerType: 'mouse', // O navegador entende como input de hardware
+                width: 1,
+                height: 1,
+                pressure: 0.5
+            });
+
+            // Dispara o evento diretamente no Canvas onde o Three.js está escutando
+            canvas.dispatchEvent(movementEvent);
+
+            // Mantém o ciclo ativo simulando frames de toque constantes
+            requestAnimationFrame(triggerRealHardwareMovement);
+        }
+
+        // Aguarda meio segundo para o canvas carregar e inicia o toque fantasma
+        setTimeout(() => {
+            triggerRealHardwareMovement();
+        }, 500);
+        // ------------------------------------------------
+
         window.__liquidApp = app;
-        window.addEventListener('resize', () => { if (app && typeof app.resize === 'function') app.resize(); });
+        window.addEventListener('resize', () => { 
+            if (app && typeof app.resize === 'function') app.resize(); 
+        });
     }
 </script>
 
