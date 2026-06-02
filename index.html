@@ -433,13 +433,15 @@
 </head>
 <body>
 
+    
+
 <!-- ==========================================
-     POPUP
+     POPUP CONVERTIDO PARA WHATSAPP (iOS 18 STYLE)
      ========================================== -->
 <div id="elevia-popup-overlay" class="el-popup-overlay">
     <div class="el-popup-wrapper">
         <button id="el-popup-close" class="el-popup-close-btn" aria-label="Fechar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
         <div class="el-popup-container">
@@ -449,19 +451,22 @@
 
             <div class="el-popup-content-side">
                 <div class="el-popup-text-group">
-                    <h2 class="el-popup-title" data-i18n="popup_title">Bem-vindo a ELEVIA</h2>
-                    <p class="el-popup-subtitle" data-i18n="popup_subtitle">Um novo conceito de cuidados com a pele.</p>
-                    <p class="el-popup-desc" data-i18n="popup_desc">Deixe seu e-mail abaixo e receba nossas novidades em primeira mão.</p>
+                    <div class="el-popup-badge-vip">
+                        <span>Grupo VIP</span>
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h2 class="el-popup-title limit-2-lines">Pré lançamento 10/06</h2>
+                    <p class="el-popup-subtitle limit-2-lines">A nova era da biotecnologia celular está prestes a começar.</p>
+                    <p class="el-popup-desc">Estoque inicial extremamente limitado. Entre na comunidade para garantir seu acesso prioritário.</p>
                 </div>
 
-                <form id="el-popup-form" action="https://formspree.io/f/contact@bropharmaceutical.com" method="POST" class="el-popup-form">
-                    <div class="el-popup-field">
-                        <input type="email" name="email" id="el-popup-email" class="el-popup-input" required data-i18n-placeholder="popup_email_ph">
-                    </div>
-                    <button type="submit" class="el-popup-submit-btn">
-                        <span data-i18n="popup_btn">SIGN UP</span>
-                    </button>
-                </form>
+                <!-- Botão de ação convertido substituindo o formulário antigo -->
+                <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="el-popup-submit-link" class="el-popup-submit-btn">
+                    <span>Acessar Grupo VIP Privado</span>
+                    <svg class="el-popup-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                
+                <span class="el-popup-footer-note">Comunidade Oficial Elevia ∙ 2026</span>
             </div>
         </div>
     </div>
@@ -471,16 +476,13 @@
     document.addEventListener("DOMContentLoaded", function () {
         const popupOverlay = document.getElementById("elevia-popup-overlay");
         const closeBtn = document.getElementById("el-popup-close");
-        const popupForm = document.getElementById("el-popup-form");
+        const submitLink = document.getElementById("el-popup-submit-link");
 
-        // Verifica se o pop-up já foi visualizado ou fechado nesta sessão de navegação
         const popupOpenedThisSession = sessionStorage.getItem("eleviaPopupOpened");
 
-        // Só inicia o cronômetro se for a primeira vez carregando a página na sessão
         if (!popupOpenedThisSession) {
             setTimeout(() => {
                 popupOverlay.classList.add("active");
-                // Marca imediatamente no navegador que o pop-up já foi exibido uma vez
                 sessionStorage.setItem("eleviaPopupOpened", "true");
             }, 3000);
         }
@@ -489,63 +491,65 @@
             popupOverlay.classList.remove("active");
         }
 
-        // Eventos para fechar o pop-up
+        // Eventos estritos de fechamento solicitados
         closeBtn.addEventListener("click", closeEleviaPopup);
+        submitLink.addEventListener("click", closeEleviaPopup);
         popupOverlay.addEventListener("click", function (e) {
             if (e.target === popupOverlay) closeEleviaPopup();
-        });
-
-        // Envio do formulário por AJAX
-        popupForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            const emailInput = document.getElementById("el-popup-email").value;
-            const payload = { email: emailInput };
-            
-            fetch(popupForm.action, {
-                method: "POST",
-                body: JSON.stringify(payload),
-                mode: "no-cors",
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            popupForm.reset();
-            closeEleviaPopup();
         });
     });
 </script>
 
 <style>
+    /* Reset interno para garantir fontes limpas solicitadas */
+    .el-popup-overlay,
+    .el-popup-overlay * {
+        font-family: Arial, Helvetica, sans-serif !important;
+        box-sizing: border-box;
+    }
+
+    /* Trava de segurança de duas linhas solicitada */
+    .limit-2-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .el-popup-overlay {
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100%;
         background-color: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(4px);
-        z-index: 9999;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease;
-        padding: 20px;
-        box-sizing: border-box;
+        padding: 24px;
     }
     .el-popup-overlay.active {
         opacity: 1;
         pointer-events: auto;
     }
+    
+    /* Wrapper adaptado para estilo cinza translúcido iOS 18 */
     .el-popup-wrapper {
         position: relative;
-        background-color: #f6f5f1;
+        background: rgba(242, 242, 247, 0.85) !important;
+        backdrop-filter: blur(30px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(210%) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
         width: 100%;
-        max-width: 840px;
+        max-width: 780px; /* Layout mais compacto e elegante */
         border-radius: 32px;
         overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255,255,255,0.7) !important;
         transform: scale(0.95);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         isolation: isolate;
@@ -561,149 +565,149 @@
     .el-popup-image-side {
         position: relative;
         width: 100%;
-        height: 260px;
+        height: 240px;
         overflow: hidden;
-        background: transparent !important;
-        border: none !important;
-        outline: none !important;
-        border-top-left-radius: 32px;
-        border-top-right-radius: 32px;
-        margin: -1px -1px 0 -1px;
-        padding: 1px;
     }
     .el-popup-img {
-        width: calc(100% + 2px);
-        height: calc(100% + 2px);
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         object-position: center;
         display: block;
-        border: none !important;
-        outline: none !important;
-        box-shadow: none !important;
-        border-top-left-radius: 31px;
-        border-top-right-radius: 31px;
-        background-clip: padding-box;
     }
+    
+    /* Configuração de conteúdo 100% centralizado e textos pretos */
     .el-popup-content-side {
         width: 100%;
-        padding: 40px 32px;
+        padding: 36px 24px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        box-sizing: border-box;
     }
+    
     .el-popup-text-group {
-        margin-bottom: 28px;
-        max-width: 360px;
-    }
-    .el-popup-title {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #3a3a3a;
-        margin: 0 0 12px 0;
-        letter-spacing: -0.01em;
-    }
-    .el-popup-subtitle {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 1rem;
-        font-weight: 400;
-        color: #555555;
-        line-height: 1.4;
-        margin: 0 0 16px 0;
-    }
-    .el-popup-desc {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.88rem;
-        font-weight: 400;
-        color: #777777;
-        line-height: 1.5;
-        margin: 0;
-    }
-    .el-popup-form {
+        margin-bottom: 24px;
         width: 100%;
-        max-width: 360px;
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        align-items: center;
     }
-    .el-popup-input {
-        width: 100%;
-        height: 52px;
-        padding: 0 16px;
-        border-radius: 14px;
-        border: 1px solid #d1cfc9;
-        background-color: #ffffff;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 0.95rem;
-        color: #000000;
-        outline: none;
-        box-sizing: border-box;
-        transition: border-color 0.2s;
+
+    /* Badge VIP sutil */
+    .el-popup-badge-vip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 16px;
     }
-    .el-popup-input:focus { border-color: #6e6a64; }
-    .el-popup-input::placeholder { color: #aaa7a1; }
+    .el-popup-badge-vip span {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #555555;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .el-popup-badge-vip svg {
+        width: 14px;
+        height: 14px;
+        fill: #34C759;
+    }
+
+    /* Títulos e descrições com leitura em preto puro */
+    .el-popup-title {
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: #000000; /* Texto Preto */
+        margin: 0 0 10px 0;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        max-width: 460px;
+    }
+    .el-popup-subtitle {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #000000; /* Texto Preto */
+        line-height: 1.4;
+        margin: 0 0 12px 0;
+        max-width: 460px;
+    }
+    .el-popup-desc {
+        font-size: 0.92rem;
+        font-weight: 400;
+        color: #000000; /* Texto Preto */
+        line-height: 1.5;
+        margin: 0;
+        max-width: 480px;
+    }
+
+    /* Botão estilo Link/Ação iOS 18 com gradiente fluido */
     .el-popup-submit-btn {
         width: 100%;
-        height: 54px;
-        border-radius: 27px;
-        border: none;
-        background-color: #65615a;
-        color: #ffffff;
-        font-family: Arial, Helvetica, sans-serif;
+        max-width: 360px;
+        height: 52px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #34C759 0%, #28a745 100%) !important;
+        color: #ffffff !important;
         font-weight: 700;
-        font-size: 0.85rem;
-        letter-spacing: 0.08em;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.02) !important;
+        box-shadow: 0 4px 12px rgba(52, 199, 89, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
         cursor: pointer;
-        transition: background-color 0.2s, transform 0.1s;
+        transition: background-color 0.2s, box-shadow 0.2s;
     }
-    .el-popup-submit-btn:hover { background-color: #524e48; }
+    .el-popup-submit-btn:hover {
+        background: linear-gradient(180deg, #30b651 0%, #218838 100%) !important;
+        box-shadow: 0 6px 18px rgba(40, 167, 69, 0.25) !important;
+    }
     .el-popup-submit-btn span { color: #ffffff !important; }
+    .el-popup-btn-icon { width: 15px; height: 15px; stroke: #ffffff; }
+
+    .el-popup-footer-note {
+        font-size: 0.75rem;
+        color: #666666;
+        margin-top: 14px;
+        display: block;
+    }
+
     .el-popup-close-btn {
         position: absolute;
-        top: 20px; right: 20px;
+        top: 16px; right: 16px;
         width: 32px; height: 32px;
         border-radius: 50%;
         background-color: rgba(0, 0, 0, 0.05);
         border: none;
-        color: #555555;
+        color: #222222;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        z-index: 10;
-        transition: background-color 0.2s;
+        z-index: 100;
+        transition: background-color 0.2s, transform 0.2s;
     }
-    .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
-    .el-popup-close-btn svg { width: 16px; height: 16px; }
+    .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); transform: scale(1.05); }
+    .el-popup-close-btn svg { width: 14px; height: 14px; }
 
+    /* Mídia query responsiva do seu layout adaptada para centralização horizontal completa */
     @media (min-width: 680px) {
         .el-popup-container { flex-direction: row; }
         .el-popup-image-side {
-            width: 48%;
+            width: 42%;
             height: auto;
-            min-height: 480px;
-            border-top-left-radius: 32px;
-            border-bottom-left-radius: 32px;
-            border-top-right-radius: 0px;
-            margin: -1px 0 -1px -1px;
-        }
-        .el-popup-img {
-            border-top-left-radius: 31px;
-            border-bottom-left-radius: 31px;
-            border-top-right-radius: 0px;
+            min-height: 380px;
         }
         .el-popup-content-side {
-            width: 52%;
-            padding: 60px 48px;
-            text-align: left;
-            align-items: flex-start;
+            width: 58%;
+            padding: 44px 36px;
+            text-align: center;
+            align-items: center;
         }
-        .el-popup-text-group { text-align: left; max-width: 100%; }
-        .el-popup-title { font-size: 1.6rem; }
-        .el-popup-form { max-width: 100%; }
     }
 </style>
 
@@ -1490,6 +1494,7 @@
         .ct-card-outer { flex: 1; }
     }
 </style>
+
 
 <!-- ==========================================
      GALLERY SECTION
