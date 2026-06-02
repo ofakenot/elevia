@@ -433,281 +433,311 @@
 </head>
 <body>
 
-    
-
 <!-- ==========================================
-     POPUP CONVERTIDO PARA WHATSAPP (iOS 18 STYLE)
+     POPUP
+     ========================================== -->
+<!-- ==========================================
+     POPUP 1: PRINCIPAL (CENTRO DA TELA - E-MAIL)
      ========================================== -->
 <div id="elevia-popup-overlay" class="el-popup-overlay">
     <div class="el-popup-wrapper">
         <button id="el-popup-close" class="el-popup-close-btn" aria-label="Fechar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
         <div class="el-popup-container">
             <div class="el-popup-image-side">
-                <img src="./images/popup-elevia.png" alt="Ritual ELEVIA" class="el-popup-img">
+                <img src="./images/popup.png" alt="Ritual ELEVIA" class="el-popup-img">
             </div>
 
             <div class="el-popup-content-side">
                 <div class="el-popup-text-group">
-                    <div class="el-popup-badge-vip">
-                        <span>Grupo VIP</span>
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    <h2 class="el-popup-title limit-2-lines">Pré lançamento 10/06</h2>
-                    <p class="el-popup-subtitle limit-2-lines">A nova era da biotecnologia celular está prestes a começar.</p>
-                    <p class="el-popup-desc">Estoque inicial extremamente limitado. Entre na comunidade para garantir seu acesso prioritário.</p>
+                    <h2 class="el-popup-title" data-i18n="popup_title">Bem-vindo a ELEVIA</h2>
+                    <p class="el-popup-subtitle" data-i18n="popup_subtitle">Um novo conceito de cuidados com a pele.</p>
+                    <p class="el-popup-desc" data-i18n="popup_desc">Deixe seu e-mail abaixo e receba nossas novidades em primeira mão.</p>
                 </div>
 
-                <!-- Botão de ação convertido substituindo o formulário antigo -->
-                <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="el-popup-submit-link" class="el-popup-submit-btn">
-                    <span>Acessar Grupo VIP Privado</span>
-                    <svg class="el-popup-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                
-                <span class="el-popup-footer-note">Comunidade Oficial Elevia ∙ 2026</span>
+                <form id="el-popup-form" action="https://formspree.io/f/contact@bropharmaceutical.com" method="POST" class="el-popup-form">
+                    <div class="el-popup-field">
+                        <input type="email" name="email" id="el-popup-email" class="el-popup-input" required data-i18n-placeholder="popup_email_ph">
+                    </div>
+                    <button type="submit" class="el-popup-submit-btn">
+                        <span data-i18n="popup_btn">SIGN UP</span>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+<!-- ==========================================
+     POPUP 2: WHATSAPP (CANTO INFERIOR DIREITO - APARECE DEPOIS)
+     ========================================== -->
+<div id="wa-popup-flutuante" class="wa-flutuante-overlay">
+    <div class="wa-flutuante-wrapper">
+        <!-- Botão Fechar (X) -->
+        <button id="wa-flutuante-close" class="wa-flutuante-close-btn" aria-label="Fechar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+
+        <div class="wa-flutuante-container">
+            <!-- Imagem Superior Alta -->
+            <div class="wa-flutuante-image-side">
+                <img src="./images/popup.png" alt="Ritual ELEVIA" class="wa-flutuante-img">
+            </div>
+
+            <!-- Conteúdo Centralizado -->
+            <div class="wa-flutuante-content-side">
+                <div class="wa-flutuante-text-group">
+                    <div class="wa-flutuante-badge-vip">
+                        <span>Grupo VIP</span>
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h2 class="wa-flutuante-title wa-limit-2">Pré lançamento 10/06</h2>
+                    <p class="wa-flutuante-subtitle wa-limit-2">A nova era da biotecnologia celular.</p>
+                    <p class="wa-flutuante-desc">Estoque limitado. Entre para garantir acesso prioritário.</p>
+                </div>
+
+                <!-- Botão de Ação -->
+                <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="wa-flutuante-submit" class="wa-flutuante-submit-btn">
+                    <span>Entrar no Grupo VIP</span>
+                    <svg class="wa-flutuante-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================
+     SCRIPT COM SEQUENCIA LÓGICA DE GATILHO
+     ========================================== -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const popupOverlay = document.getElementById("elevia-popup-overlay");
-        const closeBtn = document.getElementById("el-popup-close");
-        const submitLink = document.getElementById("el-popup-submit-link");
+        // Elementos do Pop-up Central (E-mail)
+        const emailOverlay = document.getElementById("elevia-popup-overlay");
+        const emailCloseBtn = document.getElementById("el-popup-close");
+        const emailForm = document.getElementById("el-popup-form");
 
+        // Elementos do Pop-up de Canto (WhatsApp)
+        const waOverlay = document.getElementById("wa-popup-flutuante");
+        const waCloseBtn = document.getElementById("wa-flutuante-close");
+        const waSubmitLink = document.getElementById("wa-flutuante-submit");
+
+        // Verifica o estado da sessão
         const popupOpenedThisSession = sessionStorage.getItem("eleviaPopupOpened");
 
         if (!popupOpenedThisSession) {
             setTimeout(() => {
-                popupOverlay.classList.add("active");
+                // Abre SOMENTE o pop-up principal de e-mail após 3 segundos
+                emailOverlay.classList.add("active");
                 sessionStorage.setItem("eleviaPopupOpened", "true");
             }, 3000);
         }
 
-        function closeEleviaPopup() {
-            popupOverlay.classList.remove("active");
+        // Função para acionar o Pop-up do WhatsApp (Chama com um leve delay de 400ms para suavizar a transição)
+        function dispararPopupWhatsApp() {
+            setTimeout(() => {
+                waOverlay.classList.add("active");
+            }, 4000);
         }
 
-        // Eventos estritos de fechamento solicitados
-        closeBtn.addEventListener("click", closeEleviaPopup);
-        submitLink.addEventListener("click", closeEleviaPopup);
-        popupOverlay.addEventListener("click", function (e) {
-            if (e.target === popupOverlay) closeEleviaPopup();
+        // Interceptadores de Fechamento do Pop-up de E-mail para ativar o do WhatsApp
+        function closeEmailPopup() {
+            emailOverlay.classList.remove("active");
+            dispararPopupWhatsApp(); // <--- CHAMA O SEGUNDO POP-UP AQUI
+        }
+
+        // Eventos Pop-up Central (Disparam a sequência ao fechar)
+        emailCloseBtn.addEventListener("click", closeEmailPopup);
+        
+        emailOverlay.addEventListener("click", function (e) {
+            if (e.target === emailOverlay) {
+                closeEmailPopup();
+            }
         });
+
+        emailForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const emailInput = document.getElementById("el-popup-email").value;
+            
+            fetch(emailForm.action, {
+                method: "POST",
+                body: JSON.stringify({ email: emailInput }),
+                mode: "no-cors",
+                headers: { 'Content-Type': 'application/json' }
+            });
+
+            emailForm.reset();
+            closeEmailPopup(); // Dispara o WhatsApp após o envio bem-sucedido
+        });
+
+        // Funções de Fechamento do Pop-up do WhatsApp (Independente)
+        function closeWaPopup() {
+            waOverlay.classList.remove("active");
+        }
+        waCloseBtn.addEventListener("click", closeWaPopup);
+        waSubmitLink.addEventListener("click", closeWaPopup);
     });
 </script>
 
+<!-- ==========================================
+     ESTILOS CSS (MANTIDOS E OTIMIZADOS)
+     ========================================== -->
 <style>
-    /* Reset interno para garantir fontes limpas solicitadas */
-    .el-popup-overlay,
-    .el-popup-overlay * {
-        font-family: Arial, Helvetica, sans-serif !important;
-        box-sizing: border-box;
-    }
-
-    /* Trava de segurança de duas linhas solicitada */
-    .limit-2-lines {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
+    /* --- POP-UP CENTRAL ORIGINAL --- */
     .el-popup-overlay {
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100%;
         background-color: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        z-index: 99999;
+        backdrop-filter: blur(4px);
+        z-index: 9999;
         display: flex;
         align-items: center;
         justify-content: center;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.4s ease;
-        padding: 24px;
+        padding: 20px;
+        box-sizing: border-box;
     }
-    .el-popup-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
-    /* Wrapper adaptado para estilo cinza translúcido iOS 18 */
+    .el-popup-overlay.active { opacity: 1; pointer-events: auto; }
     .el-popup-wrapper {
         position: relative;
-        background: rgba(242, 242, 247, 0.85) !important;
-        backdrop-filter: blur(30px) saturate(210%) !important;
-        -webkit-backdrop-filter: blur(30px) saturate(210%) !important;
-        border: 1px solid rgba(0, 0, 0, 0.1) !important;
-        width: 100%;
-        max-width: 780px; /* Layout mais compacto e elegante */
-        border-radius: 32px;
-        overflow: hidden;
-        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255,255,255,0.7) !important;
+        background-color: #f6f5f1;
+        width: 100%; max-width: 840px;
+        border-radius: 32px; overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
         transform: scale(0.95);
         transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         isolation: isolate;
     }
-    .el-popup-overlay.active .el-popup-wrapper {
-        transform: scale(1);
-    }
-    .el-popup-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
+    .el-popup-overlay.active .el-popup-wrapper { transform: scale(1); }
+    .el-popup-container { display: flex; flex-direction: column; width: 100%; }
     .el-popup-image-side {
-        position: relative;
-        width: 100%;
-        height: 240px;
-        overflow: hidden;
+        position: relative; width: 100%; height: 260px; overflow: hidden;
+        margin: -1px -1px 0 -1px; padding: 1px;
     }
     .el-popup-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        display: block;
+        width: calc(100% + 2px); height: calc(100% + 2px);
+        object-fit: cover; object-position: center; display: block;
+        border-top-left-radius: 31px; border-top-right-radius: 31px;
     }
-    
-    /* Configuração de conteúdo 100% centralizado e textos pretos */
     .el-popup-content-side {
-        width: 100%;
-        padding: 36px 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        width: 100%; padding: 40px 32px;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box;
     }
-    
-    .el-popup-text-group {
-        margin-bottom: 24px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .el-popup-text-group { margin-bottom: 28px; max-width: 360px; }
+    .el-popup-title { font-family: Arial, Helvetica, sans-serif; font-size: 1.4rem; font-weight: 700; color: #3a3a3a; margin: 0 0 12px 0; letter-spacing: -0.01em; }
+    .el-popup-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 1rem; font-weight: 400; color: #555555; line-height: 1.4; margin: 0 0 16px 0; }
+    .el-popup-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.88rem; font-weight: 400; color: #777777; line-height: 1.5; margin: 0; }
+    .el-popup-form { width: 100%; max-width: 360px; display: flex; flex-direction: column; gap: 12px; }
+    .el-popup-input {
+        width: 100%; height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid #d1cfc9;
+        background-color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 0.95rem; color: #000000; outline: none; box-sizing: border-box; transition: border-color 0.2s;
     }
-
-    /* Badge VIP sutil */
-    .el-popup-badge-vip {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .el-popup-badge-vip span {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: #555555;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    .el-popup-badge-vip svg {
-        width: 14px;
-        height: 14px;
-        fill: #34C759;
-    }
-
-    /* Títulos e descrições com leitura em preto puro */
-    .el-popup-title {
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: #000000; /* Texto Preto */
-        margin: 0 0 10px 0;
-        letter-spacing: -0.02em;
-        line-height: 1.2;
-        max-width: 460px;
-    }
-    .el-popup-subtitle {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: #000000; /* Texto Preto */
-        line-height: 1.4;
-        margin: 0 0 12px 0;
-        max-width: 460px;
-    }
-    .el-popup-desc {
-        font-size: 0.92rem;
-        font-weight: 400;
-        color: #000000; /* Texto Preto */
-        line-height: 1.5;
-        margin: 0;
-        max-width: 480px;
-    }
-
-    /* Botão estilo Link/Ação iOS 18 com gradiente fluido */
+    .el-popup-input:focus { border-color: #6e6a64; }
+    .el-popup-input::placeholder { color: #aaa7a1; }
     .el-popup-submit-btn {
-        width: 100%;
-        max-width: 360px;
-        height: 52px;
-        border-radius: 14px;
-        background: linear-gradient(180deg, #34C759 0%, #28a745 100%) !important;
-        color: #ffffff !important;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        border: 1px solid rgba(0, 0, 0, 0.02) !important;
-        box-shadow: 0 4px 12px rgba(52, 199, 89, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
-        cursor: pointer;
-        transition: background-color 0.2s, box-shadow 0.2s;
+        width: 100%; height: 54px; border-radius: 27px; border: none; background-color: #65615a; color: #ffffff;
+        font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.08em; cursor: pointer; transition: background-color 0.2s, transform 0.1s;
     }
-    .el-popup-submit-btn:hover {
-        background: linear-gradient(180deg, #30b651 0%, #218838 100%) !important;
-        box-shadow: 0 6px 18px rgba(40, 167, 69, 0.25) !important;
-    }
+    .el-popup-submit-btn:hover { background-color: #524e48; }
     .el-popup-submit-btn span { color: #ffffff !important; }
-    .el-popup-btn-icon { width: 15px; height: 15px; stroke: #ffffff; }
-
-    .el-popup-footer-note {
-        font-size: 0.75rem;
-        color: #666666;
-        margin-top: 14px;
-        display: block;
-    }
-
     .el-popup-close-btn {
-        position: absolute;
-        top: 16px; right: 16px;
-        width: 32px; height: 32px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.05);
-        border: none;
-        color: #222222;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 100;
-        transition: background-color 0.2s, transform 0.2s;
+        position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.05); border: none; color: #555555; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: background-color 0.2s;
     }
-    .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); transform: scale(1.05); }
-    .el-popup-close-btn svg { width: 14px; height: 14px; }
+    .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
+    .el-popup-close-btn svg { width: 16px; height: 16px; }
 
-    /* Mídia query responsiva do seu layout adaptada para centralização horizontal completa */
     @media (min-width: 680px) {
         .el-popup-container { flex-direction: row; }
-        .el-popup-image-side {
-            width: 42%;
-            height: auto;
-            min-height: 380px;
-        }
-        .el-popup-content-side {
-            width: 58%;
-            padding: 44px 36px;
-            text-align: center;
-            align-items: center;
-        }
+        .el-popup-image-side { width: 48%; min-height: 480px; border-top-left-radius: 32px; border-bottom-left-radius: 32px; border-top-right-radius: 0px; margin: -1px 0 -1px -1px; }
+        .el-popup-img { border-top-left-radius: 31px; border-bottom-left-radius: 31px; border-top-right-radius: 0px; }
+        .el-popup-content-side { width: 52%; padding: 60px 48px; text-align: left; align-items: flex-start; }
+        .el-popup-text-group { text-align: left; max-width: 100%; }
+        .el-popup-title { font-size: 1.6rem; }
+        .el-popup-form { max-width: 100%; }
+    }
+
+    /* --- MINI POPUP DO WHATSAPP (FLUTUANTE DIREITO) --- */
+    .wa-flutuante-overlay,
+    .wa-flutuante-overlay * {
+        font-family: Arial, Helvetica, sans-serif !important;
+        box-sizing: border-box;
+    }
+    .wa-limit-2 {
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+    }
+    .wa-flutuante-overlay {
+        position: fixed;
+        bottom: 20px; right: 20px;
+        width: auto; height: auto;
+        background-color: transparent;
+        z-index: 99999;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(15px);
+    }
+    .wa-flutuante-overlay.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    
+    .wa-flutuante-wrapper {
+        position: relative;
+        background: rgba(242, 242, 247, 0.93) !important;
+        backdrop-filter: blur(25px) saturate(210%) !important;
+        -webkit-backdrop-filter: blur(25px) saturate(210%) !important;
+        border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        width: 290px; border-radius: 20px; overflow: hidden;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255,255,255,0.8) !important;
+        isolation: isolate;
+    }
+    .wa-flutuante-container { display: flex; flex-direction: column; width: 100%; }
+    
+    .wa-flutuante-image-side { position: relative; width: 100%; height: 175px; overflow: hidden; background-color: #ffffff; }
+    .wa-flutuante-img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    
+    .wa-flutuante-content-side {
+        width: 100%; padding: 16px 14px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    }
+    .wa-flutuante-text-group { margin-bottom: 12px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+    
+    .wa-flutuante-badge-vip { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 6px; }
+    .wa-flutuante-badge-vip span { font-size: 0.68rem; font-weight: 700; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
+    .wa-flutuante-badge-vip svg { width: 11px; height: 11px; fill: #34C759; }
+    
+    .wa-flutuante-title { font-size: 1.15rem; font-weight: 700; color: #000000; margin: 0 0 4px 0; letter-spacing: -0.01em; line-height: 1.2; }
+    .wa-flutuante-subtitle { font-size: 0.82rem; font-weight: 700; color: #000000; line-height: 1.3; margin: 0 0 4px 0; }
+    .wa-flutuante-desc { font-size: 0.78rem; font-weight: 400; color: #000000; line-height: 1.3; margin: 0; }
+    
+    .wa-flutuante-submit-btn {
+        width: 100%; height: 38px; border-radius: 10px;
+        background: linear-gradient(180deg, #34C759 0%, #28a745 100%) !important;
+        color: #ffffff !important; font-weight: 700; font-size: 0.82rem; text-decoration: none;
+        display: flex; align-items: center; justify-content: center; gap: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.01) !important;
+        box-shadow: 0 2px 4px rgba(52, 199, 89, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        cursor: pointer;
+    }
+    .wa-flutuante-submit-btn:hover {
+        background: linear-gradient(180deg, #30b651 0%, #218838 100%) !important;
+        box-shadow: 0 3px 10px rgba(40, 167, 69, 0.2) !important;
+    }
+    .wa-flutuante-submit-btn span { color: #ffffff !important; }
+    .wa-flutuante-btn-icon { width: 11px; height: 11px; stroke: #ffffff; stroke-width: 3.5px; }
+    
+    .wa-flutuante-close-btn {
+        position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0,0,0,0.08); color: #111111;
+        display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: background-color 0.2s, transform 0.2s;
+    }
+    .wa-flutuante-close-btn:hover { background-color: #ffffff; transform: scale(1.05); }
+    .wa-flutuante-close-btn svg { width: 10px; height: 10px; }
+
+    @media (min-width: 480px) {
+        .wa-flutuante-wrapper { max-width: 290px; }
+        .wa-flutuante-container { flex-direction: column; }
     }
 </style>
 
@@ -1495,6 +1525,273 @@
     }
 </style>
 
+<!-- SEÇÃO DE PLANO DE FUNDO BRANCO -->
+<div class="wa-section-container">
+
+    <!-- CARD PREMIUM DE PRÉ-LANÇAMENTO -->
+    <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" class="wa-ios-card-outer">
+        <div class="wa-ios-card-container">
+            
+            <!-- LADO DA IMAGEM (Padrão do Pop-up) -->
+            <div class="wa-ios-image-side">
+                <img src="./images/popup.png" alt="Ritual ELEVIA" class="wa-ios-img">
+            </div>
+
+            <!-- LADO DO CONTEÚDO (Padrão do Pop-up) -->
+            <div class="wa-ios-content-side">
+                <div class="wa-ios-text-group">
+                    <div class="wa-ios-header-badge">
+                        <span class="wa-ios-badge-text">Grupo VIP</span>
+                        <svg class="wa-ios-verified" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    
+                    <h2 class="wa-ios-title">Pré Lançamento Próxima Geração</h2>
+                    <p class="wa-ios-subtitle">Seja um dos primeiros a garantir a nova fórmula de biotecnologia celular da Elevia.</p>
+                    <p class="wa-ios-desc">O estoque inicial será extremamente limitado e disponibilizado exclusivamente para os membros da comunidade VIP. Entre no grupo para receber o link de compra com condições especiais em primeira mão, conteúdos dos bastidores laboratoriais e prioridade máxima no envio.</p>
+                </div>
+
+                <div class="wa-ios-action-area">
+                    <span class="wa-ios-submit-btn">
+                        <span>Garantir Vaga no Pré Lançamento</span>
+                        <svg class="wa-ios-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </span>
+                    <span class="wa-ios-footer-note">Comunidade Oficial Elevia ∙ 2026</span>
+                </div>
+            </div>
+
+        </div>
+    </a>
+
+</div>
+
+<!-- ESTILIZAÇÃO COMPATÍVEL COM O POP-UP E ESTILO IOS 18 -->
+<style>
+    /* Forçar aplicação de fontes limpas Arial e Sans-Serif */
+    .wa-section-container,
+    .wa-section-container * {
+        font-family: Arial, Helvetica, sans-serif !important;
+        box-sizing: border-box;
+    }
+
+    /* Container base em fundo branco */
+    .wa-section-container {
+        background-color: #ffffff;
+        padding: 40px 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* ESTRUTURA DO CARD (Glassmorphism Premium iOS 18) */
+    .wa-ios-card-outer {
+        display: block;
+        text-decoration: none;
+        width: 100%;
+        max-width: 1140px; /* Limitação horizontal máxima do site */
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(20px) saturate(190%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+        
+        /* Borda fina cirúrgica e chanfro interno de luz estilo Apple */
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        border-radius: 32px !important;
+        box-shadow: 
+            0 1px 3px rgba(0,0,0,0.02),
+            0 16px 40px rgba(0, 0, 0, 0.04),
+            inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
+            
+        overflow: hidden;
+        isolation: isolate;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+
+    /* Efeito hover elegante focado no verde sutil do WhatsApp */
+    .wa-ios-card-outer:hover {
+        transform: translateY(-3px) scale(1.002);
+        box-shadow: 
+            0 1px 2px rgba(0,0,0,0.01),
+            0 24px 48px rgba(52, 199, 89, 0.08),
+            inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        border-color: rgba(52, 199, 89, 0.3) !important;
+    }
+
+    /* Divisão interna adaptada do layout do pop-up */
+    .wa-ios-card-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    /* Lado da Imagem (Mobile primeiro) */
+    .wa-ios-image-side {
+        position: relative;
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+    }
+
+    .wa-ios-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .wa-ios-card-outer:hover .wa-ios-img {
+        transform: scale(1.02);
+    }
+
+    /* Lado do Conteúdo */
+    .wa-ios-content-side {
+        width: 100%;
+        padding: 40px 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+    }
+
+    /* Elementos de Texto */
+    .wa-ios-text-group {
+        width: 100%;
+        margin-bottom: 32px;
+    }
+
+    /* Badge Superior do Grupo VIP */
+    .wa-ios-header-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 16px;
+    }
+
+    .wa-ios-badge-text {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #666666;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .wa-ios-verified {
+        width: 16px;
+        height: 16px;
+        fill: #34C759; /* Verde iOS */
+    }
+
+    .wa-ios-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #111111;
+        margin: 0 0 14px 0;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+    }
+
+    .wa-ios-subtitle {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #248a3d; /* Destaque verde escuro sofisticado */
+        line-height: 1.4;
+        margin: 0 0 16px 0;
+    }
+
+    .wa-ios-desc {
+        font-size: 0.92rem;
+        font-weight: 400;
+        color: #444444;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Área do Botão e Rodapé */
+    .wa-ios-action-area {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    /* Botão Principal Estilo Chamada do Pop-up com Gradiente iOS 18 */
+    .wa-ios-submit-btn {
+        width: 100%;
+        height: 54px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #34C759 0%, #28a745 100%) !important;
+        color: #ffffff !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        border: 1px solid rgba(0, 0, 0, 0.02) !important;
+        box-shadow: 
+            0 4px 12px rgba(52, 199, 89, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .wa-ios-card-outer:hover .wa-ios-submit-btn {
+        background: linear-gradient(180deg, #30b651 0%, #218838 100%) !important;
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.25) !important;
+    }
+
+    .wa-ios-submit-btn span {
+        color: #ffffff !important;
+    }
+
+    .wa-ios-btn-icon {
+        width: 16px;
+        height: 16px;
+        stroke: #ffffff;
+    }
+
+    .wa-ios-footer-note {
+        font-size: 0.78rem;
+        color: #999999;
+        text-align: center;
+        display: block;
+    }
+
+    /* CONFIGURAÇÃO EM DESKTOP (Seguindo fielmente as regras do media query do seu pop-up) */
+    @media (min-width: 680px) {
+        .wa-ios-card-container {
+            flex-direction: row;
+        }
+
+        .wa-ios-image-side {
+            width: 48%;
+            height: auto;
+            min-height: 460px;
+        }
+
+        .wa-ios-content-side {
+            width: 52%;
+            padding: 48px 40px;
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .wa-ios-footer-note {
+            text-align: left;
+        }
+    }
+
+    /* Ajuste fino para telas maiores preencherem as margens horizontais com elegância */
+    @media (min-width: 992px) {
+        .wa-ios-image-side {
+            width: 42%;
+        }
+        .wa-ios-content-side {
+            width: 58%;
+            padding: 56px 48px;
+        }
+    }
+</style>
 
 <!-- ==========================================
      GALLERY SECTION
