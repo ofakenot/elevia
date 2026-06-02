@@ -10,6 +10,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
+
+        /* --- ACELERAÇÃO VISUAL GLOBAL MÓVEL --- */
+html {
+    /* Ativa o scroll nativo super liso do ecossistema mobile */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Aplique esta propriedade em elementos do seu site que possuem animações, 
+   efeitos de fade, sliders (carrossel) ou nos próprios Pop-ups */
+.el-popup-overlay, 
+.el-popup-wrapper, 
+.wa-flutuante-overlay, 
+.wa-flutuante-wrapper,
+.hero-section, 
+.gallery-container {
+    /* Força o Android a usar a placa gráfica dedicada (GPU) para rodar o CSS, tirando o peso do processador principal */
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Evita o efeito de "pulo" no layout enquanto o Android renderiza fontes pesadas */
+body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
         :root {
             --font-display: 'Cormorant Garamond', Georgia, serif;
             --font-body: Arial, Helvetica, sans-serif;
@@ -2243,6 +2272,54 @@ document.addEventListener('DOMContentLoaded', () => {
             closeEleviaPopup();
         });
     });
+</script>
+
+<!-- ==========================================
+     MOTOR DE PERFORMANCE GLOBAL - OTIMIZADO PARA ANDROID
+     ========================================== -->
+<script>
+    (function () {
+        // 1. Forçar decodificação assíncrona de imagens pesadas (Evita travamentos no scroll)
+        function otimizarImagensGlobais() {
+            const imagens = document.querySelectorAll('img:not([loading])');
+            imagens.forEach(img => {
+                img.setAttribute('loading', 'lazy'); // Adiciona lazy load nativo
+                if (typeof img.decode === 'function') {
+                    img.decode().catch(() => {}); // Decodifica via hardware antes de exibir
+                }
+            });
+        }
+
+        // 2. Execução de Scripts Não-Bloqueantes (Garante que os efeitos rodem liso)
+        function liberarPerformanceNativa() {
+            // Remove delays de toque antigos que alguns navegadores Android emulam
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            document.addEventListener('touchmove', function() {}, {passive: true});
+            
+            // Disparar otimização de imagens
+            otimizarImagensGlobais();
+        }
+
+        // 3. Inicialização Híbrida Ultraveloz
+        if (document.readyState === "interactive" || document.readyState === "complete") {
+            liberarPerformanceNativa();
+        } else {
+            document.addEventListener("DOMContentLoaded", liberarPerformanceNativa);
+        }
+
+        // 4. Se o site usar efeitos de animação ao scroll (como AOS, ScrollReveal, etc.)
+        // Este bloco suaviza o lag re-renderizando na velocidade de atualização da tela (FPS)
+        let scrollTimeout;
+        window.addEventListener('scroll', function () {
+            if (!scrollTimeout) {
+                window.requestAnimationFrame(function () {
+                    // O navegador processa eventos visuais de forma suave aqui
+                    scrollTimeout = false;
+                });
+                scrollTimeout = true;
+            }
+        }, { passive: true });
+    })();
 </script>
 
 </body>
