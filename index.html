@@ -468,24 +468,27 @@ body {
 <div id="elevia-popup-overlay" class="el-popup-overlay" style="pointer-events: auto;">
     <div class="el-popup-wrapper">
         
+        <button type="button" id="el-popup-close-btn" class="el-popup-close-btn" aria-label="Fechar popup">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
         <div class="el-popup-container">
             
-            <!-- Lado da Imagem -->
             <div class="el-popup-image-side">
                 <img src="./images/popupnovo.png" alt="Ritual ELEVIA" class="el-popup-img">
             </div>
 
-            <!-- Lado do Conteúdo (Mapeado com chaves de tradução) -->
             <div class="el-popup-content-side">
                 <div class="el-popup-text-group">
                     
-                    <!-- Selo de Verificado -->
                     <div class="el-popup-badge-vip">
                         <span data-i18n="wa_badge">Lançamento Elevia</span>
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
                     
-                    <!-- Hierarquia de Textos com chaves i18n distintas -->
                     <h2 class="el-popup-title" data-i18n="wa_title">Pré Lançamento Elevia</h2>
                     
                     <p class="el-popup-subtitle" data-i18n="wa_date">10 Junho 2026</p>
@@ -495,7 +498,6 @@ body {
                     <p class="el-popup-desc" data-i18n="wa_desc">PRÉ VENDA LIMITADA, faça parte da nossa comunidade para obter benefícios exclusivos.</p>
                 </div>
 
-                <!-- Botão de Ação com suporte a tradução -->
                 <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="el-popup-whatsapp-btn" class="el-popup-submit-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.944 0c3.172.001 6.155 1.233 8.399 3.473 2.243 2.24 3.472 5.221 3.471 8.394-.003 6.597-5.34 11.945-11.89 11.945-2.015-.001-3.992-.511-5.741-1.487L0 24zm6.59-4.74c1.656.982 3.511 1.5 5.405 1.501 5.375 0 9.749-4.331 9.752-9.655.002-2.579-1.002-5.003-2.827-6.825C17.155 2.458 14.734 1.455 12.16 1.455c-5.378 0-9.754 4.332-9.757 9.657-.001 1.932.521 3.82 1.512 5.508l-.986 3.606 3.718-.966zM17.52 14.3c-.314-.157-1.859-.917-2.137-1.018-.278-.1-.481-.15-.683.151-.202.3-.781.983-.957 1.185-.177.202-.354.227-.668.071-.314-.157-1.326-.488-2.527-1.559-.933-.833-1.563-1.861-1.746-2.175-.183-.314-.02-.484.137-.64.141-.141.314-.366.471-.549.157-.183.21-.314.314-.524.105-.21.052-.393-.026-.549-.079-.157-.683-1.647-.936-2.256-.246-.593-.497-.513-.683-.522-.177-.009-.38-.01-.583-.01-.202 0-.532.076-.81.381-.278.305-1.062 1.039-1.062 2.535 0 1.496 1.088 2.943 1.24 3.146.152.203 2.142 3.272 5.19 4.587.725.313 1.291.5 1.734.641.729.232 1.392.199 1.917.12.585-.088 1.859-.759 2.122-1.454.264-.695.264-1.291.186-1.414-.079-.122-.278-.197-.592-.355z"/></svg>
                     <span data-i18n="wa_btn">PRÉ VENDA</span>
@@ -506,15 +508,13 @@ body {
     </div>
 </div>
 
-<!-- ==========================================
-     SCRIPT DE LÓGICA E INTERAÇÃO
-     ========================================== -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         if (typeof setLang === 'function') setLang('pt');
 
         const popup1Overlay = document.getElementById("elevia-popup-overlay");
         const popup1WaBtn = document.getElementById("el-popup-whatsapp-btn");
+        const popup1CloseBtn = document.getElementById("el-popup-close-btn");
 
         setTimeout(() => {
             if (popup1Overlay) {
@@ -531,6 +531,11 @@ body {
             }
         }
 
+        // Evento para fechar clicando no "X"
+        if (popup1CloseBtn) {
+            popup1CloseBtn.addEventListener("click", closePopup1);
+        }
+
         if (popup1WaBtn) {
             popup1WaBtn.addEventListener("click", function () {
                 setTimeout(closePopup1, 400);
@@ -539,9 +544,6 @@ body {
     });
 </script>
 
-<!-- ==========================================
-     ESTILOS CSS (CORES & FLUXO ATUALIZADOS)
-     ========================================== -->
 <style>
     .el-popup-overlay {
         position: fixed;
@@ -573,6 +575,30 @@ body {
     }
     .el-popup-overlay.active .el-popup-wrapper { transform: scale(1); }
     .el-popup-container { display: flex; flex-direction: column; width: 100%; }
+
+    /* NOVO: Botão de Fechar Customizado */
+    .el-popup-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+        color: #3a3a3a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 50;
+        transition: background-color 0.2s, transform 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .el-popup-close-btn:hover {
+        background-color: #ffffff;
+        transform: scale(1.05);
+    }
     
     .el-popup-image-side {
         position: relative; 
@@ -639,6 +665,10 @@ body {
         .el-popup-image-side { width: 48%; height: auto; }
         .el-popup-content-side { width: 52%; padding: 40px; text-align: left; align-items: flex-start; }
         .el-popup-text-group { text-align: left; }
+        
+        /* Ajuste do botão fechar no desktop para ficar sobre o conteúdo ou imagem elegantemente */
+        .el-popup-close-btn { background-color: rgba(0, 0, 0, 0.05); color: #3a3a3a; }
+        .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
     }
 </style>
 <!-- Language Selector Bar -->
@@ -695,7 +725,7 @@ body {
 
                 <!-- O botão fica logo abaixo delas -->
                 <div class="hero-catalog-container">
-                    <a href="#" class="hero-catalog-btn">acesse nosso catálogo</a>
+                    <a href="https://goelevia.com/app/" class="hero-catalog-btn">acesse nosso catálogo</a>
                 </div>
             </div>
         </div>
@@ -726,7 +756,7 @@ body {
 
             <!-- O botão fica logo abaixo delas no mobile também -->
             <div class="hero-catalog-container mobile-catalog-margin">
-                <a href="#" class="hero-catalog-btn">acesse nosso catálogo</a>
+                <a href="https://goelevia.com/app/" class="hero-catalog-btn">acesse nosso catálogo</a>
             </div>
         </div>
     </div>
