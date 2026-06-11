@@ -10,30 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
-
-        /* --- ACELERAÇÃO VISUAL GLOBAL MÓVEL --- */
 html {
-    /* Ativa o scroll nativo super liso do ecossistema mobile */
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
-
-/* Aplique esta propriedade em elementos do seu site que possuem animações, 
-   efeitos de fade, sliders (carrossel) ou nos próprios Pop-ups */
 .el-popup-overlay, 
 .el-popup-wrapper, 
 .wa-flutuante-overlay, 
 .wa-flutuante-wrapper,
 .hero-section, 
 .gallery-container {
-    /* Força o Android a usar a placa gráfica dedicada (GPU) para rodar o CSS, tirando o peso do processador principal */
     transform: translateZ(0);
     will-change: transform, opacity;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
-
-/* Evita o efeito de "pulo" no layout enquanto o Android renderiza fontes pesadas */
 body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -62,9 +53,7 @@ body {
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); font-weight: 600; color: #000000; }
         p, span, a, li, input, button, label, textarea { font-family: var(--font-body); color: #333333; }
 
-        /* ==========================================
-           LANGUAGE SELECTOR
-           ========================================== */
+        /* LANGUAGE SELECTOR */
         .lang-selector-bar {
             position: absolute;
             top: 0;
@@ -74,7 +63,6 @@ body {
             padding-top: 0px;
             padding-left: 24px;
         }
-
         .lang-selector {
             display: flex;
             flex-direction: row;
@@ -86,7 +74,6 @@ body {
             border: none;
             padding: 0;
         }
-
         .lang-btn {
             font-family: var(--font-body);
             font-size: 0.65rem;
@@ -101,13 +88,11 @@ body {
             border-radius: 0;
             transition: all 0.2s ease;
         }
-
         .lang-btn.active {
             background: none;
             color: #000000;
             position: relative;
         }
-
         .lang-btn.active::before {
             content: "•";
             position: absolute;
@@ -117,24 +102,16 @@ body {
             color: #000000;
             font-size: 0.6rem;
         }
-
-        .lang-btn:hover:not(.active) {
-            color: #000000;
-            background: none;
-        }
-
+        .lang-btn:hover:not(.active) { color: #000000; background: none; }
         .lang-divider { display: none; }
 
-        /* ==========================================
-           HEADER
-           ========================================== */
+        /* HEADER */
         .site-header {
             position: absolute; top: 0; left: 0; width: 100%;
             padding: 0 1.5rem;
             display: flex; justify-content: center; align-items: center;
             z-index: 30;
         }
-
         .logo-container {
             background: rgba(255,255,255,0.95);
             padding: 0.6rem 2.5rem 1.2rem;
@@ -149,323 +126,101 @@ body {
             gap: 10px;
             transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease;
         }
-
-        .logo-container:hover {
-            transform: scale(1.015) translateY(2px);
-            background: #fff;
-        }
-
-        .logo-elevia {
-            height: 105px;
-            width: auto;
-            display: block;
-            transform: translateY(0);
-        }
-
+        .logo-container:hover { transform: scale(1.015) translateY(2px); background: #fff; }
+        .logo-elevia { height: 105px; width: auto; display: block; transform: translateY(0); }
         @media (min-width: 768px) {
-            .logo-container {
-                border-radius: 0 0 48px 48px;
-                padding: 0.8rem 3.5rem 1.4rem;
-            }
-            .logo-elevia {
-                height: 115px;
-                transform: translateY(0);
-            }
+            .logo-container { border-radius: 0 0 48px 48px; padding: 0.8rem 3.5rem 1.4rem; }
+            .logo-elevia { height: 115px; transform: translateY(0); }
         }
 
-        /* ==========================================
-           HERO
-           ========================================== */
+        /* HERO */
         .hero-section {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            overflow: hidden;
-            background-color: var(--background);
-            display: flex;
-            flex-direction: column;
+            position: relative; width: 100%; min-height: 100vh; overflow: hidden;
+            background-color: var(--background); display: flex; flex-direction: column;
         }
-
         #liquid-canvas {
-            position: absolute;
-            inset: 0;
-            width: 100% !important;
-            height: 100% !important;
-            display: block;
-            z-index: 1;
-            pointer-events: none;
+            position: absolute; inset: 0; width: 100% !important; height: 100% !important;
+            display: block; z-index: 1; pointer-events: none;
         }
-
         .grain-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 2;
+            position: absolute; inset: 0; z-index: 2;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none;
         }
-
         .ethereal-background {
-            position: absolute;
-            inset: 0;
-            z-index: 3;
+            position: absolute; inset: 0; z-index: 3;
             background: linear-gradient(to top, var(--background) 0%, rgba(253,238,246,0.4) 60%, rgba(253,238,246,0) 100%);
             pointer-events: none;
         }
-
         .ui-layer {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            padding: 4rem;
+            position: absolute; inset: 0; z-index: 10; padding: 4rem;
             display: none;
-            grid-template-columns: 1fr 2fr 1fr;
-            grid-template-rows: 1fr auto;
-            align-items: center;
-            pointer-events: none;
+            grid-template-columns: 1fr 2fr 1fr; grid-template-rows: 1fr auto;
+            align-items: center; pointer-events: none;
         }
         .ui-layer * { pointer-events: auto; }
-
-        .hero-left-info {
-            grid-column: 1;
-            align-self: center;
-            max-width: 280px;
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards 0.5s;
-        }
-        .hero-left-info h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: #000000;
-        }
-        .hero-left-info p {
-            font-family: var(--font-body);
-            font-size: 0.82rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-        }
-
-        .center-content {
-            grid-column: 2;
-            text-align: center;
-            align-self: center;
-            opacity: 0;
-            animation: fadeInUp 1.8s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
-
-        .hero-tagline {
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.38em;
-            color: var(--pink-primary);
-            margin-bottom: 1.5rem;
-        }
-
+        .hero-left-info { grid-column: 1; align-self: center; max-width: 280px; opacity: 0; animation: fadeIn 1.5s ease forwards 0.5s; }
+        .hero-left-info h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; color: #000000; }
+        .hero-left-info p { font-family: var(--font-body); font-size: 0.82rem; line-height: 1.7; color: var(--text-muted); }
+        .center-content { grid-column: 2; text-align: center; align-self: center; opacity: 0; animation: fadeInUp 1.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .hero-tagline { font-family: var(--font-body); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.38em; color: var(--pink-primary); margin-bottom: 1.5rem; }
         .center-content h2 {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 600;
-            line-height: 1.1;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            background: linear-gradient(120deg, #000000 40%, #333333 50%, #000000 60%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-position: 100% 0;
-            transition: background-position 0.8s ease;
+            font-family: var(--font-display); font-size: 4rem; font-weight: 600; line-height: 1.1; letter-spacing: 0.05em; text-transform: uppercase;
+            background: linear-gradient(120deg, #000000 40%, #333333 50%, #000000 60%); background-size: 200% 100%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-position: 100% 0; transition: background-position 0.8s ease;
         }
         .center-content h2:hover { background-position: -100% 0; }
-
-/* Atualizado para forçar a fonte padrão */
-.hero-side-text {
-    grid-column: 3;
-    justify-self: end;
-    writing-mode: vertical-rl;
-    text-transform: uppercase;
-    
-    /* O !important garante que nenhuma outra regra CSS mude a fonte deste bloco */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-    
-    font-size: 0.6rem;
-    letter-spacing: 0.22em;
-    color: var(--text-muted);
-    opacity: 0;
-    animation: fadeIn 1.5s ease forwards 0.5s;
-}
-
-/* Aplicando também no footer e em todos os textos de dentro dele (b, span, div) */
-.hero-footer, 
-.hero-footer * {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-}
-
-.hero-footer {
-    grid-column: 1 / span 3;
-    grid-row: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-top: auto;
-}
-
+        .hero-side-text {
+            grid-column: 3; justify-self: end; writing-mode: vertical-rl; text-transform: uppercase;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+            font-size: 0.6rem; letter-spacing: 0.22em; color: var(--text-muted);
+            opacity: 0; animation: fadeIn 1.5s ease forwards 0.5s;
+        }
+        .hero-footer, .hero-footer * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        }
+        .hero-footer { grid-column: 1 / span 3; grid-row: 2; display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
         .hero-stats { display: flex; gap: 3rem; }
         .stat-item { display: flex; flex-direction: column; }
-        .stat-item b {
-            font-family: var(--font-display);
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #000000;
-        }
-        .stat-item span {
-            font-family: var(--font-body);
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
-        }
-
+        .stat-item b { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: #000000; }
+        .stat-item span { font-family: var(--font-body); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); margin-top: 0.2rem; }
         .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-        .scroll-mouse {
-            width: 20px;
-            height: 32px;
-            border: 2px solid #000000;
-            border-radius: 10px;
-            position: relative;
-        }
+        .scroll-mouse { width: 20px; height: 32px; border: 2px solid #000000; border-radius: 10px; position: relative; }
         .scroll-mouse::before {
-            content: '';
-            width: 4px;
-            height: 6px;
-            background-color: var(--pink-primary);
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-            animation: arrowBounce 1.6s infinite ease-in-out;
+            content: ''; width: 4px; height: 6px; background-color: var(--pink-primary);
+            position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+            border-radius: 2px; animation: arrowBounce 1.6s infinite ease-in-out;
         }
-        .scroll-indicator span {
-            font-family: var(--font-body);
-            font-size: 0.58rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #000000;
-        }
-
+        .scroll-indicator span { font-family: var(--font-body); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #000000; }
         .hero-mobile {
-            position: relative;
-            z-index: 10;
-            padding: 6rem 1.5rem 2rem;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1.2s ease forwards;
+            position: relative; z-index: 10; padding: 6rem 1.5rem 2rem; min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: space-between; text-align: center;
+            opacity: 0; animation: fadeIn 1.2s ease forwards;
         }
         .hero-mobile-top { margin-top: auto; margin-bottom: auto; }
-        .hero-mobile-tagline {
-            font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.32em;
-            color: var(--pink-primary);
-            display: block;
-            margin-bottom: 1rem;
+        .hero-mobile-tagline { font-family: var(--font-body); font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.32em; color: var(--pink-primary); display: block; margin-bottom: 1rem; }
+        .hero-mobile h2 { font-family: var(--font-display); font-size: 2.8rem; line-height: 1.1; text-transform: uppercase; color: #000000; margin-bottom: 1.5rem; letter-spacing: 0.02em; font-weight: 600; }
+        .hero-mobile h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #000000; margin-bottom: 0.75rem; }
+        .hero-mobile p { font-family: var(--font-body); font-size: 0.88rem; line-height: 1.65; color: var(--text-muted); max-width: 290px; margin: 0 auto; }
+        .hero-mobile-bottom { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; width: 100%; margin-top: auto; }
+        .hero-mobile-stats, .hero-mobile-stats * {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
         }
-        .hero-mobile h2 {
-            font-family: var(--font-display);
-            font-size: 2.8rem;
-            line-height: 1.1;
-            text-transform: uppercase;
-            color: #000000;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.02em;
-            font-weight: 600;
-        }
-        .hero-mobile h3 {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #000000;
-            margin-bottom: 0.75rem;
-        }
-        .hero-mobile p {
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            line-height: 1.65;
-            color: var(--text-muted);
-            max-width: 290px;
-            margin: 0 auto;
-        }
-        .hero-mobile-bottom {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.5rem;
-            width: 100%;
-            margin-top: auto;
-        }
- .hero-mobile-stats,
-.hero-mobile-stats * {
-    /* Força o uso da fonte padrão do sistema em todo o bloco mobile */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-}
-
-.hero-mobile-stats {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    width: 100%;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 1.5rem;
-}
-
-        @media (max-width: 991px) {
-            .ui-layer { display: none !important; }
-            .hero-mobile { display: flex !important; }
-        }
-
-        @media (min-width: 992px) {
-            .ui-layer { display: grid; }
-            .hero-mobile { display: none; }
-            .center-content h2 { font-size: 5rem; }
-        }
-        @media (min-width: 1400px) {
-            .center-content h2 { font-size: 6rem; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes arrowBounce {
-            0%, 100% { transform: translate(-50%, 0); opacity: 0.6; }
-            50% { transform: translate(-50%, 6px); opacity: 1; }
-        }
+        .hero-mobile-stats { display: flex; justify-content: center; gap: 2rem; width: 100%; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.5rem; }
+        @media (max-width: 991px) { .ui-layer { display: none !important; } .hero-mobile { display: flex !important; } }
+        @media (min-width: 992px) { .ui-layer { display: grid; } .hero-mobile { display: none; } .center-content h2 { font-size: 5rem; } }
+        @media (min-width: 1400px) { .center-content h2 { font-size: 6rem; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes arrowBounce { 0%, 100% { transform: translate(-50%, 0); opacity: 0.6; } 50% { transform: translate(-50%, 6px); opacity: 1; } }
     </style>
 </head>
 <body>
 
 <!-- ==========================================
-     POPUP 1: PRINCIPAL (CARD CENTRAL DE RETENÇÃO)
+     POPUP
      ========================================== -->
-<div id="elevia-popup-overlay" class="el-popup-overlay" style="pointer-events: auto;">
+<div id="elevia-popup-overlay" class="el-popup-overlay">
     <div class="el-popup-wrapper">
         
         <button type="button" id="el-popup-close-btn" class="el-popup-close-btn" aria-label="Fechar popup">
@@ -476,201 +231,81 @@ body {
         </button>
 
         <div class="el-popup-container">
-            
             <div class="el-popup-image-side">
                 <img src="./images/popupnovo.png" alt="Ritual ELEVIA" class="el-popup-img">
             </div>
-
             <div class="el-popup-content-side">
                 <div class="el-popup-text-group">
-                    
                     <div class="el-popup-badge-vip">
-                        <span data-i18n="wa_badge">Lançamento Elevia</span>
+                        <span data-i18n="wa_badge">Disponível Agora</span>
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
-                    
-                    <h2 class="el-popup-title" data-i18n="wa_title">Pré Lançamento Elevia</h2>
-                    
-                    <p class="el-popup-subtitle" data-i18n="wa_date">10 Junho 2026</p>
-                    
+                    <h2 class="el-popup-title" data-i18n="wa_title">Adquira seu Elevia</h2>
+                    <p class="el-popup-subtitle" data-i18n="wa_date">Canal de Vendas</p>
                     <p class="el-popup-desc-bold" data-i18n="wa_subtitle">Tecnologia avançada para resultados reais.</p>
-                    
-                    <p class="el-popup-desc" data-i18n="wa_desc">PRÉ VENDA LIMITADA, faça parte da nossa comunidade para obter benefícios exclusivos.</p>
+                    <p class="el-popup-desc" data-i18n="wa_desc">Fale diretamente com um consultor oficial e garanta o seu com condições exclusivas.</p>
                 </div>
-
-                <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="el-popup-whatsapp-btn" class="el-popup-submit-btn">
+                <a href="https://wa.me/15147536580" target="_blank" rel="noopener noreferrer" id="el-popup-whatsapp-btn" class="el-popup-submit-btn">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.944 0c3.172.001 6.155 1.233 8.399 3.473 2.243 2.24 3.472 5.221 3.471 8.394-.003 6.597-5.34 11.945-11.89 11.945-2.015-.001-3.992-.511-5.741-1.487L0 24zm6.59-4.74c1.656.982 3.511 1.5 5.405 1.501 5.375 0 9.749-4.331 9.752-9.655.002-2.579-1.002-5.003-2.827-6.825C17.155 2.458 14.734 1.455 12.16 1.455c-5.378 0-9.754 4.332-9.757 9.657-.001 1.932.521 3.82 1.512 5.508l-.986 3.606 3.718-.966zM17.52 14.3c-.314-.157-1.859-.917-2.137-1.018-.278-.1-.481-.15-.683.151-.202.3-.781.983-.957 1.185-.177.202-.354.227-.668.071-.314-.157-1.326-.488-2.527-1.559-.933-.833-1.563-1.861-1.746-2.175-.183-.314-.02-.484.137-.64.141-.141.314-.366.471-.549.157-.183.21-.314.314-.524.105-.21.052-.393-.026-.549-.079-.157-.683-1.647-.936-2.256-.246-.593-.497-.513-.683-.522-.177-.009-.38-.01-.583-.01-.202 0-.532.076-.81.381-.278.305-1.062 1.039-1.062 2.535 0 1.496 1.088 2.943 1.24 3.146.152.203 2.142 3.272 5.19 4.587.725.313 1.291.5 1.734.641.729.232 1.392.199 1.917.12.585-.088 1.859-.759 2.122-1.454.264-.695.264-1.291.186-1.414-.079-.122-.278-.197-.592-.355z"/></svg>
-                    <span data-i18n="wa_btn">PRÉ VENDA</span>
+                    <span data-i18n="wa_btn">COMPRAR AGORA</span>
                 </a>
             </div>
-            
         </div>
     </div>
 </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        if (typeof setLang === 'function') setLang('pt');
-
-        const popup1Overlay = document.getElementById("elevia-popup-overlay");
-        const popup1WaBtn = document.getElementById("el-popup-whatsapp-btn");
-        const popup1CloseBtn = document.getElementById("el-popup-close-btn");
-
-        setTimeout(() => {
-            if (popup1Overlay) {
-                window.requestAnimationFrame(() => {
-                    popup1Overlay.classList.add("active");
-                });
-            }
-        }, 3000);
-
-        function closePopup1() {
-            if (popup1Overlay) {
-                popup1Overlay.classList.remove("active");
-                popup1Overlay.style.pointerEvents = "none"; 
-            }
-        }
-
-        // Evento para fechar clicando no "X"
-        if (popup1CloseBtn) {
-            popup1CloseBtn.addEventListener("click", closePopup1);
-        }
-
-        if (popup1WaBtn) {
-            popup1WaBtn.addEventListener("click", function () {
-                setTimeout(closePopup1, 400);
-            });
-        }
-    });
-</script>
-
 <style>
     .el-popup-overlay {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(4px);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.4s ease;
-        padding: 20px;
-        box-sizing: border-box;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
+        z-index: 9999; display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        padding: 20px; box-sizing: border-box;
     }
     .el-popup-overlay.active { opacity: 1; pointer-events: auto; }
-    
     .el-popup-wrapper {
-        position: relative;
-        background-color: #F0EEEF; /* NOVO: Fundo do Card Atualizado */
-        width: 100%; max-width: 420px;
-        border-radius: 24px; overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-        transform: scale(0.95);
-        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        isolation: isolate;
+        position: relative; background-color: #F0EEEF; width: 100%; max-width: 420px;
+        border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); isolation: isolate;
     }
     .el-popup-overlay.active .el-popup-wrapper { transform: scale(1); }
     .el-popup-container { display: flex; flex-direction: column; width: 100%; }
-
-    /* NOVO: Botão de Fechar Customizado */
     .el-popup-close-btn {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: none;
-        color: #3a3a3a;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 50;
-        transition: background-color 0.2s, transform 0.2s;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        position: absolute; top: 16px; right: 16px; width: 32px; height: 32px;
+        border-radius: 50%; background-color: rgba(255, 255, 255, 0.8); border: none; color: #3a3a3a;
+        display: flex; align-items: center; justify-content: center; cursor: pointer;
+        z-index: 50; transition: background-color 0.2s, transform 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-    .el-popup-close-btn:hover {
-        background-color: #ffffff;
-        transform: scale(1.05);
-    }
-    
-    .el-popup-image-side {
-        position: relative; 
-        width: 100%; 
-        height: auto; 
-        overflow: hidden;
-        margin: 0; 
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #ffffff;
-    }
-    .el-popup-img {
-        width: 100%; 
-        height: auto; 
-        display: block;
-    }
-    .el-popup-content-side {
-        width: 100%; padding: 25px 24px;
-        display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box;
-    }
+    .el-popup-close-btn:hover { background-color: #ffffff; transform: scale(1.05); }
+    .el-popup-image-side { position: relative; width: 100%; height: auto; overflow: hidden; margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; background-color: #ffffff; }
+    .el-popup-img { width: 100%; height: auto; display: block; }
+    .el-popup-content-side { width: 100%; padding: 25px 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; }
     .el-popup-text-group { margin-bottom: 20px; width: 100%; }
-    
-    .el-popup-badge-vip { 
-        display: inline-flex; align-items: center; gap: 4px; margin-bottom: 12px; 
-    }
-    .el-popup-badge-vip span {
-        font-size: 0.72rem; font-weight: 700; color: #555555; text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .el-popup-badge-vip svg {
-        width: 12px; height: 12px; 
-        fill: #007AFF; /* NOVO: Selo de Verificado Azul Comercial */
-    }
-
+    .el-popup-badge-vip { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 12px; }
+    .el-popup-badge-vip span { font-size: 0.72rem; font-weight: 700; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
+    .el-popup-badge-vip svg { width: 12px; height: 12px; fill: #007AFF; }
     .el-popup-title { font-family: Arial, Helvetica, sans-serif; font-size: 1.45rem; font-weight: 700; color: #3a3a3a; margin: 0 0 6px 0; letter-spacing: -0.01em; text-transform: uppercase; }
-    
-    /* NOVO: Data customizada em rosa pastel premium */
     .el-popup-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 1.2rem; font-weight: 700; color: #F8B2D8; line-height: 1.2; margin: 0 0 14px 0; letter-spacing: 0.02em; }
-    
     .el-popup-desc-bold { font-family: Arial, Helvetica, sans-serif; font-size: 0.92rem; font-weight: 600; color: #2a2a2a; line-height: 1.35; margin: 0 0 10px 0; }
     .el-popup-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.84rem; font-weight: 400; color: #666666; line-height: 1.4; margin: 0; }
-    
-    /* NOVO: Botão sólido na cor #F8B2D8 com texto Branco */
     .el-popup-submit-btn {
         width: 100%; height: 50px; border-radius: 25px; border: none;
         display: flex; align-items: center; justify-content: center; gap: 8px;
-        background: #F8B2D8 !important; 
-        text-decoration: none; cursor: pointer; transition: transform 0.2s;
+        background: #F8B2D8 !important; text-decoration: none; cursor: pointer; transition: transform 0.2s;
     }
-    .el-popup-submit-btn:hover {
-        transform: scale(1.02);
-    }
-    .el-popup-submit-btn span {
-        font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.85rem; 
-        color: #ffffff !important; /* Texto Branco */
-        letter-spacing: 0.08em;
-    }
-
-    /* Adaptação Computador (Desktop) */
+    .el-popup-submit-btn:hover { transform: scale(1.02); }
+    .el-popup-submit-btn span { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.85rem; color: #ffffff !important; letter-spacing: 0.08em; }
     @media (min-width: 680px) {
         .el-popup-wrapper { max-width: 760px; background-color: #F0EEEF; }
         .el-popup-container { flex-direction: row; }
         .el-popup-image-side { width: 48%; height: auto; }
         .el-popup-content-side { width: 52%; padding: 40px; text-align: left; align-items: flex-start; }
         .el-popup-text-group { text-align: left; }
-        
-        /* Ajuste do botão fechar no desktop para ficar sobre o conteúdo ou imagem elegantemente */
         .el-popup-close-btn { background-color: rgba(0, 0, 0, 0.05); color: #3a3a3a; }
         .el-popup-close-btn:hover { background-color: rgba(0, 0, 0, 0.1); }
     }
 </style>
+
 <!-- Language Selector Bar -->
 <div class="lang-selector-bar">
     <div class="lang-selector">
@@ -688,9 +323,7 @@ body {
     </div>
 </header>
 
-<!-- ==========================================
-     HERO
-     ========================================== -->
+<!-- HERO -->
 <section class="hero-section" role="banner">
     <canvas id="liquid-canvas"></canvas>
     <div class="grain-overlay"></div>
@@ -713,19 +346,15 @@ body {
         
         <div class="hero-side-text" data-i18n="hero_side">High-End Performance &amp; Beauty — 2026 Edition</div>
         
-        <!-- FOOTER DESKTOP -->
         <div class="hero-footer">
             <div class="hero-footer-stack">
-                <!-- As estatísticas ficam no topo -->
                 <div class="hero-stats">
                     <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
                     <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
                     <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
                 </div>
-
-                <!-- O botão fica logo abaixo delas -->
                 <div class="hero-catalog-container">
-                    <a href="https://goelevia.com/app/" class="hero-catalog-btn">acesse nosso catálogo</a>
+                    <a href="https://goelevia.com/app/" class="hero-catalog-btn" data-i18n="catalog_btn">acesse nosso catálogo</a>
                 </div>
             </div>
         </div>
@@ -746,182 +375,66 @@ body {
             <p data-i18n="hero_desc">A união definitiva entre alta performance, regeneração celular profunda e comunidade. O amanhã do movimento começou.</p>
         </div>
 
-        <!-- FOOTER MOBILE -->
         <div class="hero-mobile-bottom">
             <div class="hero-mobile-stats">
                 <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
                 <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
                 <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
             </div>
-
-            <!-- O botão fica logo abaixo delas no mobile também -->
             <div class="hero-catalog-container mobile-catalog-margin">
-                <a href="https://goelevia.com/app/" class="hero-catalog-btn">acesse nosso catálogo</a>
+                <a href="https://goelevia.com/app/" class="hero-catalog-btn" data-i18n="catalog_btn">acesse nosso catálogo</a>
             </div>
         </div>
     </div>
 </section>
 
 <style>
-    /* Container que organiza as estatísticas e o botão um embaixo do outro */
-.hero-footer-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem; /* Distância entre o bloco de texto e o botão */
-    width: 100%;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center;
-}
-
-/* Modificadores para ajustar o footer original */
-.hero-footer {
-    grid-column: 1 / span 3;
-    grid-row: 2;
-    display: flex;
-    width: 100%;
-    margin-top: auto;
-}
-
-/* Container do botão para garantir centralização perfeita */
-.hero-catalog-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-/* O ESTILO DO BOTÃO ULTRA PREMIUM (Marrom com super brilho e texto branco) */
-.hero-catalog-btn {
-    /* Gradiente otimizado: Tons externos profundos com um centro bronze ultra iluminado */
-    background: linear-gradient(135deg, #3D2211 0%, #965D34 50%, #29160B 100%) !important;
-    background-size: 200% auto !important;
-    
-    /* Borda em tom ouro velho/bronze para contrastar e emoldurar o brilho */
-    border: 1px solid #85532F !important; 
-    
-    color: #FFFFFF !important; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    text-decoration: none;
-    padding: 10px 45px; 
-    border-radius: 4px; 
-    
-    /* Super combo de sombras: Sombra projetada + Aura dourada externa + Friso de luz interno */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 
-                0 0 10px rgba(150, 93, 52, 0.3), 
-                inset 0 1.5px 2px rgba(255, 255, 255, 0.45) !important;
-    
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    cursor: pointer;
-    text-align: center;
-    display: inline-block;
-}
-
-/* Efeito Hover Ultra Iluminado */
-.hero-catalog-btn:hover {
-    color: #FFFFFF !important;
-    background-position: right center !important; /* Movimenta a faixa de luz central */
-    letter-spacing: 0.18em; 
-    
-    /* No hover, a aura de brilho bronze se expande, criando o efeito "neon de luxo" */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 
-                0 0 20px rgba(180, 115, 68, 0.7), 
-                inset 0 2px 3px rgba(255, 255, 255, 0.6) !important;
-    
-    transform: translateY(-2px); /* Elevação um pouquinho mais visível */
-    filter: brightness(1.1); /* Dá um boost geral na luz de todas as cores */
-}
-
-/* Efeito ao clicar */
-.hero-catalog-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 
-                0 0 5px rgba(150, 93, 52, 0.3);
-}
-
-/* Margem extra apenas no mobile para desgrudar do bloco superior */
-@media (max-width: 767px) {
-    .mobile-catalog-margin {
-        margin-top: 1.5rem;
+    .hero-footer-stack { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; align-items: center; justify-content: center; }
+    .hero-footer { grid-column: 1 / span 3; grid-row: 2; display: flex; width: 100%; margin-top: auto; }
+    .hero-catalog-container { display: flex; justify-content: center; width: 100%; }
+    .hero-catalog-btn {
+        background: linear-gradient(135deg, #3D2211 0%, #965D34 50%, #29160B 100%) !important;
+        background-size: 200% auto !important;
+        border: 1px solid #85532F !important;
+        color: #FFFFFF !important;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em;
+        text-decoration: none; padding: 10px 45px; border-radius: 4px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(150, 93, 52, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.45) !important;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; text-align: center; display: inline-block;
     }
-}
-    .luxury-text-flipper {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 100px;
-        width: 100%;
-        perspective: 1000px;
+    .hero-catalog-btn:hover {
+        color: #FFFFFF !important; background-position: right center !important; letter-spacing: 0.18em;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(180, 115, 68, 0.7), inset 0 2px 3px rgba(255, 255, 255, 0.6) !important;
+        transform: translateY(-2px); filter: brightness(1.1);
     }
-    .luxury-text-flipper.mobile-flipper {
-        height: 60px;
-        margin: 15px auto;
-    }
+    .hero-catalog-btn:active { transform: translateY(1px); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 5px rgba(150, 93, 52, 0.3); }
+    @media (max-width: 767px) { .mobile-catalog-margin { margin-top: 1.5rem; } }
+
+    .luxury-text-flipper { position: relative; display: inline-flex; align-items: center; justify-content: center; height: 100px; width: 100%; perspective: 1000px; }
+    .luxury-text-flipper.mobile-flipper { height: 60px; margin: 15px auto; }
     .luxury-text-flipper .flip-word {
-        position: absolute;
-        font-size: 3.2rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        white-space: nowrap;
-        opacity: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        transform: rotateX(-90deg) translateZ(50px);
-        transform-origin: 50% 50% -50px;
+        position: absolute; font-size: 3.2rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+        white-space: nowrap; opacity: 0; font-family: Arial, Helvetica, sans-serif;
+        transform: rotateX(-90deg) translateZ(50px); transform-origin: 50% 50% -50px;
         transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
         background: linear-gradient(135deg, #3A2218 0%, #5A3826 25%, #C4A484 50%, #7A523A 75%, #3A2218 100%);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0px 0px 10px rgba(196, 164, 132, 0.3));
-        animation: luxuryBrownGlow 4s linear infinite;
+        background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0px 0px 10px rgba(196, 164, 132, 0.3)); animation: luxuryBrownGlow 4s linear infinite;
     }
-    .luxury-text-flipper .flip-word.active {
-        opacity: 1;
-        transform: rotateX(0deg) translateZ(50px);
-    }
-    .luxury-text-flipper .flip-word.leaving {
-        opacity: 0;
-        transform: rotateX(90deg) translateZ(50px);
-    }
-    @keyframes luxuryBrownGlow {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+    .luxury-text-flipper .flip-word.active { opacity: 1; transform: rotateX(0deg) translateZ(50px); }
+    .luxury-text-flipper .flip-word.leaving { opacity: 0; transform: rotateX(90deg) translateZ(50px); }
+    @keyframes luxuryBrownGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     @media (max-width: 768px) {
-        .luxury-text-flipper .flip-word {
-            font-size: 2.5rem;
-            letter-spacing: 0.15em;
-            transform: rotateX(-90deg) translateZ(30px);
-            transform-origin: 50% 50% -30px;
-        }
-        .luxury-text-flipper .flip-word.active {
-            transform: rotateX(0deg) translateZ(30px);
-        }
-        .luxury-text-flipper .flip-word.leaving {
-            transform: rotateX(90deg) translateZ(30px);
-        }
-        .luxury-text-flipper.mobile-flipper {
-            position: relative;
-            top: -190px !important;
-            margin-bottom: -130px !important;
-        }
-        .hero-mobile-top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+        .luxury-text-flipper .flip-word { font-size: 2.5rem; letter-spacing: 0.15em; transform: rotateX(-90deg) translateZ(30px); transform-origin: 50% 50% -30px; }
+        .luxury-text-flipper .flip-word.active { transform: rotateX(0deg) translateZ(30px); }
+        .luxury-text-flipper .flip-word.leaving { transform: rotateX(90deg) translateZ(30px); }
+        .luxury-text-flipper.mobile-flipper { position: relative; top: -190px !important; margin-bottom: -130px !important; }
+        .hero-mobile-top { display: flex; flex-direction: column; align-items: center; text-align: center; }
     }
 </style>
 
-<!-- ==========================================
-     SERUM SHOWCASE SECTION
-     ========================================== -->
+<!-- SERUM SHOWCASE SECTION -->
 <section class="elevia-premium-showcase relative w-full overflow-hidden pt-20 pb-16 px-4 text-zinc-900 selection:bg-rose-100" style="background: linear-gradient(to bottom, #f8a1d0 0%, #ffffff 18%, #ffffff 100%); font-family: Arial, Helvetica, sans-serif;">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -930,34 +443,20 @@ body {
     <style>
         .elevia-premium-showcase * { font-family: Arial, Helvetica, sans-serif !important; }
         .elevia-premium-showcase h2 { font-family: 'Cormorant Garamond', Georgia, serif !important; }
-
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 28s linear infinite; }
         @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
         .animate-spin-reverse { animation: spin-reverse 45s linear infinite; }
         @keyframes float-smooth { 0%, 100% { transform: translateY(-12px) rotate(0deg); } 50% { transform: translateY(8px) rotate(1.5deg); } }
         .animate-float-smooth { animation: float-smooth 6.5s ease-in-out infinite; }
-        @keyframes shadow-pulse {
-            0%, 100% { transform: scale(0.85); opacity: 0.25; filter: blur(14px); }
-            50% { transform: scale(1.05); opacity: 0.15; filter: blur(18px); }
-        }
+        @keyframes shadow-pulse { 0%, 100% { transform: scale(0.85); opacity: 0.25; filter: blur(14px); } 50% { transform: scale(1.05); opacity: 0.15; filter: blur(18px); } }
         .animate-shadow-pulse { animation: shadow-pulse 6.5s ease-in-out infinite; }
-        @keyframes soft-glow {
-            0%, 100% { opacity: 0.25; transform: scale(1) translate(-50%, -50%); }
-            50% { opacity: 0.4; transform: scale(1.1) translate(-50%, -50%); }
-        }
+        @keyframes soft-glow { 0%, 100% { opacity: 0.25; transform: scale(1) translate(-50%, -50%); } 50% { opacity: 0.4; transform: scale(1.1) translate(-50%, -50%); } }
         .animate-soft-glow { animation: soft-glow 5s ease-in-out infinite; }
         @keyframes fillBar { from { width: 0; } to { width: var(--progress-width); } }
         .animate-fill { animation: fillBar 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
-
-        @media (max-width: 991px) {
-            .elevia-premium-showcase .relative.z-10 { text-align: center; }
-            .elevia-premium-showcase .flex.w-full.max-w-md { align-items: center; }
-        }
-        @media (max-width: 768px) {
-            .elevia-premium-showcase { padding-top: 8rem !important; }
-            .elevia-video-col { margin-top: 2rem; }
-        }
+        @media (max-width: 991px) { .elevia-premium-showcase .relative.z-10 { text-align: center; } .elevia-premium-showcase .flex.w-full.max-w-md { align-items: center; } }
+        @media (max-width: 768px) { .elevia-premium-showcase { padding-top: 8rem !important; } .elevia-video-col { margin-top: 2rem; } }
     </style>
  
     <div class="pointer-events-none absolute top-1/2 left-1/4 z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full animate-soft-glow" style="background: radial-gradient(circle, rgba(248,161,208,0.4) 0%, rgba(255,255,255,0) 70%);"></div>
@@ -968,22 +467,12 @@ body {
             <div class="absolute h-[50%] w-[35%] rounded-full opacity-40 blur-[40px] z-0" style="background: radial-gradient(circle, #e8d08a 0%, rgba(244,165,90,0) 75%); top: 20%; left: 32.5%;"></div>
             <div class="animate-spin-slow absolute h-[85%] w-[85%] rounded-full border border-dashed border-rose-300/50 z-0"></div>
             <div class="animate-spin-reverse absolute h-[72%] w-[72%] rounded-full border border-dotted border-amber-300/30 z-0"></div>
-
             <div class="animate-float-smooth z-10 flex h-full w-full items-center justify-center p-4 relative">
                 <div style="position: absolute; width: 90%; height: 90%; border-radius: 50%; background: #ffffff; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;"></div>
-                <video 
-                    id="serum-video" 
-                    class="h-[62%] w-[62%] object-contain"
-                    style="position: relative; z-index: 1;"
-                    muted 
-                    playsinline
-                    autoplay 
-                    loop 
-                    preload="auto">
+                <video id="serum-video" class="h-[62%] w-[62%] object-contain" style="position: relative; z-index: 1;" muted playsinline autoplay loop preload="auto">
                     <source src="./images/0519.mp4" type="video/mp4">
                 </video>
             </div>
-
             <div class="animate-shadow-pulse absolute bottom-12 left-1/2 h-6 w-32 -translate-x-1/2 rounded-full bg-gradient-to-r from-zinc-900/40 via-zinc-800/20 to-transparent z-0"></div>
             <div class="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap">
                 <div class="flex items-center gap-2 rounded-full border border-zinc-100/80 bg-white/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 shadow-md backdrop-blur-md" style="font-family: Arial, Helvetica, sans-serif !important;">
@@ -999,19 +488,15 @@ body {
                 <span data-i18n="serum_eyebrow">Alta Performance Skin</span>
                 <span class="inline-block h-[1px] w-6 bg-gradient-to-r from-[#c5a55a] to-transparent"></span>
             </div>
-            
-            <!-- TÍTULO DIVIDIDO EM DUAS LINHAS, CADA UMA COM SEU PRÓPRIO data-i18n -->
             <h2 class="mb-0" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_1">Sérum</span>
             </h2>
             <h2 class="mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_2">GHK-CU &amp; PDRN</span>
             </h2>
-            
             <p class="mb-6 text-sm font-normal leading-relaxed md:text-[15px]" style="color: #444444;">
                 <span data-i18n="serum_desc">Desenvolvido com tecnologia de sincronização celular profunda. Atua diretamente na barreira cutânea para reverter os sinais de fadiga, devolvendo o viço acetinado e a firmeza original à sua pele.</span>
             </p>
- 
             <div class="w-full space-y-5 rounded-3xl border border-zinc-100/80 bg-white/60 p-6 shadow-[0_20px_50px_rgba(26,6,19,0.02)] backdrop-blur-xl md:p-7">
                 <div>
                     <div class="mb-2 flex items-center justify-between text-sm">
@@ -1050,7 +535,6 @@ body {
                     </div>
                 </div>
             </div>
- 
             <div class="mt-4 flex items-center justify-start gap-5 px-1" style="color: #888888;">
                 <div class="flex items-center gap-1.5">
                     <i data-lucide="shield" class="h-3.5 w-3.5" style="color: #aaaaaa;"></i>
@@ -1065,22 +549,18 @@ body {
     </div>
 </section>
 
-<!-- ==========================================
-     BENEFITS SECTION
-     ========================================== -->
+<!-- BENEFITS SECTION -->
 <section id="elevia-benefits" class="benefits-editorial-section">
     <div class="pointer-events-none absolute top-1/2 right-[15%] z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px]" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
- 
     <div class="editorial-grid-container">
         <div class="editorial-image-block">
             <div class="editorial-spin-ring border-[#1a0613]/40"></div>
             <div class="editorial-spin-ring border-amber-300/25" style="width: 74%; height: 74%; animation: editorialSpin 40s linear infinite reverse;"></div>
             <div class="editorial-frame">
-                <img src="./images/001.png" alt="Ritual ELEVIA" class="editorial-img">
+                <img src="./images/serumfoto.png" alt="Ritual ELEVIA" class="editorial-img">
             </div>
             <div class="editorial-ground-shadow"></div>
         </div>
-
         <div class="editorial-text-block">
             <div class="editorial-header">
                 <span class="editorial-subtitle" data-i18n="benefits_eyebrow">A Ciência por Trás da Fórmula</span>
@@ -1089,7 +569,6 @@ body {
                     <span data-i18n="benefits_title_line2">Alta Performance</span>
                 </h2>
             </div>
-            
             <div class="editorial-cards-list">
                 <div class="editorial-card">
                     <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">01</div>
@@ -1122,61 +601,27 @@ body {
     .editorial-grid-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; padding: 0 24px; align-items: center; z-index: 10; position: relative; }
     .editorial-image-block { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 400px; }
     .editorial-frame { position: relative; width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; z-index: 5; animation: editorialFloat 6s ease-in-out infinite; }
-    .editorial-img {
-        max-width: 85%; max-height: 100%; object-fit: contain;
-        -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%);
-        mask-image: radial-gradient(circle, black 60%, transparent 95%);
-        filter: drop-shadow(0 20px 30px rgba(26,6,19,0.1));
-    }
+    .editorial-img { max-width: 85%; max-height: 100%; object-fit: contain; -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%); mask-image: radial-gradient(circle, black 60%, transparent 95%); filter: drop-shadow(0 20px 30px rgba(26,6,19,0.1)); }
     .editorial-spin-ring { position: absolute; width: 85%; height: 85%; border-radius: 50%; border: 1px dashed; animation: editorialSpin 25s linear infinite; pointer-events: none; }
     @keyframes editorialSpin { to { transform: rotate(360deg); } }
     @keyframes editorialFloat { 0%, 100% { transform: translateY(-10px); } 50% { transform: translateY(10px); } }
     .editorial-ground-shadow { position: absolute; bottom: 0; width: 180px; height: 12px; background: radial-gradient(ellipse, rgba(0,0,0,0.1) 0%, transparent 70%); border-radius: 50%; }
     .editorial-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.28em; color: #888888; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    .editorial-main-title {
-        font-family: 'Arial', Helvetica, sans-serif !important;
-        font-size: clamp(2.6rem, 5vw, 3.8rem);
-        font-weight: 400 !important;
-        line-height: 1.1;
-        color: #000000 !important;
-        background: none !important;
-        -webkit-background-clip: unset !important;
-        -webkit-text-fill-color: #000000 !important;
-        background-clip: unset !important;
-        margin-bottom: 30px;
-        text-transform: none;
-    }
-    .editorial-main-title span {
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        background: none !important;
-        -webkit-background-clip: unset !important;
-    }
+    .editorial-main-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400 !important; line-height: 1.1; color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; margin-bottom: 30px; text-transform: none; }
+    .editorial-main-title span { color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; }
     .editorial-cards-list { display: flex; flex-direction: column; gap: 12px; }
     .editorial-card { display: flex; gap: 20px; align-items: center; padding: 20px; background: #fff; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; }
     .editorial-card:hover { transform: translateX(10px); border-color: rgba(0,0,0,0.2); }
     .card-editorial-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #000000; font-weight: 600; flex-shrink: 0; }
     .luxury-black-title { font-family: 'Cormorant Garamond', serif !important; font-size: 1.1rem; color: #000000; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
     .card-editorial-content p { font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; color: #444444; line-height: 1.6; }
-    @media (max-width: 991px) {
-        .editorial-card { flex-direction: column; text-align: center; }
-        .editorial-card:hover { transform: none; }
-        .benefits-editorial-section .editorial-text-block { text-align: center; }
-    }
-    @media (min-width: 992px) {
-        .editorial-grid-container { flex-direction: row-reverse; gap: 80px; padding: 0 40px; }
-        .editorial-image-block { width: 45%; min-height: 550px; }
-        .editorial-text-block { width: 50%; }
-        .editorial-main-title { font-size: 3.2rem; }
-    }
+    @media (max-width: 991px) { .editorial-card { flex-direction: column; text-align: center; } .editorial-card:hover { transform: none; } .benefits-editorial-section .editorial-text-block { text-align: center; } }
+    @media (min-width: 992px) { .editorial-grid-container { flex-direction: row-reverse; gap: 80px; padding: 0 40px; } .editorial-image-block { width: 45%; min-height: 550px; } .editorial-text-block { width: 50%; } .editorial-main-title { font-size: 3.2rem; } }
 </style>
 
-<!-- ==========================================
-     INSTAGRAM & VERIFICATION SECTION
-     ========================================== -->
+<!-- INSTAGRAM & VERIFICATION SECTION -->
 <section class="ig-section">
     <div class="ig-wrapper">
-        
         <a href="https://instagram.com/goelevia" target="_blank" rel="noopener noreferrer" class="ig-card-outer card-social-style">
             <div class="ig-card-inner ig-flex-col-between">
                 <div>
@@ -1195,7 +640,6 @@ body {
                             <svg class="ig-icon-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         </button>
                     </div>
- 
                     <div class="ig-body">
                         <p class="ig-line font-semibold-custom" data-i18n="ig_tagline">Ciência Celular &amp; Movimento</p>
                         <p class="ig-line" data-i18n="ig_desc1">Produtos desenvolvidos em bases biotecnológicas avançadas de alta performance. Nossas fórmulas integram biologia molecular e pureza botânica para redefinir o ciclo de regeneração da pele.</p>
@@ -1203,7 +647,6 @@ body {
                         <p class="ig-line mt-2 font-medium-pink" data-i18n="ig_cta_text">A nova era do movimento celular começou.</p>
                     </div>
                 </div>
- 
                 <div class="ig-actions-block">
                     <div class="ig-footer-social">
                         <span class="ig-timestamp" data-i18n="ig_timestamp">2026 · Comunidade Oficial Elevia</span>
@@ -1231,14 +674,12 @@ body {
                             <span class="ig-handle font-mono-sub" data-i18n="verify_system">SECURE PACKAGING SYSTEM</span>
                         </div>
                     </div>
- 
                     <div class="ig-body border-left-gold">
                         <p class="ig-line font-semibold-custom" data-i18n="verify_title">Garantia de Autenticidade Global</p>
                         <p class="ig-line text-muted-custom" data-i18n="verify_desc1">Evite falsificações. Cada lote do Sérum Elevia possui um código molecular único rastreável em nossa plataforma de segurança criptográfica de ponta.</p>
                         <p class="ig-line text-muted-custom mt-2" data-i18n="verify_desc2">Ao receber seu produto, utilize nosso scanner oficial para validar a procedência de sua fórmula e liberar as certificações laboratoriais ativas em tempo real.</p>
                     </div>
                 </div>
- 
                 <div class="ig-actions-block">
                     <a href="https://bropharmaceutical.com/verify" target="_blank" rel="noopener noreferrer" class="ig-btn ig-btn-primary">
                         <span data-i18n="verify_btn1">Verificar Produto Elevia</span>
@@ -1301,12 +742,9 @@ body {
     .ig-btn span, .ig-btn svg { color: inherit; }
 </style>
 
-<!-- ==========================================
-     CONTACT SECTION
-     ========================================== -->
+<!-- CONTACT SECTION -->
 <section class="ct-section">
     <div class="pointer-events-none absolute top-1/3 right-1/4 z-0 h-[450px] w-[450px] rounded-full opacity-20 blur-[90px]" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
- 
     <div class="ct-container">
         <div class="ct-left">
             <div class="ct-left-top">
@@ -1317,29 +755,25 @@ body {
                 <h3 class="ct-details-title" data-i18n="contact_privacy_title">Privacidade &amp; Compromisso</h3>
                 <p class="ct-desc" style="font-size: 0.85rem; max-width: 320px;" data-i18n="contact_privacy_desc">Seus dados são tratados com total discrição e utilizados exclusivamente para melhorias em nossos protocolos científicos.</p>
             </div>
-
-            <!-- NOVO BOTÃO WHATSAPP (Abaixo dos textos) -->
             <a href="https://wa.me/15147536580" target="_blank" class="ct-whatsapp-btn">
                 <i class="fa-brands fa-whatsapp"></i>
-                <span>Chamar no WhatsApp</span>
+                <span data-i18n="whatsapp_btn">Chamar no WhatsApp</span>
             </a>
         </div>
- 
         <div class="ct-card-outer">
             <div class="ct-card-inner">
                 <div class="ct-field">
                     <label class="ct-label" for="ct-name" data-i18n="form_name">Nome</label>
-                    <input class="ct-input" type="text" id="ct-name" data-i18n-placeholder="form_name_ph">
+                    <input class="ct-input" type="text" id="ct-name" data-i18n-placeholder="form_name_ph" placeholder="Como podemos te chamar?">
                 </div>
                 <div class="ct-field">
                     <label class="ct-label" for="ct-email" data-i18n="form_email">E-mail</label>
-                    <input class="ct-input" type="email" id="ct-email" data-i18n-placeholder="form_email_ph">
+                    <input class="ct-input" type="email" id="ct-email" data-i18n-placeholder="form_email_ph" placeholder="Para contato">
                 </div>
                 <div class="ct-field">
                     <label class="ct-label" for="ct-message" data-i18n="form_message">Mensagem</label>
-                    <textarea class="ct-input ct-textarea" id="ct-message" rows="5" data-i18n-placeholder="form_message_ph"></textarea>
+                    <textarea class="ct-input ct-textarea" id="ct-message" rows="5" data-i18n-placeholder="form_message_ph" placeholder="Conte-nos o que achou..."></textarea>
                 </div>
-                
                 <button class="ct-submit" type="button">
                     <span data-i18n="form_submit">Enviar Mensagem</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -1353,66 +787,14 @@ body {
     .ct-section { background-color: #ffffff; width: 100%; position: relative; overflow: hidden; padding: 60px 24px; font-family: Arial, Helvetica, sans-serif; box-sizing: border-box; }
     .ct-container { max-width: 1140px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 10; }
     .ct-left { display: flex; flex-direction: column; gap: 28px; }
-    .ct-title {
-        font-family: 'Arial', Helvetica, sans-serif !important;
-        font-size: clamp(2.6rem, 8vw, 4rem);
-        font-weight: 400 !important;
-        text-transform: none;
-        color: #000000 !important;
-        background: none !important;
-        -webkit-background-clip: unset !important;
-        -webkit-text-fill-color: #000000 !important;
-        background-clip: unset !important;
-        letter-spacing: 0.01em;
-        line-height: 1.1;
-        margin: 0;
-    }
+    .ct-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 400 !important; text-transform: none; color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em; line-height: 1.1; margin: 0; }
     .ct-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.94rem; line-height: 1.7; color: #444444; max-width: 480px; margin: 0; }
     .ct-details-title { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; margin: 0 0 12px; }
-    
-    /* BOTÃO WHATSAPP - Com garantia de texto branco */
-    .ct-whatsapp-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        background-color: #ff859f !important; /* Rosa da foto */
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-decoration: none;
-        padding: 14px 28px;
-        border-radius: 14px;
-        width: 100%;
-        max-width: 320px;
-        box-sizing: border-box;
-        box-shadow: 0 4px 12px rgba(255, 133, 159, 0.2);
-        transition: all 0.3s ease;
-        text-transform: none;
-        
-        /* Força a cor branca no link em si */
-        color: #ffffff !important; 
-    }
-
-    /* Garante blindagem total para que o texto e o ícone fiquem estritamente brancos */
-    .ct-whatsapp-btn,
-    .ct-whatsapp-btn span,
-    .ct-whatsapp-btn i {
-        color: #ffffff !important;
-    }
-
-    .ct-whatsapp-btn:hover {
-        background-color: #ff6b8b !important;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(255, 133, 159, 0.3);
-    }
-    .ct-whatsapp-btn:active {
-        transform: translateY(0);
-    }
-    .ct-whatsapp-btn i {
-        font-size: 1.2rem;
-    }
-
+    .ct-whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #ff859f !important; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.95rem; text-decoration: none; padding: 14px 28px; border-radius: 14px; width: 100%; max-width: 320px; box-sizing: border-box; box-shadow: 0 4px 12px rgba(255, 133, 159, 0.2); transition: all 0.3s ease; text-transform: none; color: #ffffff !important; }
+    .ct-whatsapp-btn, .ct-whatsapp-btn span, .ct-whatsapp-btn i { color: #ffffff !important; }
+    .ct-whatsapp-btn:hover { background-color: #ff6b8b !important; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(255, 133, 159, 0.3); }
+    .ct-whatsapp-btn:active { transform: translateY(0); }
+    .ct-whatsapp-btn i { font-size: 1.2rem; }
     .ct-card-outer { width: 100%; padding: 6px; border-radius: 24px; position: relative; isolation: isolate; overflow: hidden; background: rgba(255,255,255,0.4); background-image: linear-gradient(135deg, rgba(255,255,255,0.65) 0%, rgba(253,238,246,0.15) 50%, rgba(255,255,255,0.3) 100%); backdrop-filter: blur(20px) saturate(160%); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 12px 40px rgba(0,0,0,0.05); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease; }
     .ct-card-outer:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.09); }
     .ct-card-inner { width: 100%; padding: 28px 22px; border-radius: 19px; display: flex; flex-direction: column; gap: 20px; background: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%); border: 1px solid rgba(255,255,255,0.45); }
@@ -1421,44 +803,16 @@ body {
     .ct-input { width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 0.95rem; font-family: Arial, Helvetica, sans-serif; color: #000000; background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.09); outline: none; transition: 0.25s; }
     .ct-input::placeholder { color: #999999; }
     .ct-input:focus { background: #ffffff; border-color: rgba(0,0,0,0.3); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
-    .ct-submit {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-height: 52px;
-        padding: 14px 28px;
-        border-radius: 50px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: 700;
-        text-transform: uppercase;
-        cursor: pointer;
-        border: none !important;
-        background: #111111 !important;
-        color: #ffffff !important;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-        transition: 0.35s;
-    }
+    .ct-submit { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 28px; border-radius: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; text-transform: uppercase; cursor: pointer; border: none !important; background: #111111 !important; color: #ffffff !important; box-shadow: 0 6px 16px rgba(0,0,0,0.15); transition: 0.35s; }
     .ct-submit:hover { background: #222222 !important; box-shadow: 0 8px 22px rgba(0,0,0,0.25); transform: translateY(-2px); }
     .ct-submit span { color: #ffffff !important; }
     .ct-submit svg { width: 16px; height: 16px; transition: transform 0.3s; color: #ffffff !important; }
     .ct-submit:hover svg { transform: translateX(4px); }
-    
-    @media (max-width: 767px) {
-        .ct-left { align-items: center; text-align: center; }
-        .ct-desc { text-align: center; margin: 0 auto; }
-        .ct-whatsapp-btn { margin: 10px auto 0; }
-    }
-    @media (min-width: 1024px) {
-        .ct-container { flex-direction: row; align-items: flex-start; gap: 80px; }
-        .ct-card-outer { flex: 1; }
-    }
+    @media (max-width: 767px) { .ct-left { align-items: center; text-align: center; } .ct-desc { text-align: center; margin: 0 auto; } .ct-whatsapp-btn { margin: 10px auto 0; } }
+    @media (min-width: 1024px) { .ct-container { flex-direction: row; align-items: flex-start; gap: 80px; } .ct-card-outer { flex: 1; } }
 </style>
 
-
-<!-- ==========================================
-     GALLERY SECTION
-     ========================================== -->
+<!-- GALLERY SECTION -->
 <section class="gallery-section">
     <div class="gallery-container">
         <div class="gallery-header">
@@ -1466,7 +820,6 @@ body {
                 <h2 class="gallery-main-title" data-i18n="gallery_title">Resultados Reais</h2>
                 <p class="gallery-description mx-auto md:mx-0" data-i18n="gallery_desc">Sinta o impacto da biotecnologia em poucos dias de uso. ELEVIA combina ativos de ponta para devolver a perfeição e o equilíbrio à sua pele, elevando o padrão dos seus rituais diários de beleza.</p>
             </div>
-            
             <div class="gallery-controls-desktop">
                 <button id="gallery-prev" class="gallery-arrow-btn" aria-label="Slide anterior">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -1478,61 +831,14 @@ body {
         </div>
     </div>
 
-  <div class="gallery-carousel-viewport">
+    <div class="gallery-carousel-viewport">
         <div id="gallery-track" class="gallery-carousel-track">
-            
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <video class="gallery-card-img" autoplay loop muted playsinline>
-                        <source src="./images/v3.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-            </div>
-
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <video class="gallery-card-img" autoplay loop muted playsinline>
-                        <source src="./images/v2.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-            </div>
-
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <video class="gallery-card-img" autoplay loop muted playsinline>
-                        <source src="./images/v1.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-            </div>
-            
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <img src="./images/02.webp" alt="Resultado Clínico 02" class="gallery-card-img">
-                </div>
-            </div>
-            
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <video class="gallery-card-img" autoplay loop muted playsinline>
-                        <source src="./images/v4.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-            </div>
-            
-            <div class="gallery-slide">
-                <div class="gallery-card-inner">
-                    <video class="gallery-card-img" autoplay loop muted playsinline>
-                        <source src="./images/v5.mp4" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-            </div>
-
-            
+            <div class="gallery-slide"><div class="gallery-card-inner"><video class="gallery-card-img" autoplay loop muted playsinline><source src="./images/v3.mp4" type="video/mp4">Seu navegador não suporta vídeos.</video></div></div>
+            <div class="gallery-slide"><div class="gallery-card-inner"><video class="gallery-card-img" autoplay loop muted playsinline><source src="./images/v2.mp4" type="video/mp4">Seu navegador não suporta vídeos.</video></div></div>
+            <div class="gallery-slide"><div class="gallery-card-inner"><video class="gallery-card-img" autoplay loop muted playsinline><source src="./images/v1.mp4" type="video/mp4">Seu navegador não suporta vídeos.</video></div></div>
+            <div class="gallery-slide"><div class="gallery-card-inner"><img src="./images/02.webp" alt="Resultado Clínico 02" class="gallery-card-img"></div></div>
+            <div class="gallery-slide"><div class="gallery-card-inner"><video class="gallery-card-img" autoplay loop muted playsinline><source src="./images/v4.mp4" type="video/mp4">Seu navegador não suporta vídeos.</video></div></div>
+            <div class="gallery-slide"><div class="gallery-card-inner"><video class="gallery-card-img" autoplay loop muted playsinline><source src="./images/v5.mp4" type="video/mp4">Seu navegador não suporta vídeos.</video></div></div>
         </div>
     </div>
 
@@ -1544,16 +850,7 @@ body {
     .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
     .gallery-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
     .gallery-title-group { display: flex; flex-direction: column; gap: 16px; max-width: 520px; }
-    .gallery-main-title {
-    /* Força o uso da mesma fonte padrão do sistema */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-    
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 500;
-    color: #000000;
-    margin: 0;
-    letter-spacing: -0.02em;
-}
+    .gallery-main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; color: #000000; margin: 0; letter-spacing: -0.02em; }
     .gallery-description { font-size: 0.95rem; line-height: 1.6; color: #666666; margin: 0; }
     .gallery-controls-desktop { display: none; gap: 12px; }
     .gallery-arrow-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e5e5e5; background-color: transparent; color: #000000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
@@ -1573,11 +870,8 @@ body {
     @media (min-width: 768px) { .gallery-controls-desktop { display: flex; } }
 </style>
 
-<!-- ==========================================
-     FOOTER
-     ========================================== -->
+<!-- FOOTER -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
- 
 <style>
     .site-footer { background-color: #ffffff; color: #000000; padding: 40px 24px; font-family: Arial, Helvetica, sans-serif; border-top: 1px solid rgba(0,0,0,0.06); }
     .ft-container { max-width: 1140px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 32px; }
@@ -1593,10 +887,7 @@ body {
     .ft-social-links a { color: #888888; font-size: 1.35rem; transition: 0.3s; }
     .ft-social-links a:hover { color: #ff2a85; }
     .ft-bottom-bar { padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.04); text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; color: #888888; text-transform: uppercase; }
-    @media (min-width: 992px) {
-        .ft-main-layout { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
-        .ft-brand-block, .ft-info-block { align-items: flex-start; }
-    }
+    @media (min-width: 992px) { .ft-main-layout { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; } .ft-brand-block, .ft-info-block { align-items: flex-start; } }
 </style>
  
 <footer class="site-footer">
@@ -1613,12 +904,9 @@ body {
                 <p class="ft-info-item">
                     <i class="fa-solid fa-location-dot"></i> 72TH Innovation Ave, Houston, TX, USA
                 </p>
-                
-                <!-- NOVO ITEM: SUPORTE WHATSAPP -->
-                <a href="https://wa.me/15147536580" target="_blank" class="ft-info-item ft-whatsapp-link">
-                    <i class="fa-brands fa-whatsapp"></i> Suporte WhatsApp
+                <a href="https://wa.me/15147536580" target="_blank" class="ft-info-item">
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="footer_whatsapp">Suporte WhatsApp</span>
                 </a>
-
                 <a href="https://bropharmaceutical.com/verify" class="ft-text-link" data-i18n="verify_product_link">Verificar Produto</a>
             </div>
             <ul class="ft-social-links">
@@ -1640,67 +928,32 @@ body {
 
 <script type="module">
     import LiquidBackground from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.22/build/backgrounds/liquid1.min.js';
-    
     const canvas = document.getElementById('liquid-canvas');
     if (canvas) {
         const app = LiquidBackground(canvas);
         app.loadImage('https://i.pinimg.com/736x/b0/52/44/b052446b10d00489d1a97d5359254136.jpg');
-        
         app.liquidPlane.material.metalness = 0.75;
         app.liquidPlane.material.roughness = 0.25;
         app.liquidPlane.uniforms.displacementScale.value = 5;
         app.setRain(false);
-        
-        // --- GERADOR DE EVENTOS DE TOQUE/MOUSE REAIS ---
         const fakePointer = document.getElementById('fake-pointer-trigger');
         let angle = 0;
-
         function triggerRealHardwareMovement() {
-            // Define o tamanho da órbita do movimento na tela
-            const radiusX = window.innerWidth * 0.35; 
+            const radiusX = window.innerWidth * 0.35;
             const radiusY = window.innerHeight * 0.25;
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-
-            // Calcula a posição física atual do "dedo invisível"
             const posX = centerX + Math.cos(angle) * radiusX;
             const posY = centerY + Math.sin(angle) * radiusY;
-
-            // Move a div invisível para a coordenada
             fakePointer.style.transform = `translate(${posX}px, ${posY}px)`;
-
-            // Altera o ângulo para o próximo frame (0.01 é uma velocidade suave e elegante)
-            angle += 0.01; 
-
-            // Cria um evento nativo do navegador que simula o Mouse/Dedo se movendo
-            const movementEvent = new PointerEvent('pointermove', {
-                clientX: posX,
-                clientY: posY,
-                bubbles: true,
-                cancelable: true,
-                pointerType: 'mouse', // O navegador entende como input de hardware
-                width: 1,
-                height: 1,
-                pressure: 0.5
-            });
-
-            // Dispara o evento diretamente no Canvas onde o Three.js está escutando
+            angle += 0.01;
+            const movementEvent = new PointerEvent('pointermove', { clientX: posX, clientY: posY, bubbles: true, cancelable: true, pointerType: 'mouse', width: 1, height: 1, pressure: 0.5 });
             canvas.dispatchEvent(movementEvent);
-
-            // Mantém o ciclo ativo simulando frames de toque constantes
             requestAnimationFrame(triggerRealHardwareMovement);
         }
-
-        // Aguarda meio segundo para o canvas carregar e inicia o toque fantasma
-        setTimeout(() => {
-            triggerRealHardwareMovement();
-        }, 500);
-        // ------------------------------------------------
-
+        setTimeout(() => { triggerRealHardwareMovement(); }, 500);
         window.__liquidApp = app;
-        window.addEventListener('resize', () => { 
-            if (app && typeof app.resize === 'function') app.resize(); 
-        });
+        window.addEventListener('resize', () => { if (app && typeof app.resize === 'function') app.resize(); });
     }
 </script>
 
@@ -1723,11 +976,10 @@ body {
     });
 </script>
 
-<!-- Lucide icons -->
+<!-- Lucide icons + Video -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         if (typeof lucide !== 'undefined') { lucide.createIcons(); }
-
         const video = document.getElementById('serum-video');
         if (!video) return;
         const ensurePlaying = () => {
@@ -1757,10 +1009,8 @@ body {
         const prevBtn = document.getElementById("gallery-prev");
         const nextBtn = document.getElementById("gallery-next");
         const dotsContainer = document.getElementById("gallery-dots");
-        
         const slides = Array.from(track.children);
         let currentIndex = 0;
-
         slides.forEach((_, index) => {
             const dot = document.createElement("button");
             dot.classList.add("gallery-dot");
@@ -1769,159 +1019,54 @@ body {
             dot.addEventListener("click", () => goToSlide(index));
             dotsContainer.appendChild(dot);
         });
-
         const dots = Array.from(dotsContainer.children);
-
         function updateCarousel() {
             const slideWidth = slides[0].getBoundingClientRect().width + 20;
             track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
             prevBtn.disabled = currentIndex === 0;
             nextBtn.disabled = currentIndex >= slides.length - Math.floor(viewport.getBoundingClientRect().width / slideWidth);
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentIndex);
-            });
+            dots.forEach((dot, index) => { dot.classList.toggle("active", index === currentIndex); });
         }
-
         function goToSlide(index) {
-            currentIndex = index;
-            if (currentIndex < 0) currentIndex = 0;
-            if (currentIndex > slides.length - 1) currentIndex = slides.length - 1;
+            currentIndex = Math.max(0, Math.min(index, slides.length - 1));
             updateCarousel();
         }
-
         prevBtn.addEventListener("click", () => { if (currentIndex > 0) goToSlide(currentIndex - 1); });
         nextBtn.addEventListener("click", () => {
             const slideWidth = slides[0].getBoundingClientRect().width + 20;
             const maxVisible = Math.floor(viewport.getBoundingClientRect().width / slideWidth);
             if (currentIndex < slides.length - maxVisible) goToSlide(currentIndex + 1);
         });
-
         let isDragging = false, startX, startTransform;
-        viewport.addEventListener("mousedown", (e) => {
-            isDragging = true;
-            startX = e.pageX;
-            const transformMatrix = window.getComputedStyle(track).transform;
-            startTransform = transformMatrix !== 'none' ? parseInt(transformMatrix.split(',')[4]) : 0;
-        });
-        window.addEventListener("mouseup", () => {
-            if (!isDragging) return;
-            isDragging = false;
-            const slideWidth = slides[0].getBoundingClientRect().width + 20;
-            const currentLeft = parseInt(window.getComputedStyle(track).transform.split(',')[4]) || 0;
-            goToSlide(Math.round(Math.abs(currentLeft) / slideWidth));
-        });
-        viewport.addEventListener("mousemove", (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            track.style.transform = `translateX(${startTransform + (e.pageX - startX)}px)`;
-        });
-        viewport.addEventListener("touchstart", (e) => {
-            isDragging = true;
-            startX = e.touches[0].pageX;
-            const transformMatrix = window.getComputedStyle(track).transform;
-            startTransform = transformMatrix !== 'none' ? parseInt(transformMatrix.split(',')[4]) : 0;
-        });
-        viewport.addEventListener("touchend", () => {
-            if (!isDragging) return;
-            isDragging = false;
-            const slideWidth = slides[0].getBoundingClientRect().width + 20;
-            const currentLeft = parseInt(window.getComputedStyle(track).transform.split(',')[4]) || 0;
-            goToSlide(Math.round(Math.abs(currentLeft) / slideWidth));
-        });
-        viewport.addEventListener("touchmove", (e) => {
-            if (!isDragging) return;
-            track.style.transform = `translateX(${startTransform + (e.touches[0].pageX - startX)}px)`;
-        });
-
+        viewport.addEventListener("mousedown", (e) => { isDragging = true; startX = e.pageX; const m = window.getComputedStyle(track).transform; startTransform = m !== 'none' ? parseInt(m.split(',')[4]) : 0; });
+        window.addEventListener("mouseup", () => { if (!isDragging) return; isDragging = false; const slideWidth = slides[0].getBoundingClientRect().width + 20; const currentLeft = parseInt(window.getComputedStyle(track).transform.split(',')[4]) || 0; goToSlide(Math.round(Math.abs(currentLeft) / slideWidth)); });
+        viewport.addEventListener("mousemove", (e) => { if (!isDragging) return; e.preventDefault(); track.style.transform = `translateX(${startTransform + (e.pageX - startX)}px)`; });
+        viewport.addEventListener("touchstart", (e) => { isDragging = true; startX = e.touches[0].pageX; const m = window.getComputedStyle(track).transform; startTransform = m !== 'none' ? parseInt(m.split(',')[4]) : 0; });
+        viewport.addEventListener("touchend", () => { if (!isDragging) return; isDragging = false; const slideWidth = slides[0].getBoundingClientRect().width + 20; const currentLeft = parseInt(window.getComputedStyle(track).transform.split(',')[4]) || 0; goToSlide(Math.round(Math.abs(currentLeft) / slideWidth)); });
+        viewport.addEventListener("touchmove", (e) => { if (!isDragging) return; track.style.transform = `translateX(${startTransform + (e.touches[0].pageX - startX)}px)`; });
         window.addEventListener("resize", updateCarousel);
         updateCarousel();
     });
 </script>
 
 <!-- ==========================================
-     I18N SYSTEM — UNIFICADO E CORRIGIDO
+     I18N SYSTEM — CORRIGIDO
      ========================================== -->
 <script>
-Para o sistema de tradução automática ($i18n$) funcionar, cada elemento de texto do HTML precisa ter a sua respectiva marcação `data-i18n="..."`.
-
-No código que você enviou, apenas o selo VIP tinha a marcação, enquanto o título, a data, a descrição e o botão estavam com os textos fixados direto no HTML. Quando o JavaScript rodava, ele não encontrava onde injetar as traduções.
-
-Aqui está o código do **Pop-up 1** totalmente corrigido com as chaves corretas mapeadas para o dicionário do script, seguido pelo objeto do dicionário atualizado para incluir a nova estrutura de textos.
-
-### 1. HTML do Pop-up 1 Corrigido ($i18n$ Ativo)
-
-```html
-<!-- ==========================================
-     POPUP 1: PRINCIPAL (CARD CENTRAL DE RETENÇÃO)
-     ========================================== -->
-<div id="elevia-popup-overlay" class="el-popup-overlay" style="pointer-events: auto;">
-    <div class="el-popup-wrapper">
-        
-        <div class="el-popup-container">
-            
-            <!-- Lado da Imagem -->
-            <div class="el-popup-image-side">
-                <img src="./images/popupnovo.png" alt="Ritual ELEVIA" class="el-popup-img">
-            </div>
-
-            <!-- Lado do Conteúdo (Mapeado com chaves de tradução) -->
-            <div class="el-popup-content-side">
-                <div class="el-popup-text-group">
-                    
-                    <!-- Selo de Verificado -->
-                    <div class="el-popup-badge-vip">
-                        <span data-i18n="wa_badge">Lançamento Elevia</span>
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    </div>
-                    
-                    <!-- Hierarquia de Textos com chaves i18n distintas -->
-                    <h2 class="el-popup-title" data-i18n="wa_title">Pré Lançamento Elevia</h2>
-                    
-                    <p class="el-popup-subtitle" data-i18n="wa_date">10 Junho 2026</p>
-                    
-                    <p class="el-popup-desc-bold" data-i18n="wa_subtitle">Tecnologia avançada para resultados reais.</p>
-                    
-                    <p class="el-popup-desc" data-i18n="wa_desc">PRÉ VENDA LIMITADA, faça parte da nossa comunidade para obter benefícios exclusivos.</p>
-                </div>
-
-                <!-- Botão de Ação com suporte a tradução -->
-                <a href="https://chat.whatsapp.com/DAHhLuiQSs6IseUuF5Xw5y?s=cl&p=a&ilr=2" target="_blank" rel="noopener noreferrer" id="el-popup-whatsapp-btn" class="el-popup-submit-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.944 0c3.172.001 6.155 1.233 8.399 3.473 2.243 2.24 3.472 5.221 3.471 8.394-.003 6.597-5.34 11.945-11.89 11.945-2.015-.001-3.992-.511-5.741-1.487L0 24zm6.59-4.74c1.656.982 3.511 1.5 5.405 1.501 5.375 0 9.749-4.331 9.752-9.655.002-2.579-1.002-5.003-2.827-6.825C17.155 2.458 14.734 1.455 12.16 1.455c-5.378 0-9.754 4.332-9.757 9.657-.001 1.932.521 3.82 1.512 5.508l-.986 3.606 3.718-.966zM17.52 14.3c-.314-.157-1.859-.917-2.137-1.018-.278-.1-.481-.15-.683.151-.202.3-.781.983-.957 1.185-.177.202-.354.227-.668.071-.314-.157-1.326-.488-2.527-1.559-.933-.833-1.563-1.861-1.746-2.175-.183-.314-.02-.484.137-.64.141-.141.314-.366.471-.549.157-.183.21-.314.314-.524.105-.21.052-.393-.026-.549-.079-.157-.683-1.647-.936-2.256-.246-.593-.497-.513-.683-.522-.177-.009-.38-.01-.583-.01-.202 0-.532.076-.81.381-.278.305-1.062 1.039-1.062 2.535 0 1.496 1.088 2.943 1.24 3.146.152.203 2.142 3.272 5.19 4.587.725.313 1.291.5 1.734.641.729.232 1.392.199 1.917.12.585-.088 1.859-.759 2.122-1.454.264-.695.264-1.291.186-1.414-.079-.122-.278-.197-.592-.355z"/></svg>
-                    <span data-i18n="wa_btn">PRÉ VENDA</span>
-                </a>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-```
-
----
-
-### 2. Dicionário de Idiomas Atualizado (Script)
-
-Substitua apenas o objeto `const i18n = { ... };` do seu arquivo por este bloco. Foram adicionadas as novas chaves estruturais separando a data da descrição, com a devida localização ortográfica para o inglês e o espanhol:
-
-```javascript
 const i18n = {
     pt: {
-        // Pop-up 1 (WhatsApp & Lançamento)
-        wa_badge: "Lançamento Elevia",
-        wa_title: "Pré Lançamento Elevia",
-        wa_date: "10 Junho 2026",
+        wa_badge: "Disponível Agora",
+        wa_title: "Adquira seu Elevia",
+        wa_date: "Canal de Vendas",
         wa_subtitle: "Tecnologia avançada para resultados reais.",
-        wa_desc: "PRÉ VENDA LIMITADA, faça parte da nossa comunidade para obter benefícios exclusivos.",
-        wa_btn: "PRÉ VENDA",
-
-        // Hero
+        wa_desc: "Fale diretamente com um consultor oficial e garanta o seu com condições exclusivas.",
+        wa_btn: "COMPRAR AGORA",
+        catalog_btn: "acesse nosso catálogo",
         hero_subtitle: "Biotecnologia Molecular",
         hero_desc: "A união definitiva entre alta performance, regeneração celular profunda e comunidade. O amanhã do movimento começou.",
         hero_side: "High-End Performance & Beauty — 2026 Edition",
         stat1: "Absorção", stat2: "Hidratação", stat3_val: "Alta", stat3: "Perf.",
         flip1: "MOLÉCULAS", flip2: "PELE", flip3: "SÉRUM", flip4: "DNA VISION",
-
-        // Serum
         formula_activated: "Fórmula Ativada",
         serum_eyebrow: "Alta Performance Skin",
         serum_title_1: "Sérum",
@@ -1932,8 +1077,6 @@ const i18n = {
         bar3: "Densidade & Firmeza Cutânea",
         badge1: "Dermatologicamente Testado",
         badge2: "Fórmula Avançada",
-
-        // Benefits
         benefits_eyebrow: "A Ciência por Trás da Fórmula",
         benefits_title_line1: "Três Pilares de",
         benefits_title_line2: "Alta Performance",
@@ -1943,8 +1086,6 @@ const i18n = {
         benefit2_desc: "Peptídeos estruturados que estimulam colágeno e elastina, devolvendo a firmeza física imediata.",
         benefit3_title: "Luminosidade Inata",
         benefit3_desc: "Neutralização do estresse oxidativo. Infusão de viço para um brilho saudável e magnético.",
-
-        // Instagram & Verify
         ig_name: "Instagram Elevia",
         ig_tagline: "Ciência Celular & Movimento",
         ig_desc1: "Produtos desenvolvidos em bases biotecnológicas avançadas de alta performance. Nossas fórmulas integram biologia molecular e pureza botânica para redefinir o ciclo de regeneração da pele.",
@@ -1958,43 +1099,35 @@ const i18n = {
         verify_desc2: "Ao receber seu produto, utilize nosso scanner oficial para validar a procedência de sua fórmula e liberar as certificações laboratoriais ativas em tempo real.",
         verify_btn1: "Verificar Produto Elevia",
         verify_btn2: "Conhecer Mais",
-
-        // Contact
         contact_title: "Canais de Atendimento",
         contact_desc: "Entre em contato com nossa equipe corporativa para suporte, esclarecimento de dúvidas ou propostas comerciais. Preencha o formulário e receberá nosso retorno via e-mail.",
         contact_privacy_title: "Privacidade & Compromisso",
         contact_privacy_desc: "Seus dados são tratados com total discrição e utilizados exclusivamente para melhorias em nossos protocolos científicos.",
+        whatsapp_btn: "Chamar no WhatsApp",
         form_name: "Nome", form_name_ph: "Como podemos te chamar?",
         form_email: "E-mail", form_email_ph: "Para contato",
         form_message: "Mensagem", form_message_ph: "Conte-nos o que achou...",
         form_submit: "Enviar Mensagem",
-
-        // Gallery
         gallery_title: "Resultados Reais",
         gallery_desc: "Sinta o impacto da biotecnologia em poucos dias de uso. ELEVIA combina ativos de ponta para devolver a perfeição e o equilíbrio à sua pele, elevando o padrão dos seus rituais diários de beleza.",
-
-        // Footer
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
+        footer_whatsapp: "Suporte WhatsApp",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
         verify_product_link: "Verificar Produto"
     },
     en: {
-        // Pop-up 1 (WhatsApp & Launch)
-        wa_badge: "Elevia Launch",
-        wa_title: "Elevia Pre-Launch",
-        wa_date: "June 10, 2026",
+        wa_badge: "Available Now",
+        wa_title: "Get your Elevia",
+        wa_date: "Sales Channel",
         wa_subtitle: "Advanced technology for real results.",
-        wa_desc: "LIMITED PRE-SALE, join our community to obtain exclusive benefits.",
-        wa_btn: "PRE-SALE",
-
-        // Hero
+        wa_desc: "Speak directly with an official consultant and secure yours with exclusive conditions.",
+        wa_btn: "BUY NOW",
+        catalog_btn: "browse our catalog",
         hero_subtitle: "Molecular Biotechnology",
         hero_desc: "The definitive union of high performance, deep cellular regeneration and community. The future of movement has begun.",
         hero_side: "High-End Performance & Beauty — 2026 Edition",
         stat1: "Absorption", stat2: "Hydration", stat3_val: "High", stat3: "Perf.",
         flip1: "MOLECULES", flip2: "SKIN", flip3: "SERUM", flip4: "DNA VISION",
-
-        // Serum
         formula_activated: "Formula Activated",
         serum_eyebrow: "High Performance Skin",
         serum_title_1: "Serum",
@@ -2005,8 +1138,6 @@ const i18n = {
         bar3: "Skin Density & Firmness",
         badge1: "Dermatologically Tested",
         badge2: "Advanced Formula",
-
-        // Benefits
         benefits_eyebrow: "The Science Behind the Formula",
         benefits_title_line1: "Three Pillars of",
         benefits_title_line2: "High Performance",
@@ -2016,8 +1147,6 @@ const i18n = {
         benefit2_desc: "Structured peptides that stimulate collagen and elastin, restoring immediate physical firmness.",
         benefit3_title: "Innate Luminosity",
         benefit3_desc: "Neutralization of oxidative stress. Infusion of vitality for a healthy and magnetic glow.",
-
-        // Instagram & Verify
         ig_name: "Instagram Elevia",
         ig_tagline: "Cellular Science & Movement",
         ig_desc1: "Products developed on advanced high-performance biotechnological bases. Our formulas integrate molecular biology and botanical purity to redefine the skin regeneration cycle.",
@@ -2031,55 +1160,45 @@ const i18n = {
         verify_desc2: "When you receive your product, use our official scanner to validate the origin of your formula and release active laboratory certifications in real time.",
         verify_btn1: "Verify Elevia Product",
         verify_btn2: "Learn More",
-
-        // Contact
         contact_title: "Contact Channels",
         contact_desc: "Get in touch with our corporate team for support, questions or commercial proposals. Fill in the form and we'll get back to you via email.",
         contact_privacy_title: "Privacy & Commitment",
         contact_privacy_desc: "Your data is handled with total discretion and used exclusively for improvements in our scientific protocols.",
+        whatsapp_btn: "Chat on WhatsApp",
         form_name: "Name", form_name_ph: "What should we call you?",
         form_email: "Email", form_email_ph: "For contact",
         form_message: "Message", form_message_ph: "Tell us what you think...",
         form_submit: "Send Message",
-
-        // Gallery
         gallery_title: "Real Results",
         gallery_desc: "Feel the impact of biotechnology within days of use. ELEVIA combines cutting-edge actives to restore perfection and balance to your skin, raising the standard of your daily beauty rituals.",
-
-        // Footer
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
+        footer_whatsapp: "WhatsApp Support",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
         verify_product_link: "Verify Product"
     },
     es: {
-        // Pop-up 1 (WhatsApp & Lanzamiento)
-        wa_badge: "Lanzamiento Elevia",
-        wa_title: "Pre Lanzamiento Elevia",
-        wa_date: "10 de Junio de 2026",
+        wa_badge: "Disponible Ahora",
+        wa_title: "Adquiere tu Elevia",
+        wa_date: "Canal de Ventas",
         wa_subtitle: "Tecnología avanzada para resultados reales.",
-        wa_desc: "PREVENTA LIMITADA, únete a nuestra comunidad para obtener beneficios exclusivos.",
-        wa_btn: "PREVENTA",
-
-        // Hero
+        wa_desc: "Habla directamente con un asesor oficial y asegura el tuyo con condiciones exclusivas.",
+        wa_btn: "COMPRAR AHORA",
+        catalog_btn: "ver nuestro catálogo",
         hero_subtitle: "Biotecnología Molecular",
-        hero_desc: "La unión definitiva entre alto rendimiento, regeneración celular profunda y comunidad. El futuro del movement ha comenzado.",
+        hero_desc: "La unión definitiva entre alto rendimiento, regeneración celular profunda y comunidad. El futuro del movimiento ha comenzado.",
         hero_side: "High-End Performance & Beauty — 2026 Edition",
-        stat1: "Absorción", stat2: "Hidratação", stat3_val: "Alto", stat3: "Rend.",
+        stat1: "Absorción", stat2: "Hidratación", stat3_val: "Alto", stat3: "Rend.",
         flip1: "MOLÉCULAS", flip2: "PIEL", flip3: "SÉRUM", flip4: "DNA VISION",
-
-        // Serum
-        formula_activated: "Fórmula Ativada",
+        formula_activated: "Fórmula Activada",
         serum_eyebrow: "Alto Rendimiento Piel",
         serum_title_1: "Sérum",
         serum_title_2: "GHK-CU & PDRN",
-        serum_desc: "Desarrollado con tecnología de sincronización celular profunda. Actúa directamente sobre la barrera cutánea para verter los signos de fatiga, devolviendo el brillo acetinado y la firmeza original a tu piel.",
+        serum_desc: "Desarrollado con tecnología de sincronización celular profunda. Actúa directamente sobre la barrera cutánea para revertir los signos de fatiga, devolviendo el brillo acetinado y la firmeza original a tu piel.",
         bar1: "Luminosidad & Brillo Natural",
         bar2: "Hidratación Celular Continua",
-        bar3: "Densidade & Firmeza Cutánea",
+        bar3: "Densidad & Firmeza Cutánea",
         badge1: "Dermatológicamente Testado",
         badge2: "Fórmula Avanzada",
-
-        // Benefits
         benefits_eyebrow: "La Ciencia detrás de la Fórmula",
         benefits_title_line1: "Tres Pilares de",
         benefits_title_line2: "Alto Rendimiento",
@@ -2089,49 +1208,39 @@ const i18n = {
         benefit2_desc: "Péptidos estructurados que estimulan colágeno y elastina, devolviendo la firmeza física inmediata.",
         benefit3_title: "Luminosidad Innata",
         benefit3_desc: "Neutralización del estrés oxidativo. Infusión de vitalidad para un brillo saludable y magnético.",
-
-        // Instagram & Verify
         ig_name: "Instagram Elevia",
-        ig_tagline: "Ciencia Celular & Movimento",
+        ig_tagline: "Ciencia Celular & Movimiento",
         ig_desc1: "Productos desarrollados sobre bases biotecnológicas avanzadas de alto rendimiento. Nuestras fórmulas integran biología molecular y pureza botánica para redefinir el ciclo de regeneración de la piel.",
-        ig_desc2: "Conéctate con una comunidad enfocada en rituales diarios de alto rendimiento, bienestar sistémico y longevidade cutánea. Sigue los bastidores de nuestros laboratorios, feedbacks reales y lanzamientos científicos exclusivos.",
+        ig_desc2: "Conéctate con una comunidad enfocada en rituales diarios de alto rendimiento, bienestar sistémico y longevidad cutánea. Sigue los bastidores de nuestros laboratorios, feedbacks reales y lanzamientos científicos exclusivos.",
         ig_cta_text: "La nueva era del movimiento celular ha comenzado.",
         ig_timestamp: "2026 · Comunidad Oficial Elevia",
         ig_follow_btn: "Seguir en Instagram",
         verify_system: "SECURE PACKAGING SYSTEM",
         verify_title: "Garantía de Autenticidad Global",
-        verify_desc1: "Evita falsificações. Cada lote del Sérum Elevia tiene un código molecular único rastreable en nuestra plataforma de seguridad criptográfica de última generación.",
-        verify_desc2: "Al receber tu producto, usa nuestro escáner oficial para validar el origen de tu fórmula y liberar certificaciones de laboratorio activas en tiempo real.",
+        verify_desc1: "Evita falsificaciones. Cada lote del Sérum Elevia tiene un código molecular único rastreable en nuestra plataforma de seguridad criptográfica de última generación.",
+        verify_desc2: "Al recibir tu producto, usa nuestro escáner oficial para validar el origen de tu fórmula y liberar certificaciones de laboratorio activas en tiempo real.",
         verify_btn1: "Verificar Producto Elevia",
         verify_btn2: "Conocer Más",
-
-        // Contact
         contact_title: "Canales de Atención",
         contact_desc: "Ponte en contacto con nuestro equipo corporativo para soporte, dudas o propuestas comerciales. Rellena el formulario y recibirás nuestra respuesta por correo.",
         contact_privacy_title: "Privacidad & Compromiso",
         contact_privacy_desc: "Tus datos se tratan con total discreción y se utilizan exclusivamente para mejoras en nuestros protocolos científicos.",
+        whatsapp_btn: "Chatear en WhatsApp",
         form_name: "Nombre", form_name_ph: "¿Cómo podemos llamarte?",
         form_email: "Correo", form_email_ph: "Para contacto",
         form_message: "Mensaje", form_message_ph: "Cuéntanos qué te pareció...",
         form_submit: "Enviar Mensaje",
-
-        // Gallery
         gallery_title: "Resultados Reales",
-        gallery_desc: "Siente el impacto de la biotecnología en pocos dias de uso. ELEVIA combina activos de vanguardia para devolver la perfección y el equilibrio a tu piel, elevando el estándar de tus rituales diarios de belleza.",
-
-        // Footer
+        gallery_desc: "Siente el impacto de la biotecnología en pocos días de uso. ELEVIA combina activos de vanguardia para devolver la perfección y el equilibrio a tu piel, elevando el estándar de tus rituales diarios de belleza.",
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
+        footer_whatsapp: "Soporte WhatsApp",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
         verify_product_link: "Verificar Producto"
     }
 };
 
-```
-
-let currentLang = 'pt';
-
 function setLang(lang) {
-    currentLang = lang;
+    if (!i18n[lang]) return;
     const dict = i18n[lang];
 
     // Atualiza botões de idioma
@@ -2142,7 +1251,7 @@ function setLang(lang) {
     // Atualiza lang do html
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
 
-    // Atualiza todos os elementos com data-i18n
+    // Atualiza elementos com data-i18n (texto simples)
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
         if (dict[key] !== undefined) {
@@ -2156,110 +1265,82 @@ function setLang(lang) {
         if (dict[key] !== undefined) el.placeholder = dict[key];
     });
 
-    // Atualiza os flip words
+    // Atualiza os flip words corretamente via data-i18n-flip
     document.querySelectorAll('[data-i18n-flip]').forEach(el => {
         const key = el.dataset.i18nFlip;
         if (dict[key] !== undefined) el.textContent = dict[key];
     });
 }
 
+// Inicializa com detecção automática do idioma do navegador
 document.addEventListener('DOMContentLoaded', () => {
-    // Detecta nativamente o idioma do smartphone ou navegador do usuário
-    const userLanguage = navigator.language || navigator.userLanguage;
-    
-    // Extrai os dois primeiros caracteres (ex: 'pt-BR' vira 'pt')
-    const shortLang = userLanguage.substring(0, 2);
-
-    // Se o idioma do celular for suportado (pt, en ou es), aplica. Senão, adota 'pt' como padrão.
-    if (i18n[shortLang] !== undefined) {
-        setLang(shortLang);
-    } else {
-        setLang('pt');
-    }
+    const userLanguage = (navigator.language || navigator.userLanguage || 'pt').substring(0, 2);
+    setLang(i18n[userLanguage] ? userLanguage : 'pt');
 });
 </script>
 
-<!-- Popup — único bloco, sem duplicata -->
+<!-- Popup — controle único -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const popupOverlay = document.getElementById("elevia-popup-overlay");
-        const closeBtn = document.getElementById("el-popup-close");
-        const popupForm = document.getElementById("el-popup-form");
+        const closeBtn = document.getElementById("el-popup-close-btn");
+        const waBtn = document.getElementById("el-popup-whatsapp-btn");
 
-        // Só abre uma vez por sessão
+        function openPopup() {
+            popupOverlay.classList.add("active");
+        }
+
+        function closePopup() {
+            popupOverlay.classList.remove("active");
+            popupOverlay.style.pointerEvents = "none";
+        }
+
+        // Abre uma vez por sessão após 3 segundos
         if (!sessionStorage.getItem("eleviaPopupOpened")) {
             setTimeout(() => {
-                popupOverlay.classList.add("active");
+                openPopup();
                 sessionStorage.setItem("eleviaPopupOpened", "true");
             }, 3000);
         }
 
-        function closeEleviaPopup() {
-            popupOverlay.classList.remove("active");
-        }
+        // Fecha ao clicar no X
+        if (closeBtn) closeBtn.addEventListener("click", closePopup);
 
-        closeBtn.addEventListener("click", closeEleviaPopup);
+        // Fecha ao clicar fora do card
         popupOverlay.addEventListener("click", function (e) {
-            if (e.target === popupOverlay) closeEleviaPopup();
+            if (e.target === popupOverlay) closePopup();
         });
 
-        popupForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            const emailInput = document.getElementById("el-popup-email").value;
-            fetch(popupForm.action, {
-                method: "POST",
-                body: JSON.stringify({ email: emailInput }),
-                mode: "no-cors",
-                headers: { 'Content-Type': 'application/json' }
-            });
-            popupForm.reset();
-            closeEleviaPopup();
+        // Fecha após clicar no botão de compra
+        if (waBtn) waBtn.addEventListener("click", function () {
+            setTimeout(closePopup, 400);
         });
     });
 </script>
 
-<!-- ==========================================
-     MOTOR DE PERFORMANCE GLOBAL - OTIMIZADO PARA ANDROID
-     ========================================== -->
+<!-- Motor de Performance -->
 <script>
     (function () {
-        // 1. Forçar decodificação assíncrona de imagens pesadas (Evita travamentos no scroll)
         function otimizarImagensGlobais() {
-            const imagens = document.querySelectorAll('img:not([loading])');
-            imagens.forEach(img => {
-                img.setAttribute('loading', 'lazy'); // Adiciona lazy load nativo
-                if (typeof img.decode === 'function') {
-                    img.decode().catch(() => {}); // Decodifica via hardware antes de exibir
-                }
+            document.querySelectorAll('img:not([loading])').forEach(img => {
+                img.setAttribute('loading', 'lazy');
+                if (typeof img.decode === 'function') img.decode().catch(() => {});
             });
         }
-
-        // 2. Execução de Scripts Não-Bloqueantes (Garante que os efeitos rodem liso)
         function liberarPerformanceNativa() {
-            // Remove delays de toque antigos que alguns navegadores Android emulam
             document.addEventListener('touchstart', function() {}, {passive: true});
             document.addEventListener('touchmove', function() {}, {passive: true});
-            
-            // Disparar otimização de imagens
             otimizarImagensGlobais();
         }
-
-        // 3. Inicialização Híbrida Ultraveloz
         if (document.readyState === "interactive" || document.readyState === "complete") {
             liberarPerformanceNativa();
         } else {
             document.addEventListener("DOMContentLoaded", liberarPerformanceNativa);
         }
-
-        // 4. Se o site usar efeitos de animação ao scroll (como AOS, ScrollReveal, etc.)
-        // Este bloco suaviza o lag re-renderizando na velocidade de atualização da tela (FPS)
         let scrollTimeout;
         window.addEventListener('scroll', function () {
             if (!scrollTimeout) {
-                window.requestAnimationFrame(function () {
-                    // O navegador processa eventos visuais de forma suave aqui
-                    scrollTimeout = false;
-                });
+                window.requestAnimationFrame(function () { scrollTimeout = false; });
                 scrollTimeout = true;
             }
         }, { passive: true });
