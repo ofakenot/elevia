@@ -614,14 +614,12 @@ body {
     .editorial-image-block { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     .editorial-frame { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; z-index: 5; }
     
-    /* --- MÁSCARA ULTRA-SUAVE (Correção e Melhoria) --- */
+    /* --- MÁSCARA ULTRA-SUAVE --- */
     .editorial-video-mask {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
-        
-        /* Pontos de parada ajustados (3% e 97%) para um fade curtíssimo e extremamente leve, eliminando o aspecto lavado */
         -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
         mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
     }
@@ -646,16 +644,21 @@ body {
 
     /* =========================================
        📢 COMPORTAMENTO MOBILE (Até 767px)
-       Mantém: Toca as bordas laterais.
        ========================================= */
     @media (max-width: 767px) {
         .editorial-grid-container { padding: 0; }
         .editorial-image-block { width: 100%; min-height: auto; margin-bottom: 30px; }
         .editorial-frame { height: auto; animation: none; }
         
-        /* Máscara de ponta a ponta nas laterais, mantendo o fade ultra-sutil vertical */
         .editorial-video-mask { max-width: 100%; width: 100%; }
-        .editorial-video-responsive { max-width: 100%; filter: none; }
+        
+        /* Altura máxima levemente ampliada para 520px */
+        .editorial-video-responsive { 
+            max-width: 100%; 
+            max-height: 520px; 
+            object-fit: cover;  
+            filter: none; 
+        }
         
         /* Remove elementos decorativos */
         .editorial-spin-ring, 
@@ -677,7 +680,6 @@ body {
         
         .editorial-frame { height: 450px; animation: editorialFloat 6s ease-in-out infinite; }
         
-        /* Configuração de largura para PC */
         .editorial-video-mask { max-width: 75%; }
         .editorial-video-responsive { object-fit: contain; filter: drop-shadow(0 20px 40px rgba(26,6,19,0.15)); }
         
