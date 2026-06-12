@@ -552,19 +552,23 @@ body {
 </section>
 
 <section id="elevia-benefits" class="benefits-editorial-section">
-    <div class="pointer-events-none absolute top-1/2 right-[15%] z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px]" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
+    <div class="pointer-events-none absolute top-1/2 right-[15%] z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px] background-glow" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
+    
     <div class="editorial-grid-container">
         <div class="editorial-image-block">
-            <div class="editorial-spin-ring border-[#1a0613]/40"></div>
-            <div class="editorial-spin-ring border-amber-300/25" style="width: 74%; height: 74%; animation: editorialSpin 40s linear infinite reverse;"></div>
+            <div class="editorial-spin-ring border-[#1a0613]/40 ring-1"></div>
+            <div class="editorial-spin-ring border-amber-300/25 ring-2" style="width: 74%; height: 74%; animation: editorialSpin 40s linear infinite reverse;"></div>
+            
             <div class="editorial-frame">
-                <video autoplay loop muted playsinline preload="auto" class="editorial-video">
+                <video autoplay loop muted playsinline preload="auto" class="editorial-video-responsive">
                     <source src="./images/videoserum.mp4" type="video/mp4">
                     Seu navegador não suporta a tag de vídeo.
                 </video>
             </div>
+            
             <div class="editorial-ground-shadow"></div>
         </div>
+        
         <div class="editorial-text-block">
             <div class="editorial-header">
                 <span class="editorial-subtitle" data-i18n="benefits_eyebrow">A Ciência por Trás da Fórmula</span>
@@ -601,29 +605,90 @@ body {
 </section>
  
 <style>
-    .benefits-editorial-section { background-color: #ffffff; position: relative; width: 100%; padding: 50px 0; overflow: hidden; font-family: Arial, Helvetica, sans-serif; }
-    .editorial-grid-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; padding: 0 24px; align-items: center; z-index: 10; position: relative; }
-    .editorial-image-block { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 400px; }
-    .editorial-frame { position: relative; width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; z-index: 5; animation: editorialFloat 6s ease-in-out infinite; }
+    /* --- ESTILOS GERAIS E RESET --- */
+    .benefits-editorial-section { background-color: #ffffff; position: relative; width: 100%; padding: 40px 0; overflow: hidden; font-family: Arial, Helvetica, sans-serif; }
+    .editorial-grid-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; z-index: 10; position: relative; width: 100%; }
     
-    /* max-width reduzido de 85% para 65% para deixar o vídeo um pouco menor e mais discreto */
-    .editorial-video { max-width: 65%; max-height: 100%; object-fit: contain; -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%); mask-image: radial-gradient(circle, black 60%, transparent 95%); filter: drop-shadow(0 20px 30px rgba(26,6,19,0.1)); }
+    /* --- ESTILOS DO VÍDEO (Padrão: PC) --- */
+    .editorial-image-block { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .editorial-frame { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; z-index: 5; }
     
-    .editorial-spin-ring { position: absolute; width: 85%; height: 85%; border-radius: 50%; border: 1px dashed; animation: editorialSpin 25s linear infinite; pointer-events: none; }
+    /* Vídeo no PC: Ajustado para ficar 'melhor', maior e responsivo */
+    .editorial-video-responsive { width: 100%; height: auto; object-fit: cover; display: block; }
+
+    /* Efeitos de Anel (Padrão: Visível no PC) */
+    .editorial-spin-ring { position: absolute; border-radius: 50%; border: 1px dashed; pointer-events: none; z-index: 1; }
+    .ring-1 { width: 85%; height: 85%; animation: editorialSpin 25s linear infinite; }
+    
     @keyframes editorialSpin { to { transform: rotate(360deg); } }
-    @keyframes editorialFloat { 0%, 100% { transform: translateY(-10px); } 50% { transform: translateY(10px); } }
-    .editorial-ground-shadow { position: absolute; bottom: 0; width: 180px; height: 12px; background: radial-gradient(ellipse, rgba(0,0,0,0.1) 0%, transparent 70%); border-radius: 50%; }
+    @keyframes editorialFloat { 0%, 100% { transform: translateY(-8px); } 50% { transform: translateY(8px); } }
+    
+    /* --- ESTILOS DE TEXTO (Comuns) --- */
     .editorial-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.28em; color: #888888; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    .editorial-main-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400 !important; line-height: 1.1; color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; margin-bottom: 30px; text-transform: none; }
+    .editorial-main-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 400 !important; line-height: 1.1; color: #000000 !important; margin-bottom: 30px; text-transform: none; }
     .editorial-main-title span { color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; }
     .editorial-cards-list { display: flex; flex-direction: column; gap: 12px; }
-    .editorial-card { display: flex; gap: 20px; align-items: center; padding: 20px; background: #fff; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; }
-    .editorial-card:hover { transform: translateX(10px); border-color: rgba(0,0,0,0.2); }
-    .card-editorial-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: #000000; font-weight: 600; flex-shrink: 0; }
-    .luxury-black-title { font-family: 'Cormorant Garamond', serif !important; font-size: 1.1rem; color: #000000; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-    .card-editorial-content p { font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; color: #444444; line-height: 1.6; }
-    @media (max-width: 991px) { .editorial-card { flex-direction: column; text-align: center; } .editorial-card:hover { transform: none; } .benefits-editorial-section .editorial-text-block { text-align: center; } }
-    @media (min-width: 992px) { .editorial-grid-container { flex-direction: row-reverse; gap: 80px; padding: 0 40px; } .editorial-image-block { width: 45%; min-height: 550px; } .editorial-text-block { width: 50%; } .editorial-main-title { font-size: 3.2rem; } }
+    .editorial-card { display: flex; gap: 18px; align-items: center; padding: 18px; background: #fff; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); }
+    .card-editorial-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #000000; font-weight: 600; flex-shrink: 0; }
+    .luxury-black-title { font-family: 'Cormorant Garamond', serif !important; font-size: 1.05rem; color: #000000; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .card-editorial-content p { font-family: Arial, Helvetica, sans-serif; font-size: 0.82rem; color: #444444; line-height: 1.5; }
+
+    /* =========================================
+       📢 CONFIGURAÇÃO MOBILE (Até 767px)
+       Objetivo: Vídeo margem a margem, sem efeitos.
+       ========================================= */
+    @media (max-width: 767px) {
+        /* Container sem padding lateral para o vídeo tocar as bordas */
+        .editorial-grid-container { padding: 0; }
+        
+        /* Ajuste do bloco de imagem para mobile */
+        .editorial-image-block { width: 100%; min-height: auto; margin-bottom: 30px; }
+        .editorial-frame { height: auto; animation: none; /* Remove flutuação */ }
+        
+        /* VÍDEO MOBILE: Margem a margem total, sem máscara radial */
+        .editorial-video-responsive { max-width: 100%; -webkit-mask-image: none; mask-image: none; filter: none; }
+        
+        /* ESCONDER EFEITOS NO MOBILE */
+        .editorial-spin-ring, 
+        .editorial-ground-shadow, 
+        .background-glow { display: none !important; }
+        
+        /* Padding apenas no texto para não encostar na borda */
+        .editorial-text-block { padding: 0 20px; text-align: center; }
+        .editorial-card { flex-direction: column; text-align: center; padding: 15px; }
+    }
+
+    /* =========================================
+       🖥️ CONFIGURAÇÃO PC (A partir de 768px)
+       Objetivo: Layout editorial premium e melhorado.
+       ========================================= */
+    @media (min-width: 768px) {
+        .editorial-grid-container { flex-direction: row-reverse; gap: 5%; padding: 0 40px; align-items: center; }
+        
+        /* Melhoria de proporção no PC: Vídeo ganha mais destaque (55%) */
+        .editorial-image-block { width: 55%; min-height: 500px; padding: 20px; }
+        .editorial-text-block { width: 40%; }
+        
+        /* Reativação e ajuste dos efeitos no PC */
+        .editorial-frame { height: 450px; animation: editorialFloat 6s ease-in-out infinite; }
+        
+        /* VÍDEO PC: Tamanho 'melhor' (75%), com máscara radial e sombra editorial */
+        .editorial-video-responsive { 
+            max-width: 75%; /* Vídeo imponente, mas contido */
+            max-height: 100%; 
+            object-fit: contain; 
+            -webkit-mask-image: radial-gradient(circle, black 65%, transparent 98%); 
+            mask-image: radial-gradient(circle, black 65%, transparent 98%); 
+            filter: drop-shadow(0 20px 40px rgba(26,6,19,0.15)); 
+        }
+        
+        /* Sombra no chão reativada */
+        .editorial-ground-shadow { position: absolute; bottom: 10px; width: 200px; height: 15px; background: radial-gradient(ellipse, rgba(0,0,0,0.12) 0%, transparent 75%); border-radius: 50%; z-index: 2; }
+        
+        /* Efeito de hover nos cards só no PC */
+        .editorial-card { transition: 0.3s; }
+        .editorial-card:hover { transform: translateX(-8px); border-color: rgba(0,0,0,0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.03); }
+    }
 </style>
 
 <!-- INSTAGRAM & VERIFICATION SECTION -->
