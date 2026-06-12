@@ -551,7 +551,6 @@ body {
     </div>
 </section>
 
-<!-- BENEFITS SECTION -->
 <section id="elevia-benefits" class="benefits-editorial-section">
     <div class="pointer-events-none absolute top-1/2 right-[15%] z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 blur-[120px]" style="background: radial-gradient(circle, #f8a1d0 0%, transparent 70%);"></div>
     <div class="editorial-grid-container">
@@ -559,7 +558,10 @@ body {
             <div class="editorial-spin-ring border-[#1a0613]/40"></div>
             <div class="editorial-spin-ring border-amber-300/25" style="width: 74%; height: 74%; animation: editorialSpin 40s linear infinite reverse;"></div>
             <div class="editorial-frame">
-                <img src="./images/serumfoto.png" alt="Ritual ELEVIA" class="editorial-img">
+                <video autoplay loop muted playsinline preload="auto" class="editorial-video">
+                    <source src="./images/videoserum.mp4" type="video/mp4">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>
             </div>
             <div class="editorial-ground-shadow"></div>
         </div>
@@ -603,7 +605,10 @@ body {
     .editorial-grid-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; padding: 0 24px; align-items: center; z-index: 10; position: relative; }
     .editorial-image-block { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; min-height: 400px; }
     .editorial-frame { position: relative; width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; z-index: 5; animation: editorialFloat 6s ease-in-out infinite; }
-    .editorial-img { max-width: 85%; max-height: 100%; object-fit: contain; -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%); mask-image: radial-gradient(circle, black 60%, transparent 95%); filter: drop-shadow(0 20px 30px rgba(26,6,19,0.1)); }
+    
+    /* max-width reduzido de 85% para 65% para deixar o vídeo um pouco menor e mais discreto */
+    .editorial-video { max-width: 65%; max-height: 100%; object-fit: contain; -webkit-mask-image: radial-gradient(circle, black 60%, transparent 95%); mask-image: radial-gradient(circle, black 60%, transparent 95%); filter: drop-shadow(0 20px 30px rgba(26,6,19,0.1)); }
+    
     .editorial-spin-ring { position: absolute; width: 85%; height: 85%; border-radius: 50%; border: 1px dashed; animation: editorialSpin 25s linear infinite; pointer-events: none; }
     @keyframes editorialSpin { to { transform: rotate(360deg); } }
     @keyframes editorialFloat { 0%, 100% { transform: translateY(-10px); } 50% { transform: translateY(10px); } }
