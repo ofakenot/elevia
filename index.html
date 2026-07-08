@@ -358,9 +358,6 @@ body {
                     <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
                     <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
                 </div>
-                <div class="hero-catalog-container">
-                    <a href="https://goelevia.com/app/" class="hero-catalog-btn" data-i18n="catalog_btn">acesse nosso catálogo</a>
-                </div>
             </div>
         </div>
     </div>
@@ -385,9 +382,6 @@ body {
                 <div class="stat-item"><b>98%</b><span data-i18n="stat1">Absorção</span></div>
                 <div class="stat-item"><b>24h</b><span data-i18n="stat2">Hidratação</span></div>
                 <div class="stat-item"><b data-i18n="stat3_val">Alta</b><span data-i18n="stat3">Perf.</span></div>
-            </div>
-            <div class="hero-catalog-container mobile-catalog-margin">
-                <a href="https://goelevia.com/app/" class="hero-catalog-btn" data-i18n="catalog_btn">acesse nosso catálogo</a>
             </div>
         </div>
     </div>
@@ -462,9 +456,26 @@ body {
         .animate-fill { animation: fillBar 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: 0.2s; }
         @media (max-width: 991px) { .elevia-premium-showcase .relative.z-10 { text-align: center; } .elevia-premium-showcase .flex.w-full.max-w-md { align-items: center; } }
         @media (max-width: 768px) { .elevia-premium-showcase { padding-top: 8rem !important; } .elevia-video-col { margin-top: 2rem; } }
+
+        /* Acabamento de Alta Fidelidade (Efeito 3D de Vidro/Gel da Foto) */
+        .btn-premium-3d {
+            box-shadow: 
+                0 1px 0px rgba(255, 255, 255, 0.35) inset, /* Linha de brilho interna superior */
+                0 4px 10px rgba(0, 0, 0, 0.25);             /* Sombra projetada para profundidade */
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-premium-3d:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 
+                0 1px 0px rgba(255, 255, 255, 0.4) inset,
+                0 6px 14px rgba(0, 0, 0, 0.3);
+        }
     </style>
  
-    <div class="pointer-events-none absolute top-1/2 left-1/4 z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full animate-soft-glow" style="background: radial-gradient(circle, rgba(248,161,208,0.4) 0%, rgba(255,255,255,0) 70%);"></div>
+<div class="pointer-events-none absolute top-1/2 left-1/4 z-0 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full animate-soft-glow" style="background: radial-gradient(circle, rgba(248,161,208,0.4) 0%, rgba(255,255,255,0) 70%);"></div>
  
     <div class="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center justify-center gap-8 lg:flex-row lg:gap-28">
         
@@ -478,12 +489,21 @@ body {
                     <source src="./images/0519.mp4" type="video/mp4">
                 </video>
             </div>
+            
             <div class="animate-shadow-pulse absolute bottom-12 left-1/2 h-6 w-32 -translate-x-1/2 rounded-full bg-gradient-to-r from-zinc-900/40 via-zinc-800/20 to-transparent z-0"></div>
-            <div class="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 whitespace-nowrap">
-                <div class="flex items-center gap-2 rounded-full border border-zinc-100/80 bg-white/80 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-rose-500 shadow-md backdrop-blur-md" style="font-family: Arial, Helvetica, sans-serif !important;">
-                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-rose-400"></span>
-                    <span data-i18n="formula_activated">Fórmula Ativada</span>
-                </div>
+            
+            <div class="absolute bottom-[-24px] left-1/2 z-20 w-full max-w-[290px] -translate-x-1/2 flex flex-col gap-2.5 px-2">
+                
+                <a href="https://loja.goelevia.com" target="_blank" data-i18n="btn_buy_now" class="btn-premium-3d flex w-full justify-center items-center rounded-[5px] py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white text-center" 
+                   style="background: linear-gradient(to right, #b52a5b 0%, #cf4476 35%, #eb6c9a 75%, #fa87b1 100%); font-family: Arial, Helvetica, sans-serif !important;">
+                    Compre Agora
+                </a>
+
+                <a href="https://wa.me/15147536580" target="_blank" data-i18n="btn_whatsapp" class="btn-premium-3d flex w-full justify-center items-center rounded-[5px] py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white text-center" 
+                   style="background: linear-gradient(to right, #0e5c2c 0%, #178241 35%, #22c45e 75%, #4ade80 100%); font-family: Arial, Helvetica, sans-serif !important;">
+                    WhatsApp Elevia
+                </a>
+
             </div>
         </div>
  
@@ -1191,14 +1211,17 @@ const i18n = {
         whatsapp_btn: "Chamar no WhatsApp",
         form_name: "Nome", form_name_ph: "Como podemos te chamar?",
         form_email: "E-mail", form_email_ph: "Para contato",
-        form_message: "Mensagem", form_message_ph: "Conte-nos o que achou...",
+        form_message: "Mensagem", form_message_ph: "Conte-nos lo que achou...",
         form_submit: "Enviar Mensagem",
         gallery_title: "Resultados Reais",
         gallery_desc: "Sinta o impacto da biotecnologia em poucos dias de uso. ELEVIA combina ativos de ponta para devolver a perfeição e o equilíbrio à sua pele, elevando o padrão dos seus rituais diários de beleza.",
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
         footer_whatsapp: "Suporte WhatsApp",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
-        verify_product_link: "Verificar Produto"
+        verify_product_link: "Verificar Produto",
+        // Novas chaves para os botões do bloco guardado:
+        btn_buy_now: "Compre Agora",
+        btn_whatsapp: "WhatsApp Elevia"
     },
     en: {
         wa_badge: "Available Now",
@@ -1260,7 +1283,10 @@ const i18n = {
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
         footer_whatsapp: "WhatsApp Support",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
-        verify_product_link: "Verify Product"
+        verify_product_link: "Verify Product",
+        // English keys
+        btn_buy_now: "Buy Now",
+        btn_whatsapp: "WhatsApp Elevia"
     },
     es: {
         wa_badge: "Disponible Ahora",
@@ -1289,21 +1315,21 @@ const i18n = {
         benefits_title_line1: "Tres Pilares de",
         benefits_title_line2: "Alto Rendimiento",
         benefit1_title: "ADN Celular PDRN",
-        benefit1_desc: "Actúa en la matriz de regeneración. Devuelve textura uniforme y promueve un efecto de piel renovada.",
+        benefit1_desc: "Actúa en la matriz de regeneración. Devuelve textura uniforme y promueve un efeito de piel renovada.",
         benefit2_title: "Sustentación GHK-CU",
         benefit2_desc: "Péptidos estructurados que estimulam colágeno y elastina, devolviendo la firmeza física inmediata.",
         benefit3_title: "Luminosidad Innata",
         benefit3_desc: "Neutralización del estrés oxidativo. Infusión de vitalidad para un brillo saludable y magnético.",
         ig_name: "Instagram Elevia",
         ig_tagline: "Ciencia Celular & Movimento",
-        ig_desc1: "Productos desarrollados sobre bases biotecnológicas avanzadas de alto rendimiento. Nuestras fórmulas integran biología molecular y pureza botánica para redefinir el ciclo de regeneración de la piel.",
+        ig_desc1: "Productos desarrollados sobre bases biotecnológicas avanzadas de alto rendimiento. Nuestras fórmulas integram biología molecular y pureza botánica para redefinir el ciclo de regeneración de la piel.",
         ig_desc2: "Conéctate con una comunidad enfocada en rituales diarios de alto rendimiento, bienestar sistémico y longevidad cutánea. Sigue los bastidores de nuestros laboratorios, feedbacks reales y lanzamientos científicos exclusivos.",
         ig_cta_text: "La nueva era del movimiento celular ha comenzado.",
         ig_timestamp: "2026 · Comunidad Oficial Elevia",
         ig_comunidade_btn: "Unirse a la Comunidad Elevia",
         ig_follow_btn: "Seguir en Instagram",
         verify_system: "SECURE PACKAGING SYSTEM",
-        verify_title: "Garantía de Autenticidad Global",
+        verify_title: "Garantia de Autenticidad Global",
         verify_desc1: "Evita falsificaciones. Cada lote del Sérum Elevia tiene un código molecular único rastreable en nuestra plataforma de seguridad criptográfica de última generación.",
         verify_desc2: "Al recibir tu producto, usa nuestro escáner oficial para validar el origen de tu fórmula y liberar certificaciones de laboratorio activas en tiempo real.",
         verify_btn1: "Verificar Producto Elevia",
@@ -1317,14 +1343,18 @@ const i18n = {
         form_email: "Correo", form_email_ph: "Para contacto",
         form_message: "Mensagem", form_message_ph: "Cuéntanos qué te pareció...",
         form_submit: "Enviar Mensaje",
-        gallery_title: "Resultados Reales",
+        gallery_title: "Resultados Reais",
         gallery_desc: "Siente el impacto de la biotecnología en pocos dias de uso. ELEVIA combina activos de vanguardia para devolver la perfección y el equilibrio a tu piel, elevando el estándar de tus rituales diarios de belleza.",
         footer_desc: "Medicinal & Biotech Industry.\nHigh-quality compounds and innovation.\nGlobal vision.",
         footer_whatsapp: "Soporte WhatsApp",
         footer_copy: "© 2024 BRO PHARMACEUTICALS. All rights reserved.",
-        verify_product_link: "Verificar Producto"
+        verify_product_link: "Verificar Producto",
+        // Spanish keys
+        btn_buy_now: "Comprar Ahora",
+        btn_whatsapp: "WhatsApp Elevia"
     }
 };
+
 function setLang(lang) {
     if (!i18n[lang]) return;
     const dict = i18n[lang];
