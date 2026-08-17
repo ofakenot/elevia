@@ -549,8 +549,10 @@ body {
             <div class="animate-spin-reverse absolute h-[72%] w-[72%] rounded-full border border-dotted border-amber-300/30 z-0"></div>
             <div class="animate-float-smooth z-10 flex h-full w-full items-center justify-center p-4 relative">
                 <div style="position: absolute; width: 90%; height: 90%; border-radius: 50%; background: #ffffff; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;"></div>
-                <video id="serum-video" class="h-[62%] w-[62%] object-contain" style="position: relative; z-index: 1;" muted playsinline autoplay loop preload="auto">
+                <video id="serum-video" class="h-[62%] w-[62%] object-contain" style="position: relative; z-index: 1;" muted="muted" autoplay="autoplay" loop="loop" playsinline="playsinline" webkit-playsinline="true" preload="metadata" disablepictureinpicture="true" controlslist="nodownload noplaybackrate noremoteplayback">
                     <source src="./images/0519.mp4" type="video/mp4">
+                    <source src="./images/videoserum.mp4" type="video/mp4">
+                    Seu navegador não suporta a reprodução deste vídeo.
                 </video>
             </div>
             
@@ -1249,20 +1251,50 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
         if (typeof lucide !== 'undefined') { lucide.createIcons(); }
         const video = document.getElementById('serum-video');
         if (!video) return;
+
+        // Android exige silêncio explícito e reprodução inline para autoplay.
+        video.muted = true;
+        video.defaultMuted = true;
+        video.setAttribute('muted', '');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('webkit-playsinline', 'true');
+
+        let fallbackActivated = false;
+        const activateFallback = () => {
+            if (fallbackActivated) return;
+            fallbackActivated = true;
+            const fallback = video.querySelectorAll('source')[1];
+            if (fallback) {
+                video.src = fallback.src;
+                video.load();
+            }
+        };
+        video.addEventListener('error', activateFallback, { once: true });
+
         const ensurePlaying = () => {
-            if (video.paused) {
-                video.play().catch(() => {
+            video.muted = true;
+            const playAttempt = video.play();
+            if (playAttempt && typeof playAttempt.catch === 'function') {
+                playAttempt.catch(() => {
                     const resumeOnInteraction = () => {
-                        video.play();
+                        video.muted = true;
+                        video.play().catch(() => {});
                         document.removeEventListener('touchstart', resumeOnInteraction);
+                        document.removeEventListener('pointerdown', resumeOnInteraction);
                         document.removeEventListener('click', resumeOnInteraction);
                     };
-                    document.addEventListener('touchstart', resumeOnInteraction, { passive: true });
-                    document.addEventListener('click', resumeOnInteraction);
+                    document.addEventListener('touchstart', resumeOnInteraction, { passive: true, once: true });
+                    document.addEventListener('pointerdown', resumeOnInteraction, { passive: true, once: true });
+                    document.addEventListener('click', resumeOnInteraction, { once: true });
                 });
             }
         };
+        video.addEventListener('loadedmetadata', ensurePlaying, { once: true });
+        video.addEventListener('canplay', ensurePlaying, { once: true });
         video.addEventListener('pause', ensurePlaying);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) ensurePlaying(); });
+        video.load();
+        ensurePlaying();
         video.addEventListener('ended', ensurePlaying);
         ensurePlaying();
     });
