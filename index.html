@@ -1324,14 +1324,59 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 .gallery-carousel-viewport { width: 100%; overflow: hidden; padding: 0 24px; box-sizing: border-box; cursor: grab; touch-action: pan-y; }
     .gallery-carousel-viewport:active { cursor: grabbing; }
     .gallery-carousel-track { display: flex; gap: 20px; transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); width: max-content; padding-left: calc(max(0px, (100vw - 1200px) / 2)); will-change: transform; }
-    .gallery-slide { flex-shrink: 0; width: 290px; }
-    @media (min-width: 1024px) { .gallery-slide { width: 360px; } }
-    .gallery-card-inner { position: relative; width: 100%; min-height: 432px; border-radius: 16px; overflow: hidden; isolation: isolate; }
+    .gallery-slide { flex-shrink: 0; width: min(58vw, 220px); }
+    @media (min-width: 1024px) { .gallery-slide { width: 280px; } }
+    .gallery-card-inner { position: relative; width: 100%; aspect-ratio: 9 / 16; min-height: 0; border-radius: 20px; overflow: hidden; isolation: isolate; background:#f4f1ef; }
     .gallery-card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1; }
     .gallery-dots-container { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
     .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background-color: rgba(0, 0, 0, 0.15); border: none; padding: 0; cursor: pointer; transition: background-color 0.2s; }
     .gallery-dot.active { background-color: #000000; }
     @media (min-width: 768px) { .gallery-controls-desktop { display: flex; } }
+</style>
+
+<style>
+  .elevia-technology-section { background:#ffffff; padding:5rem 1.25rem 5.5rem; font-family:var(--font-body); }
+  .elevia-technology-inner { width:min(100%, 1060px); margin:0 auto; }
+  .elevia-technology-title { margin:0 0 .8rem; color:#d34f82; text-align:center; font:700 clamp(2rem, 4vw, 2.8rem)/1.1 var(--font-body); letter-spacing:-.03em; }
+  .elevia-technology-description { max-width:760px; margin:0 auto 2.5rem; color:#333333; text-align:center; font:400 .9rem/1.6 var(--font-body); }
+  .elevia-technology-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; max-width:900px; margin:0 auto; }
+  .elevia-technology-card { width:100%; max-width:290px; justify-self:center; aspect-ratio:1 / 1.18; overflow:hidden; border-radius:12px; background:#f3eee8; }
+  .elevia-technology-card img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.16,1,.3,1); }
+  .elevia-technology-card:hover img { transform:scale(1.035); }
+  @media (max-width:767px) { .elevia-technology-section { padding:4rem .75rem 4.5rem; } .elevia-technology-description { margin:0 auto 1.8rem; max-width:330px; font-size:.78rem; } .elevia-technology-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); gap:5px; width:100%; } .elevia-technology-card { width:100%; max-width:none; aspect-ratio:1 / 1.12; border-radius:9px; } }
+</style>
+<section class="elevia-technology-section" aria-labelledby="elevia-technology-title">
+  <div class="elevia-technology-inner">
+    <h2 class="elevia-technology-title" id="elevia-technology-title">Tecnologia avançada</h2>
+    <p class="elevia-technology-description">Tecnologia de ponta e ativos de alta performance desenvolvidos para elevar os padrões do skincare.</p>
+    <div class="elevia-technology-grid">
+      <div class="elevia-technology-card"><img src="https://loja.goelevia.com/cdn/shop/files/SaveClip.App_727268108_18398920279157838_6070940497871538828_n_7bfdc04e-de98-4cf6-be39-174f49379cc9.jpg?v=1782847415&width=600" alt="Tecnologia avançada Elevia — imagem 1" loading="lazy"></div>
+      <div class="elevia-technology-card"><img src="https://loja.goelevia.com/cdn/shop/files/SaveClip.App_727446376_18398920288157838_8350764028524097165_n.jpg?v=1782847428&width=600" alt="Tecnologia avançada Elevia — imagem 2" loading="lazy"></div>
+      <div class="elevia-technology-card"><img src="https://loja.goelevia.com/cdn/shop/files/SaveClip.App_728003731_18398920297157838_7306512639759135920_n_80dba439-1896-48b1-a50f-358af87bcbeb.jpg?v=1782847444&width=600" alt="Tecnologia avançada Elevia — imagem 3" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Ajustes globais de continuidade entre seções */
+  section { border-top: none !important; border-bottom: none !important; }
+  .elevia-editorial-product { border-top: none !important; }
+  .elevia-radiance-section { padding-top:3.2rem !important; padding-bottom:3.5rem !important; }
+  .elevia-faq-section { padding-top:.5rem !important; padding-bottom:3.5rem !important; }
+  .elevia-science-section { padding-top:3.2rem !important; padding-bottom:3.8rem !important; }
+  .elevia-client-counter-section { padding-top:2.2rem !important; padding-bottom:1.2rem !important; }
+  .gallery-section { padding-top:3.5rem !important; padding-bottom:3.8rem !important; }
+  .elevia-technology-section { padding-top:3.5rem !important; padding-bottom:3.8rem !important; }
+  .ig-section { padding-top:3.5rem !important; padding-bottom:3.8rem !important; }
+  @media (max-width:767px) {
+    .elevia-radiance-section { padding-top:2.2rem !important; padding-bottom:2.8rem !important; }
+    .elevia-faq-section { padding-top:.25rem !important; padding-bottom:2.8rem !important; }
+    .elevia-science-section { padding-top:2.4rem !important; padding-bottom:2.8rem !important; }
+    .elevia-client-counter-section { padding-top:1.6rem !important; padding-bottom:.8rem !important; }
+    .gallery-section { padding-top:2.8rem !important; padding-bottom:3rem !important; }
+    .elevia-technology-section { padding-top:2.8rem !important; padding-bottom:3rem !important; }
+    .ig-section { padding-top:2.8rem !important; padding-bottom:3rem !important; }
+  }
 </style>
 
 <!-- FOOTER -->
