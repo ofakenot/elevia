@@ -240,6 +240,17 @@ body {
 .elevia-editorial-product:nth-of-type(2) { transition-delay:.08s; }
 .elevia-editorial-product:nth-of-type(3) { transition-delay:.16s; }
 .elevia-editorial-photo-frame img { width:100%; height:100%; object-fit:contain; display:block; border:0; }
+.elevia-cream-carousel { position:relative; overflow:hidden; border:0; box-shadow:none; }
+.elevia-cream-carousel-track { display:flex; width:100%; height:100%; transition:transform .55s cubic-bezier(.16,1,.3,1); }
+.elevia-cream-carousel-slide { min-width:100%; width:100%; height:100%; display:grid; place-items:center; }
+.elevia-cream-carousel-slide img { width:100%; height:100%; object-fit:contain; border:0; }
+.elevia-cream-carousel-control { position:absolute; top:50%; z-index:2; width:34px; height:34px; display:grid; place-items:center; transform:translateY(-50%); border:0; border-radius:50%; background:rgba(255,255,255,.82); color:#000; font:700 1.1rem/1 Arial,sans-serif; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.08); }
+.elevia-cream-carousel-control.prev { left:10px; }
+.elevia-cream-carousel-control.next { right:10px; }
+.elevia-cream-carousel-dots { position:absolute; z-index:2; left:0; right:0; bottom:14px; display:flex; justify-content:center; gap:7px; }
+.elevia-cream-carousel-dot { width:7px; height:7px; padding:0; border:0; border-radius:50%; background:rgba(0,0,0,.25); cursor:pointer; }
+.elevia-cream-carousel-dot.active { background:#000; }
+
 .elevia-editorial-detail { margin:0 0 1.7rem; padding:1.35rem 1.5rem; border:0; border-radius:24px; background:#ffffff; box-shadow:0 20px 50px rgba(26,6,19,.06); transition:box-shadow .5s ease; }
 .elevia-editorial-product.is-visible .elevia-editorial-detail { box-shadow:0 22px 48px rgba(26,6,19,.09); }
 .elevia-benefit-row { margin-bottom:1rem; }
@@ -650,7 +661,15 @@ body {
 
     <article class="elevia-editorial-product">
       <div class="elevia-editorial-photo">
-        <div class="elevia-editorial-photo-frame" data-image-url="https://loja.goelevia.com/cdn/shop/files/WhatsApp_Image_2026-07-22_at_21.58.09.jpg?v=1784777581&width=600"><span class="elevia-image-placeholder">Cole o link da foto<br>no atributo data-image-url</span></div>
+        <div class="elevia-editorial-photo-frame elevia-cream-carousel" aria-label="Galeria de imagens do Elevia Jelly Cream">
+          <div class="elevia-cream-carousel-track">
+            <div class="elevia-cream-carousel-slide"><img src="https://loja.goelevia.com/cdn/shop/files/WhatsApp_Image_2026-07-22_at_21.58.09.jpg?v=1784777581&width=600" alt="Elevia Jelly Cream" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide"><img src="./images/jellycream2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
+          </div>
+          <button class="elevia-cream-carousel-control prev" type="button" aria-label="Imagem anterior">‹</button>
+          <button class="elevia-cream-carousel-control next" type="button" aria-label="Próxima imagem">›</button>
+          <div class="elevia-cream-carousel-dots" aria-label="Selecionar imagem"><button class="elevia-cream-carousel-dot active" type="button" aria-label="Ver primeira imagem"></button><button class="elevia-cream-carousel-dot" type="button" aria-label="Ver segunda imagem"></button></div>
+        </div>
       </div>
       <div class="elevia-editorial-copy">
         <div class="elevia-editorial-number" data-i18n="cream_label">02 / Skin Ritual</div>
@@ -668,7 +687,7 @@ body {
 
     <article class="elevia-editorial-product reverse">
       <div class="elevia-editorial-photo">
-        <div class="elevia-editorial-photo-frame" data-image-url="https://bropharmaceutical.com/app/images/kit1.png"><span class="elevia-image-placeholder">Cole o link da foto<br>no atributo data-image-url</span></div>
+        <div class="elevia-editorial-photo-frame" data-image-url="./images/novokit.png"><span class="elevia-image-placeholder">Cole o link da foto<br>no atributo data-image-url</span></div>
       </div>
       <div class="elevia-editorial-copy">
         <div class="elevia-editorial-number" data-i18n="kit_label">03 / Complete Ritual</div>
@@ -686,7 +705,7 @@ body {
 
     <article class="elevia-editorial-product">
       <div class="elevia-editorial-photo">
-        <div class="elevia-editorial-photo-frame" data-image-url="https://bropharmaceutical.com/app/images/necessaire2.jpeg"><span class="elevia-image-placeholder">Cole o link da foto<br>no atributo data-image-url</span></div>
+        <div class="elevia-editorial-photo-frame" data-image-url="./images/bolsa.png"><span class="elevia-image-placeholder">Cole o link da foto<br>no atributo data-image-url</span></div>
       </div>
       <div class="elevia-editorial-copy">
         <div class="elevia-editorial-number" data-i18n="pouch_label">04 / Elevia Essential</div>
@@ -729,6 +748,22 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
     box.replaceChildren(image);
   }
 });
+  (function () {
+    var carousel = document.querySelector('.elevia-cream-carousel');
+    if (!carousel) return;
+    var track = carousel.querySelector('.elevia-cream-carousel-track');
+    var dots = Array.prototype.slice.call(carousel.querySelectorAll('.elevia-cream-carousel-dot'));
+    var index = 0;
+    function showSlide(nextIndex) {
+      index = (nextIndex + dots.length) % dots.length;
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach(function (dot, dotIndex) { dot.classList.toggle('active', dotIndex === index); });
+    }
+    carousel.querySelector('.elevia-cream-carousel-control.prev').addEventListener('click', function () { showSlide(index - 1); });
+    carousel.querySelector('.elevia-cream-carousel-control.next').addEventListener('click', function () { showSlide(index + 1); });
+    dots.forEach(function (dot, dotIndex) { dot.addEventListener('click', function () { showSlide(dotIndex); }); });
+    setInterval(function () { showSlide(index + 1); }, 5000);
+  })();
 </script>
 
 
