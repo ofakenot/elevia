@@ -2015,10 +2015,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 </style>
 <style id="elevia-pot-size-adjustment">
-  /* O segundo pote fica discretamente maior, preservando o enquadramento do carrossel. */
+  /* As duas fotos ficam inteiras dentro do card; pote2 continua levemente maior sem ser cortado. */
+  .elevia-cream-carousel-slide img.elevia-jelly-image--pote1 {
+    width: 92%;
+    height: 92%;
+    object-fit: contain;
+    transform: none;
+  }
   .elevia-cream-carousel-slide img.elevia-jelly-image--pote2 {
-    transform: scale(1.08);
-    transform-origin: center center;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: none;
   }
 </style>
 </body>
