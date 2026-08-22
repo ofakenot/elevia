@@ -241,8 +241,8 @@ body {
 .elevia-editorial-product:nth-of-type(3) { transition-delay:.16s; }
 .elevia-editorial-photo-frame img { width:100%; height:100%; object-fit:contain; display:block; border:0; }
 .elevia-cream-carousel { position:relative; overflow:hidden; border:0 !important; box-shadow:none !important; background:transparent !important; }
-.elevia-cream-carousel-track { display:flex; width:100%; height:100%; transition:transform .55s cubic-bezier(.16,1,.3,1); }
-.elevia-cream-carousel-slide { min-width:100%; width:100%; height:100%; display:grid; place-items:center; background:transparent !important; border:0 !important; }
+.elevia-cream-carousel-track { position:relative; display:block; width:100%; height:100%; }
+.elevia-cream-carousel-slide { position:absolute; inset:0; min-width:100%; width:100%; height:100%; display:grid; place-items:center; opacity:0; pointer-events:none; transition:opacity .8s ease; background:transparent !important; border:0 !important; } .elevia-cream-carousel-slide.is-active { opacity:1; pointer-events:auto; }
 .elevia-cream-carousel-slide img { width:100%; height:100%; object-fit:contain; border:0 !important; outline:0; box-shadow:none; background:transparent !important; }
 .elevia-cream-carousel { touch-action:pan-y; cursor:grab; }
 .elevia-cream-carousel.is-dragging { cursor:grabbing; }
@@ -662,7 +662,7 @@ body {
       <div class="elevia-editorial-photo">
         <div class="elevia-editorial-photo-frame elevia-cream-carousel" aria-label="Galeria de imagens do Elevia Jelly Cream">
           <div class="elevia-cream-carousel-track">
-            <div class="elevia-cream-carousel-slide"><img class="elevia-jelly-image elevia-jelly-image--pote1" src="./images/pote1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide is-active"><img class="elevia-jelly-image elevia-jelly-image--pote1" src="./images/pote1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
             <div class="elevia-cream-carousel-slide"><img class="elevia-jelly-image elevia-jelly-image--pote2" src="./images/pote2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
           </div>
           <div class="elevia-cream-carousel-dots" aria-label="Selecionar imagem"><button class="elevia-cream-carousel-dot active" type="button" aria-label="Ver primeira imagem"></button><button class="elevia-cream-carousel-dot" type="button" aria-label="Ver segunda imagem"></button></div>
@@ -813,12 +813,13 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
   (function () {
     var carousel = document.querySelector('.elevia-cream-carousel');
     if (!carousel) return;
-    var track = carousel.querySelector('.elevia-cream-carousel-track');
+var track = carousel.querySelector('.elevia-cream-carousel-track');
+    var slides = Array.prototype.slice.call(carousel.querySelectorAll('.elevia-cream-carousel-slide'));
     var dots = Array.prototype.slice.call(carousel.querySelectorAll('.elevia-cream-carousel-dot'));
     var index = 0;
     function showSlide(nextIndex) {
       index = (nextIndex + dots.length) % dots.length;
-      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      slides.forEach(function (slide, slideIndex) { slide.classList.toggle('is-active', slideIndex === index); });
       dots.forEach(function (dot, dotIndex) { dot.classList.toggle('active', dotIndex === index); });
     }
     dots.forEach(function (dot, dotIndex) { dot.addEventListener('click', function () { showSlide(dotIndex); }); });
