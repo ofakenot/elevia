@@ -11,7 +11,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
 html {
     -webkit-overflow-scrolling: touch;
@@ -34,8 +34,8 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
         :root {
-            --font-display: 'Cormorant Garamond', Georgia, serif;
-            --font-body: Arial, Helvetica, sans-serif;
+            --font-display: 'Nunito', Arial, sans-serif;
+            --font-body: 'PT Sans', Arial, sans-serif;
             --background: #f8a1d0;
             --foreground: #000000;
             --pink-primary: #ff2a85;
@@ -175,12 +175,12 @@ body {
         .center-content h2:hover { background-position: -100% 0; }
         .hero-side-text {
             grid-column: 3; justify-self: end; writing-mode: vertical-rl; text-transform: uppercase;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+            font-family: var(--font-body) !important;
             font-size: 0.6rem; letter-spacing: 0.22em; color: var(--text-muted);
             opacity: 0; animation: fadeIn 1.5s ease forwards 0.5s;
         }
         .hero-footer, .hero-footer * {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+            font-family: var(--font-body) !important;
         }
         .hero-footer { grid-column: 1 / span 3; grid-row: 2; display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; }
         .hero-stats { display: flex; gap: 3rem; }
@@ -207,7 +207,7 @@ body {
         .hero-mobile p { font-family: var(--font-body); font-size: 0.88rem; line-height: 1.65; color: var(--text-muted); max-width: 290px; margin: 0 auto; }
         .hero-mobile-bottom { display: flex; flex-direction: column; align-items: center; gap: 2.5rem; width: 100%; margin-top: auto; }
         .hero-mobile-stats, .hero-mobile-stats * {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+            font-family: var(--font-body) !important;
         }
         .hero-mobile-stats { display: flex; justify-content: center; gap: 2rem; width: 100%; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.5rem; }
         @media (max-width: 991px) { .ui-layer { display: none !important; } .hero-mobile { display: flex !important; } }
@@ -224,7 +224,7 @@ body {
 .elevia-products-section::before { content:''; position:absolute; inset:8% -18% auto; height:42rem; background:radial-gradient(circle,rgba(248,161,208,.10) 0%,rgba(255,255,255,0) 68%); pointer-events:none; }
 .elevia-products-inner { position:relative; z-index:1; max-width:1120px; margin:0 auto; }
 .elevia-products-heading { text-align:center; max-width:650px; margin:0 auto 4.5rem; }
-.elevia-products-eyebrow { display:block; margin-bottom:.8rem; color:#9a8a7a; font:700 .68rem Arial,sans-serif; letter-spacing:.3em; text-transform:uppercase; }
+.elevia-products-eyebrow { display:block; margin-bottom:.8rem; color:#9a8a7a; font:700 .68rem var(--font-body); letter-spacing:.3em; text-transform:uppercase; }
 .elevia-products-heading h2 { margin:0 0 .8rem; color:var(--foreground); font:400 clamp(2.3rem,5vw,4rem)/1.05 var(--font-display); }
 .elevia-products-heading p { margin:0; color:var(--text-muted); font:.92rem/1.7 var(--font-body); }
 .elevia-editorial-product { display:grid; grid-template-columns:minmax(360px,1fr) minmax(320px, .9fr); align-items:center; gap:clamp(3rem,8vw,8rem); min-height:520px; padding:4rem 0; border-top:1px solid rgba(0,0,0,.08); }
@@ -265,7 +265,7 @@ body {
 @keyframes elevia-benefit-fill { from { transform:scaleX(0); } to { transform:scaleX(1); } }
 .elevia-editorial-actions { display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; }
 .elevia-editorial-btn, .elevia-editorial-whatsapp { min-width:155px; text-align:center; }
-.elevia-editorial-whatsapp { display:inline-block; padding:.95rem 1.35rem; border:1px solid rgba(0,0,0,.18); border-radius:5px; color:#fff; background:linear-gradient(to right,#0e5c2c,#178241,#22c45e,#4ade80); text-decoration:none; font:700 .65rem Arial,sans-serif; letter-spacing:.16em; text-transform:uppercase; box-shadow:0 4px 10px rgba(0,0,0,.2); transition:filter .2s ease; }
+.elevia-editorial-whatsapp { display:inline-block; padding:.95rem 1.35rem; border:1px solid rgba(0,0,0,.18); border-radius:5px; color:#fff; background:linear-gradient(to right,#0e5c2c,#178241,#22c45e,#4ade80); text-decoration:none; font:700 .65rem var(--font-body); letter-spacing:.16em; text-transform:uppercase; box-shadow:0 4px 10px rgba(0,0,0,.2); transition:filter .2s ease; }
 .elevia-editorial-btn:active, .elevia-editorial-whatsapp:active { transform:translateY(1px) scale(.99); }
 @media (prefers-reduced-motion:reduce) { .elevia-editorial-product { opacity:1; transform:none; transition:none; } }
 @media (max-width:820px) {
@@ -276,7 +276,7 @@ body {
 }
 .elevia-editorial-photo-frame .elevia-image-placeholder { padding:2rem; color:var(--text-muted); text-align:center; font:700 .65rem/1.6 var(--font-body); letter-spacing:.14em; text-transform:uppercase; }
 .elevia-editorial-copy { max-width:470px; }
-.elevia-editorial-number { display:flex; align-items:center; gap:.8rem; margin-bottom:1rem; color:#9a8a7a; font:700 .68rem Arial,sans-serif; letter-spacing:.3em; text-transform:uppercase; }
+.elevia-editorial-number { display:flex; align-items:center; gap:.8rem; margin-bottom:1rem; color:#9a8a7a; font:700 .68rem var(--font-body); letter-spacing:.3em; text-transform:uppercase; }
 .elevia-editorial-number::before, .elevia-editorial-number::after { content:''; display:inline-block; width:24px; height:1px; background:linear-gradient(to right,transparent,#c5a55a); }
 .elevia-editorial-number::after { background:linear-gradient(to left,transparent,#c5a55a); }
 .elevia-editorial-copy h3 { margin:0 0 1rem; color:var(--foreground); font:400 clamp(2.6rem,5vw,3.8rem)/1.02 var(--font-display); letter-spacing:.01em; }
@@ -284,7 +284,7 @@ body {
 .elevia-editorial-detail { margin-bottom:1.7rem; padding:1.35rem 1.5rem; border:0; border-radius:18px; background:#ffffff; box-shadow:0 18px 40px rgba(26,6,19,.07); }
 .elevia-editorial-detail strong { display:block; margin-bottom:.35rem; color:var(--foreground); font:600 .75rem var(--font-body); letter-spacing:.12em; text-transform:uppercase; }
 .elevia-editorial-detail span { color:var(--text-muted); font:.8rem/1.5 var(--font-body); }
-.elevia-editorial-btn { display:inline-block; padding:.95rem 1.35rem; border:1px solid rgba(0,0,0,.22); border-radius:5px; color:#fff; background:linear-gradient(to right,#b52a5b,#eb6c9a,#fa87b1); text-decoration:none; font:700 .65rem Arial,sans-serif; letter-spacing:.18em; text-transform:uppercase; box-shadow:0 4px 10px rgba(0,0,0,.2); transition:transform .2s ease,box-shadow .2s ease; }
+.elevia-editorial-btn { display:inline-block; padding:.95rem 1.35rem; border:1px solid rgba(0,0,0,.22); border-radius:5px; color:#fff; background:linear-gradient(to right,#b52a5b,#eb6c9a,#fa87b1); text-decoration:none; font:700 .65rem var(--font-body); letter-spacing:.18em; text-transform:uppercase; box-shadow:0 4px 10px rgba(0,0,0,.2); transition:transform .2s ease,box-shadow .2s ease; }
 .elevia-editorial-btn:hover { transform:translateY(-2px); box-shadow:0 7px 15px rgba(0,0,0,.25); }
 @keyframes elevia-product-spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
 @keyframes elevia-product-spin-reverse { from { transform:rotate(360deg); } to { transform:rotate(0deg); } }
@@ -363,17 +363,17 @@ body {
     .el-popup-badge-vip { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 12px; }
     .el-popup-badge-vip span { font-size: 0.72rem; font-weight: 700; color: #555555; text-transform: uppercase; letter-spacing: 0.05em; }
     .el-popup-badge-vip svg { width: 12px; height: 12px; fill: #007AFF; }
-    .el-popup-title { font-family: Arial, Helvetica, sans-serif; font-size: 1.45rem; font-weight: 700; color: #3a3a3a; margin: 0 0 6px 0; letter-spacing: -0.01em; text-transform: uppercase; }
-    .el-popup-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 1.2rem; font-weight: 700; color: #F8B2D8; line-height: 1.2; margin: 0 0 14px 0; letter-spacing: 0.02em; }
-    .el-popup-desc-bold { font-family: Arial, Helvetica, sans-serif; font-size: 0.92rem; font-weight: 600; color: #2a2a2a; line-height: 1.35; margin: 0 0 10px 0; }
-    .el-popup-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.84rem; font-weight: 400; color: #666666; line-height: 1.4; margin: 0; }
+    .el-popup-title { font-family: var(--font-body); font-size: 1.45rem; font-weight: 700; color: #3a3a3a; margin: 0 0 6px 0; letter-spacing: -0.01em; text-transform: uppercase; }
+    .el-popup-subtitle { font-family: var(--font-body); font-size: 1.2rem; font-weight: 700; color: #F8B2D8; line-height: 1.2; margin: 0 0 14px 0; letter-spacing: 0.02em; }
+    .el-popup-desc-bold { font-family: var(--font-body); font-size: 0.92rem; font-weight: 600; color: #2a2a2a; line-height: 1.35; margin: 0 0 10px 0; }
+    .el-popup-desc { font-family: var(--font-body); font-size: 0.84rem; font-weight: 400; color: #666666; line-height: 1.4; margin: 0; }
     .el-popup-submit-btn {
         width: 100%; height: 50px; border-radius: 25px; border: none;
         display: flex; align-items: center; justify-content: center; gap: 8px;
         background: #F8B2D8 !important; text-decoration: none; cursor: pointer; transition: transform 0.2s;
     }
     .el-popup-submit-btn:hover { transform: scale(1.02); }
-    .el-popup-submit-btn span { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.85rem; color: #ffffff !important; letter-spacing: 0.08em; }
+    .el-popup-submit-btn span { font-family: var(--font-body); font-weight: 700; font-size: 0.85rem; color: #ffffff !important; letter-spacing: 0.08em; }
     @media (min-width: 680px) {
         .el-popup-wrapper { max-width: 760px; background-color: #F0EEEF; }
         .el-popup-container { flex-direction: row; }
@@ -470,7 +470,7 @@ body {
         background-size: 200% auto !important;
         border: 1px solid #85532F !important;
         color: #FFFFFF !important;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+        font-family: var(--font-body) !important;
         font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em;
         text-decoration: none; padding: 10px 45px; border-radius: 4px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(150, 93, 52, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 0.45) !important;
@@ -488,7 +488,7 @@ body {
     .luxury-text-flipper.mobile-flipper { height: 60px; margin: 15px auto; }
     .luxury-text-flipper .flip-word {
         position: absolute; font-size: 3.2rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-        white-space: nowrap; opacity: 0; font-family: Arial, Helvetica, sans-serif;
+        white-space: nowrap; opacity: 0; font-family: var(--font-body);
         transform: rotateX(-90deg) translateZ(50px); transform-origin: 50% 50% -50px;
         transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.4s ease;
         background: linear-gradient(135deg, #3A2218 0%, #5A3826 25%, #C4A484 50%, #7A523A 75%, #3A2218 100%);
@@ -508,14 +508,14 @@ body {
 </style>
 
 <!-- SERUM SHOWCASE SECTION -->
-<section class="elevia-premium-showcase relative w-full overflow-hidden pt-20 pb-16 px-4 text-zinc-900 selection:bg-rose-100" style="background: linear-gradient(to bottom, #f8a1d0 0%, #ffffff 18%, #ffffff 100%); font-family: Arial, Helvetica, sans-serif;">
+<section class="elevia-premium-showcase relative w-full overflow-hidden pt-20 pb-16 px-4 text-zinc-900 selection:bg-rose-100" style="background: linear-gradient(to bottom, #f8a1d0 0%, #ffffff 18%, #ffffff 100%); font-family: var(--font-body);">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
  
     <style>
-        .elevia-premium-showcase * { font-family: Arial, Helvetica, sans-serif !important; }
-        .elevia-premium-showcase h2 { font-family: 'Cormorant Garamond', Georgia, serif !important; }
+        .elevia-premium-showcase * { font-family: var(--font-body) !important; }
+        .elevia-premium-showcase h2 { font-family: var(--font-display) !important; }
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 28s linear infinite; }
         @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
@@ -569,12 +569,12 @@ body {
             <div class="absolute bottom-[-24px] left-1/2 z-20 w-full max-w-[290px] -translate-x-1/2 flex flex-col gap-2.5 px-2">
                 
                 <a href="https://goelevia.mycartpanda.com/checkout/211151069:1" target="_blank" data-i18n="btn_buy_now" class="btn-premium-3d flex w-full justify-center items-center rounded-[5px] py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white text-center" 
-                   style="background: linear-gradient(to right, #b52a5b 0%, #cf4476 35%, #eb6c9a 75%, #fa87b1 100%); font-family: Arial, Helvetica, sans-serif !important;">
+                   style="background: linear-gradient(to right, #b52a5b 0%, #cf4476 35%, #eb6c9a 75%, #fa87b1 100%); font-family: var(--font-body) !important;">
                     Compre Agora
                 </a>
 
                 <a href="https://wa.me/15147536580" target="_blank" data-i18n="btn_whatsapp" class="btn-premium-3d flex w-full justify-center items-center rounded-[5px] py-3.5 text-[11px] font-bold uppercase tracking-[0.22em] text-white text-center" 
-                   style="background: linear-gradient(to right, #0e5c2c 0%, #178241 35%, #22c45e 75%, #4ade80 100%); font-family: Arial, Helvetica, sans-serif !important;">
+                   style="background: linear-gradient(to right, #0e5c2c 0%, #178241 35%, #22c45e 75%, #4ade80 100%); font-family: var(--font-body) !important;">
                     WhatsApp Elevia
                 </a>
 
@@ -587,10 +587,10 @@ body {
                 <span data-i18n="serum_eyebrow">Alta Performance Skin</span>
                 <span class="inline-block h-[1px] w-6 bg-gradient-to-r from-[#c5a55a] to-transparent"></span>
             </div>
-            <h2 class="mb-0" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+            <h2 class="mb-0" style="font-family: var(--font-display) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_1">Sérum</span>
             </h2>
-            <h2 class="mb-4" style="font-family: 'Cormorant Garamond', Georgia, serif !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+            <h2 class="mb-4" style="font-family: var(--font-display) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_2">GHK-CU &amp; PDRN</span>
             </h2>
             <p class="mb-6 text-sm font-normal leading-relaxed md:text-[15px]" style="color: #444444;">
@@ -662,8 +662,8 @@ body {
       <div class="elevia-editorial-photo">
         <div class="elevia-editorial-photo-frame elevia-cream-carousel" aria-label="Galeria de imagens do Elevia Jelly Cream">
           <div class="elevia-cream-carousel-track">
-            <div class="elevia-cream-carousel-slide"><img src="./images/cremejelly1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
-            <div class="elevia-cream-carousel-slide"><img src="./images/jellycream2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide"><img src="./images/pote1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide"><img src="./images/pote2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
           </div>
           <div class="elevia-cream-carousel-dots" aria-label="Selecionar imagem"><button class="elevia-cream-carousel-dot active" type="button" aria-label="Ver primeira imagem"></button><button class="elevia-cream-carousel-dot" type="button" aria-label="Ver segunda imagem"></button></div>
         </div>
@@ -726,13 +726,13 @@ body {
   .elevia-radiance-media { width:100%; max-width:420px; justify-self:center; aspect-ratio:3 / 4; overflow:hidden; border-radius:20px; background:#eef5ff; }
   .elevia-radiance-media img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
   .elevia-radiance-copy { max-width:440px; }
-  .elevia-radiance-copy h2 { margin:0 0 1.35rem; color:#111111; font:400 clamp(2.2rem, 4vw, 3.5rem)/1.05 var(--font-body); letter-spacing:-.04em; }
+  .elevia-radiance-copy h2 { margin:0 0 1.35rem; color:#111111; font:400 clamp(2.2rem, 4vw, 3.5rem)/1.05 var(--font-display); letter-spacing:-.04em; }
   .elevia-radiance-copy p { margin:0; color:#555555; font:400 .92rem/1.85 var(--font-body); }
   @media (max-width:767px) {
     .elevia-radiance-section { padding:4.5rem 1.25rem 5.5rem; }
     .elevia-radiance-inner { grid-template-columns:1fr; gap:2.5rem; }
     .elevia-radiance-media { width:min(100%, 360px); }
-    .elevia-radiance-copy { max-width:none; text-align:left; }
+    .elevia-radiance-copy { max-width:none; text-align:center; margin:0 auto; }
   }
 </style>
 <section class="elevia-radiance-section" aria-labelledby="elevia-radiance-title">
@@ -750,7 +750,7 @@ body {
 <style>
   .elevia-faq-section { background:#ffffff; padding:1rem 1.25rem 7rem; }
   .elevia-faq-inner { width:min(100%, 920px); margin:0 auto; }
-  .elevia-faq-title { margin:0 0 2.6rem; color:#111111; text-align:center; font:400 clamp(2rem, 4vw, 3rem)/1.1 var(--font-body); letter-spacing:-.045em; }
+  .elevia-faq-title { margin:0 0 2.6rem; color:#111111; text-align:center; font:400 clamp(2rem, 4vw, 3rem)/1.1 var(--font-display); letter-spacing:-.045em; }
   .elevia-faq-list { border-top:1px solid rgba(0,0,0,.12); }
   .elevia-faq-item { border-bottom:1px solid rgba(0,0,0,.12); }
   .elevia-faq-item summary { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.35rem 0; color:#181818; cursor:pointer; list-style:none; font:400 .9rem/1.45 var(--font-body); }
@@ -877,21 +877,21 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
             </div>
             <div class="editorial-cards-list">
                 <div class="editorial-card">
-                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">01</div>
+                    <div class="card-editorial-num" style="font-family: var(--font-display) !important; opacity: 0.5;">01</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit1_title">DNA Celular PDRN</h3>
                         <p data-i18n="benefit1_desc">Atua na matriz de regeneração. Devolve textura uniforme e promove um efeito de pele renovada.</p>
                     </div>
                 </div>
                 <div class="editorial-card">
-                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">02</div>
+                    <div class="card-editorial-num" style="font-family: var(--font-display) !important; opacity: 0.5;">02</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit2_title">Sustentação GHK-CU</h3>
                         <p data-i18n="benefit2_desc">Peptídeos estruturados que estimulam colágeno e elastina, devolvendo a firmeza física imediata.</p>
                     </div>
                 </div>
                 <div class="editorial-card">
-                    <div class="card-editorial-num" style="font-family: Arial, Helvetica, sans-serif !important; opacity: 0.5;">03</div>
+                    <div class="card-editorial-num" style="font-family: var(--font-display) !important; opacity: 0.5;">03</div>
                     <div class="card-editorial-content">
                         <h3 class="luxury-black-title" data-i18n="benefit3_title">Luminosidade Inata</h3>
                         <p data-i18n="benefit3_desc">Neutralização do estresse oxidativo. Infusão de viço para um brilho saudável e magnético.</p>
@@ -904,7 +904,7 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
  
 <style>
     /* --- ESTILOS GERAIS --- */
-    .benefits-editorial-section { background-color: #ffffff; position: relative; width: 100%; padding: 40px 0; overflow: hidden; font-family: Arial, Helvetica, sans-serif; }
+    .benefits-editorial-section { background-color: #ffffff; position: relative; width: 100%; padding: 40px 0; overflow: hidden; font-family: var(--font-body); }
     .editorial-grid-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; z-index: 10; position: relative; width: 100%; }
     
     .editorial-image-block { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -929,14 +929,14 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
     @keyframes editorialFloat { 0%, 100% { transform: translateY(-8px); } 50% { transform: translateY(8px); } }
     
     /* --- TEXTOS --- */
-    .editorial-subtitle { font-family: Arial, Helvetica, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.28em; color: #888888; text-transform: uppercase; margin-bottom: 10px; display: block; }
-    .editorial-main-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 400 !important; line-height: 1.1; color: #000000 !important; margin-bottom: 30px; text-transform: none; }
+    .editorial-subtitle { font-family: var(--font-body); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.28em; color: #888888; text-transform: uppercase; margin-bottom: 10px; display: block; }
+    .editorial-main-title { font-family: var(--font-display) !important; font-size: clamp(2.4rem, 4vw, 3.5rem); font-weight: 400 !important; line-height: 1.1; color: #000000 !important; margin-bottom: 30px; text-transform: none; }
     .editorial-main-title span { color: #000000 !important; -webkit-text-fill-color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; }
     .editorial-cards-list { display: flex; flex-direction: column; gap: 12px; }
     .editorial-card { display: flex; gap: 18px; align-items: center; padding: 18px; background: #fff; border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); }
-    .card-editorial-num { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #000000; font-weight: 600; flex-shrink: 0; }
-    .luxury-black-title { font-family: 'Cormorant Garamond', serif !important; font-size: 1.05rem; color: #000000; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-    .card-editorial-content p { font-family: Arial, Helvetica, sans-serif; font-size: 0.82rem; color: #444444; line-height: 1.5; }
+    .card-editorial-num { font-family: var(--font-display); font-size: 1.8rem; color: #000000; font-weight: 600; flex-shrink: 0; }
+    .luxury-black-title { font-family: var(--font-display) !important; font-size: 1.05rem; color: #000000; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .card-editorial-content p { font-family: var(--font-body); font-size: 0.82rem; color: #444444; line-height: 1.5; }
 
     /* =========================================
        📢 COMPORTAMENTO MOBILE (Até 767px)
@@ -989,10 +989,10 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 <style>
   .elevia-science-section { background:#ffffff; padding:5rem 1.25rem 5.5rem; font-family:var(--font-body); }
   .elevia-science-inner { width:min(100%, 1080px); margin:0 auto; }
-  .elevia-science-title { margin:0 0 2.2rem; color:#111111; text-align:center; font:400 clamp(2rem, 4vw, 3rem)/1.1 var(--font-body); letter-spacing:-.045em; }
+  .elevia-science-title { margin:0 0 2.2rem; color:#111111; text-align:center; font:400 clamp(2rem, 4vw, 3rem)/1.1 var(--font-display); letter-spacing:-.045em; }
   .elevia-science-list { display:flex; flex-direction:column; gap:12px; }
   .elevia-science-card { padding:1.35rem 1.65rem 1.45rem; background:#ffffff; border:1px solid rgba(0,0,0,.035); box-shadow:0 8px 24px rgba(0,0,0,.08); }
-  .elevia-science-card h3 { margin:0 0 .75rem; color:#202020; font:400 .9rem/1.35 var(--font-body); }
+  .elevia-science-card h3 { margin:0 0 .75rem; color:#202020; font:400 .9rem/1.35 var(--font-display); }
   .elevia-science-card p { margin:0; color:#666666; font:400 .8rem/1.75 var(--font-body); }
   @media (max-width:767px) { .elevia-science-section { padding:4rem 1.25rem 4.5rem; } .elevia-science-card { padding:1.2rem 1.1rem 1.25rem; } }
 </style>
@@ -1103,7 +1103,7 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 </section>
  
 <style>
-    .ig-section { background-color: #ffffff; width: 100%; padding: 50px 24px; display: flex; justify-content: center; align-items: center; position: relative; font-family: Arial, Helvetica, sans-serif; }
+    .ig-section { background-color: #ffffff; width: 100%; padding: 50px 24px; display: flex; justify-content: center; align-items: center; position: relative; font-family: var(--font-body); }
     .ig-wrapper { width: 100%; max-width: 1140px; display: grid; grid-template-columns: 1fr; gap: 30px; justify-items: stretch; }
     @media (min-width: 992px) { .ig-wrapper { grid-template-columns: 1fr 1fr; } }
     .ig-card-outer { display: flex; flex-direction: column; text-decoration: none; width: 100%; max-width: 540px; padding: 6px; border-radius: 20px; position: relative; isolation: isolate; overflow: hidden; box-shadow: 0 8px 24px rgba(26, 6, 19, 0.04); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease; will-change: transform; }
@@ -1120,25 +1120,25 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
     .ig-avatar-img { width: 100%; height: 100%; object-fit: contain; }
     .ig-header-info { flex: 1; display: flex; flex-direction: column; gap: 1px; }
     .ig-name-row { display: flex; align-items: center; gap: 5px; }
-    .ig-name { font-family: Arial, Helvetica, sans-serif; font-size: 0.98rem; font-weight: 700; color: #000000; }
+    .ig-name { font-family: var(--font-body); font-size: 0.98rem; font-weight: 700; color: #000000; }
     .text-gold-title { color: #2c1e16; letter-spacing: 0.02em; }
     .ig-verified { width: 16px; height: 16px; fill: #0095f6; flex-shrink: 0; }
     .gold-verified { fill: #c5a55a; }
-    .ig-handle { font-family: Arial, Helvetica, sans-serif; font-size: 0.8rem; color: #777777; }
-    .font-mono-sub { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; letter-spacing: 0.12em; color: #9a8a7a; }
+    .ig-handle { font-family: var(--font-body); font-size: 0.8rem; color: #777777; }
+    .font-mono-sub { font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 0.12em; color: #9a8a7a; }
     .ig-icon-btn { background: none; border: none; cursor: pointer; padding: 6px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #777777; transition: background 0.2s ease, color 0.2s ease; flex-shrink: 0; }
     .ig-icon-btn:hover { background: rgba(0,0,0,0.05); color: #000000; }
     .ig-icon-svg { width: 20px; height: 20px; fill: currentColor; }
     .ig-body { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
     .border-left-gold { border-left: 2px solid rgba(197, 165, 90, 0.25); padding-left: 14px; }
-    .ig-line { font-family: Arial, Helvetica, sans-serif; font-size: 0.9rem; line-height: 1.6; color: #444444; margin: 0; }
+    .ig-line { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.6; color: #444444; margin: 0; }
     .font-semibold-custom { font-weight: 700; color: #000000; margin-bottom: 2px; }
     .font-medium-pink { font-weight: 700; color: #000000; }
     .text-muted-custom { color: #555555; }
-    .ig-timestamp { font-family: Arial, Helvetica, sans-serif; font-size: 0.76rem; color: #aaaaaa; display: block; }
+    .ig-timestamp { font-family: var(--font-body); font-size: 0.76rem; color: #aaaaaa; display: block; }
     .ig-footer-social { padding-bottom: 4px; }
     .ig-actions-block { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: auto; }
-    .ig-btn { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: Arial, Helvetica, sans-serif; font-size: 0.88rem; font-weight: 700; padding: 13px 24px; border-radius: 12px; text-decoration: none; transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease; }
+    .ig-btn { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-body); font-size: 0.88rem; font-weight: 700; padding: 13px 24px; border-radius: 12px; text-decoration: none; transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease; }
     .ig-btn-icon { width: 14px; height: 14px; }
     .ig-btn-primary { background: #ff85a1; color: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
     .ig-btn-primary:hover { background: #e8607a; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transform: translateY(-1px); }
@@ -1194,13 +1194,13 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 </section>
  
 <style>
-    .ct-section { background-color: #ffffff; width: 100%; position: relative; overflow: hidden; padding: 60px 24px; font-family: Arial, Helvetica, sans-serif; box-sizing: border-box; }
+    .ct-section { background-color: #ffffff; width: 100%; position: relative; overflow: hidden; padding: 60px 24px; font-family: var(--font-body); box-sizing: border-box; }
     .ct-container { max-width: 1140px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; position: relative; z-index: 10; }
     .ct-left { display: flex; flex-direction: column; gap: 28px; }
-    .ct-title { font-family: 'Arial', Helvetica, sans-serif !important; font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 400 !important; text-transform: none; color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em; line-height: 1.1; margin: 0; }
-    .ct-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.94rem; line-height: 1.7; color: #444444; max-width: 480px; margin: 0; }
-    .ct-details-title { font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; margin: 0 0 12px; }
-    .ct-whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #ff859f !important; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 0.95rem; text-decoration: none; padding: 14px 28px; border-radius: 14px; width: 100%; max-width: 320px; box-sizing: border-box; box-shadow: 0 4px 12px rgba(255, 133, 159, 0.2); transition: all 0.3s ease; text-transform: none; color: #ffffff !important; }
+    .ct-title { font-family: var(--font-display) !important; font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 400 !important; text-transform: none; color: #000000 !important; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em; line-height: 1.1; margin: 0; }
+    .ct-desc { font-family: var(--font-body); font-size: 0.94rem; line-height: 1.7; color: #444444; max-width: 480px; margin: 0; }
+    .ct-details-title { font-family: var(--font-body); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #000000; margin: 0 0 12px; }
+    .ct-whatsapp-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background-color: #ff859f !important; font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; text-decoration: none; padding: 14px 28px; border-radius: 14px; width: 100%; max-width: 320px; box-sizing: border-box; box-shadow: 0 4px 12px rgba(255, 133, 159, 0.2); transition: all 0.3s ease; text-transform: none; color: #ffffff !important; }
     .ct-whatsapp-btn, .ct-whatsapp-btn span, .ct-whatsapp-btn i { color: #ffffff !important; }
     .ct-whatsapp-btn:hover { background-color: #ff6b8b !important; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(255, 133, 159, 0.3); }
     .ct-whatsapp-btn:active { transform: translateY(0); }
@@ -1211,11 +1211,11 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
     .ct-card-outer:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.09); }
     .ct-card-inner { width: 100%; padding: 28px 22px; border-radius: 19px; display: flex; flex-direction: column; gap: 20px; background: linear-gradient(145deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%); border: 1px solid rgba(255,255,255,0.45); }
     .ct-field { display: flex; flex-direction: column; gap: 7px; }
-    .ct-label { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #444444; }
-    .ct-input { width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 0.95rem; font-family: Arial, Helvetica, sans-serif; color: #000000; background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.09); outline: none; transition: 0.25s; }
+    .ct-label { font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #444444; }
+    .ct-input { width: 100%; padding: 14px 16px; border-radius: 12px; font-size: 0.95rem; font-family: var(--font-body); color: #000000; background: rgba(255,255,255,0.65); border: 1px solid rgba(0,0,0,0.09); outline: none; transition: 0.25s; }
     .ct-input::placeholder { color: #999999; }
     .ct-input:focus { background: #ffffff; border-color: rgba(0,0,0,0.3); box-shadow: 0 0 0 3px rgba(0,0,0,0.05); }
-    .ct-submit { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 28px; border-radius: 50px; font-family: Arial, Helvetica, sans-serif; font-weight: 700; text-transform: uppercase; cursor: pointer; border: none !important; background: #111111 !important; color: #ffffff !important; box-shadow: 0 6px 16px rgba(0,0,0,0.15); transition: 0.35s; }
+    .ct-submit { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 28px; border-radius: 50px; font-family: var(--font-body); font-weight: 700; text-transform: uppercase; cursor: pointer; border: none !important; background: #111111 !important; color: #ffffff !important; box-shadow: 0 6px 16px rgba(0,0,0,0.15); transition: 0.35s; }
     .ct-submit:hover { background: #222222 !important; box-shadow: 0 8px 22px rgba(0,0,0,0.25); transform: translateY(-2px); }
     .ct-submit span { color: #ffffff !important; }
     .ct-submit svg { width: 16px; height: 16px; transition: transform 0.3s; color: #ffffff !important; }
@@ -1226,8 +1226,8 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 
 <style>
   .elevia-client-counter-section { background:#ffffff; padding:2.8rem 1.25rem 1.2rem; text-align:center; }
-  .elevia-client-counter { margin:0; font:700 clamp(3.8rem, 9vw, 6.5rem)/.9 Arial, Helvetica, sans-serif; letter-spacing:-.07em; background:linear-gradient(115deg, #5a5a5a 0%, #eeeeee 18%, #7b7b7b 36%, #ffffff 50%, #a8a8a8 68%, #3d3d3d 100%); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; text-shadow:0 3px 10px rgba(0,0,0,.12); animation:eleviaMetallicShimmer 7s linear infinite; }
-  .elevia-client-counter-label { margin:.9rem 0 0; color:#333333; font:400 1rem/1.4 Arial, Helvetica, sans-serif; }
+  .elevia-client-counter { margin:0; font:700 clamp(3.8rem, 9vw, 6.5rem)/.9 var(--font-display); letter-spacing:-.07em; background:linear-gradient(115deg, #5a5a5a 0%, #eeeeee 18%, #7b7b7b 36%, #ffffff 50%, #a8a8a8 68%, #3d3d3d 100%); background-size:220% auto; -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; text-shadow:0 3px 10px rgba(0,0,0,.12); animation:eleviaMetallicShimmer 7s linear infinite; }
+  .elevia-client-counter-label { margin:.9rem 0 0; color:#333333; font:400 1rem/1.4 var(--font-body); }
   @keyframes eleviaMetallicShimmer { 0% { background-position:200% center; } 100% { background-position:-20% center; } }
 </style>
 <section class="elevia-client-counter-section" aria-label="Clientes pelo mundo">
@@ -1310,11 +1310,11 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 </section>
 
 <style>
-    .gallery-section { padding: 80px 0; background-color: #ffffff; font-family: Arial, Helvetica, sans-serif; overflow: hidden; width: 100%; box-sizing: border-box; }
+    .gallery-section { padding: 80px 0; background-color: #ffffff; font-family: var(--font-body); overflow: hidden; width: 100%; box-sizing: border-box; }
     .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; box-sizing: border-box; }
     .gallery-header { display: block; text-align: center; margin-bottom: 40px; }
     .gallery-title-group { display: flex; flex-direction: column; align-items: center; gap: 16px; max-width: 800px; margin: 0 auto; text-align: center !important; }
-    .gallery-main-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important; font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; color: #000000; margin: 0; letter-spacing: -0.02em; text-align: center !important; }
+    .gallery-main-title { font-family: var(--font-display) !important; font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; color: #000000; margin: 0; letter-spacing: -0.02em; text-align: center !important; }
     .gallery-description { max-width: 760px; font-size: 0.95rem; line-height: 1.6; color: #666666; margin: 0 auto; text-align: center !important; }
     .gallery-controls-desktop { display: none; justify-content: center; gap: 12px; margin-top: 22px; }
     .gallery-arrow-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e5e5e5; background-color: transparent; color: #000000; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; }
@@ -1337,7 +1337,7 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 <style>
   .elevia-technology-section { background:#ffffff; padding:5rem 1.25rem 5.5rem; font-family:var(--font-body); }
   .elevia-technology-inner { width:min(100%, 1060px); margin:0 auto; }
-  .elevia-technology-title { margin:0 0 .8rem; color:#d34f82; text-align:center; font:700 clamp(2rem, 4vw, 2.8rem)/1.1 var(--font-body); letter-spacing:-.03em; }
+  .elevia-technology-title { margin:0 0 .8rem; color:#d34f82; text-align:center; font:700 clamp(2rem, 4vw, 2.8rem)/1.1 var(--font-display); letter-spacing:-.03em; }
   .elevia-technology-description { max-width:760px; margin:0 auto 2.5rem; color:#333333; text-align:center; font:400 .9rem/1.6 var(--font-body); }
   .elevia-technology-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; max-width:900px; margin:0 auto; }
   .elevia-technology-card { width:100%; max-width:290px; justify-self:center; aspect-ratio:1 / 1.18; overflow:hidden; border-radius:12px; background:#f3eee8; }
@@ -1382,20 +1382,20 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
 <!-- FOOTER -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-    .site-footer { background-color: #ffffff; color: #000000; padding: 40px 24px; font-family: Arial, Helvetica, sans-serif; border-top: 1px solid rgba(0,0,0,0.06); }
+    .site-footer { background-color: #ffffff; color: #000000; padding: 40px 24px; font-family: var(--font-body); border-top: 1px solid rgba(0,0,0,0.06); }
     .ft-container { max-width: 1140px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 32px; }
     .ft-main-layout { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px; }
     .ft-brand-block { display: flex; flex-direction: column; align-items: center; gap: 12px; }
     .ft-logo-img { height: 38px; width: auto; display: block; }
-    .ft-brand-desc { font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; line-height: 1.5; color: #666666; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; }
+    .ft-brand-desc { font-family: var(--font-body); font-size: 0.72rem; line-height: 1.5; color: #666666; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; }
     .ft-info-block { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-    .ft-info-item { font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; color: #555555; margin: 0; display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .ft-text-link { font-family: Arial, Helvetica, sans-serif; font-size: 0.85rem; font-weight: 700; color: #000000; text-decoration: underline; transition: 0.3s; }
+    .ft-info-item { font-family: var(--font-body); font-size: 0.85rem; color: #555555; margin: 0; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .ft-text-link { font-family: var(--font-body); font-size: 0.85rem; font-weight: 700; color: #000000; text-decoration: underline; transition: 0.3s; }
     .ft-text-link:hover { color: #ff2a85; }
     .ft-social-links { list-style: none; padding: 0; margin: 0; display: flex; gap: 24px; }
     .ft-social-links a { color: #888888; font-size: 1.35rem; transition: 0.3s; }
     .ft-social-links a:hover { color: #ff2a85; }
-    .ft-bottom-bar { padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.04); text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 0.72rem; color: #888888; text-transform: uppercase; }
+    .ft-bottom-bar { padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.04); text-align: center; font-family: var(--font-body); font-size: 0.72rem; color: #888888; text-transform: uppercase; }
     @media (min-width: 992px) { .ft-main-layout { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; } .ft-brand-block, .ft-info-block { align-items: flex-start; } }
 </style>
  
@@ -1941,5 +1941,78 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 </script>
 
+<style id="elevia-typography-overrides">
+  /* Hierarquia editorial final: Nunito para títulos, nomes e subtítulos. PT Sans permanece nos textos de apoio e na interface. */
+  h1, h2, h3, h4, h5, h6,
+  .luxury-text-flipper .flip-word,
+  .elevia-products-eyebrow,
+  .elevia-products-heading h2,
+  .elevia-editorial-number,
+  .elevia-editorial-copy h3,
+  .elevia-editorial-copy h3 span,
+  .elevia-radiance-copy h2,
+  .elevia-faq-title,
+  .elevia-faq-item summary,
+  .editorial-subtitle,
+  .editorial-main-title,
+  .editorial-main-title span,
+  .card-editorial-num,
+  .luxury-black-title,
+  .elevia-science-title,
+  .elevia-science-card h3,
+  .ig-name,
+  .ig-line.font-semibold-custom,
+  .ct-title,
+  .ct-details-title,
+  .gallery-main-title,
+  .elevia-technology-title,
+  .el-popup-title,
+  .el-popup-subtitle,
+  .elevia-client-counter {
+    font-family: var(--font-display) !important;
+  }
+
+  /* Elementos que ficam dentro de títulos, mas eram sobrescritos pelo seletor global de span. */
+  .elevia-premium-showcase h2,
+  .elevia-premium-showcase h2 span,
+  .elevia-premium-showcase [data-i18n="serum_eyebrow"],
+  .elevia-products-heading [data-i18n="catalog_eyebrow"],
+  [data-i18n="hero_subtitle"],
+  [data-i18n="benefits_eyebrow"],
+  [data-i18n="cream_title_1"],
+  [data-i18n="cream_title_2"],
+  [data-i18n="kit_title_1"],
+  [data-i18n="kit_title_2"],
+  [data-i18n="pouch_title_1"],
+  [data-i18n="pouch_title_2"] {
+    font-family: var(--font-display) !important;
+  }
+
+  /* Descrições, métricas, botões, campos e demais textos funcionais permanecem em DM Sans. */
+  p, a, li, input, button, label, textarea,
+  .elevia-products-heading p,
+  .elevia-editorial-copy p,
+  .elevia-editorial-detail,
+  .elevia-editorial-detail strong,
+  .elevia-editorial-detail span,
+  .elevia-benefit-label,
+  .elevia-benefit-badge,
+  .elevia-premium-showcase .btn-premium-3d,
+  .elevia-premium-showcase .serum_eyebrow,
+  .elevia-premium-showcase p,
+  .ig-handle,
+  .ig-line:not(.font-semibold-custom),
+  .ig-timestamp,
+  .ct-desc,
+  .ct-label,
+  .ct-input,
+  .ct-submit,
+  .gallery-description,
+  .elevia-technology-description,
+  .elevia-client-counter-label,
+  .site-footer {
+    font-family: var(--font-body) !important;
+  }
+</style>
 </body>
 </html>
