@@ -1075,7 +1075,7 @@ document.querySelectorAll('.elevia-editorial-photo-frame[data-image-url]').forEa
                         </div>
                         <div class="ig-header-info">
                             <div class="ig-name-row">
-                                <span class="ig-name text-gold-title">BRO Pharmaceuticals</span>
+                                <span class="ig-name text-gold-title">BRO PHARMACEUTICALS</span>
                                 <svg class="ig-verified gold-verified" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                             </div>
                             <span class="ig-handle font-mono-sub" data-i18n="verify_system">SECURE PACKAGING SYSTEM</span>
@@ -2012,6 +2012,48 @@ document.addEventListener('DOMContentLoaded', () => {
   .elevia-client-counter-label,
   .site-footer {
     font-family: var(--font-body) !important;
+  }
+</style>
+<style id="elevia-title-style">
+  /* Títulos e nomes de produtos seguem a mesma referência visual: Nunito, preto e regular. */
+  h1, h2, h3, h4, h5, h6,
+  .elevia-products-heading h2,
+  .elevia-editorial-copy h3,
+  .elevia-editorial-copy h3 span,
+  .elevia-radiance-copy h2,
+  .elevia-faq-title,
+  .editorial-main-title,
+  .luxury-black-title,
+  .elevia-science-title,
+  .elevia-science-card h3,
+  .ig-name,
+  .ig-line.font-semibold-custom,
+  .ct-title,
+  .ct-details-title,
+  .gallery-main-title,
+  .elevia-technology-title,
+  .el-popup-title,
+  .el-popup-subtitle {
+    font-family: var(--font-display) !important;
+    font-weight: 400 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+  }
+</style>
+<style id="elevia-hero-brown-style">
+  /* O texto animado do hero preserva o destaque marrom original. */
+  .luxury-text-flipper .flip-word,
+  .luxury-text-flipper .flip-word.active,
+  .luxury-text-flipper .flip-word.leaving {
+    font-family: var(--font-display) !important;
+    font-weight: 700 !important;
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background: linear-gradient(135deg, #3A2218 0%, #5A3826 25%, #C4A484 50%, #7A523A 75%, #3A2218 100%) !important;
+    background-size: 200% auto !important;
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    filter: drop-shadow(0 0 10px rgba(196, 164, 132, 0.3));
   }
 </style>
 <style id="elevia-pot-size-adjustment">
