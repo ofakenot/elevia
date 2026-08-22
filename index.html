@@ -662,8 +662,8 @@ body {
       <div class="elevia-editorial-photo">
         <div class="elevia-editorial-photo-frame elevia-cream-carousel" aria-label="Galeria de imagens do Elevia Jelly Cream">
           <div class="elevia-cream-carousel-track">
-            <div class="elevia-cream-carousel-slide"><img src="./images/pote1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
-            <div class="elevia-cream-carousel-slide"><img src="./images/pote2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide"><img class="elevia-jelly-image elevia-jelly-image--pote1" src="./images/pote1.png" alt="Elevia Jelly Cream" loading="lazy"></div>
+            <div class="elevia-cream-carousel-slide"><img class="elevia-jelly-image elevia-jelly-image--pote2" src="./images/pote2.png" alt="Elevia Jelly Cream — imagem adicional" loading="lazy"></div>
           </div>
           <div class="elevia-cream-carousel-dots" aria-label="Selecionar imagem"><button class="elevia-cream-carousel-dot active" type="button" aria-label="Ver primeira imagem"></button><button class="elevia-cream-carousel-dot" type="button" aria-label="Ver segunda imagem"></button></div>
         </div>
@@ -2012,6 +2012,13 @@ document.addEventListener('DOMContentLoaded', () => {
   .elevia-client-counter-label,
   .site-footer {
     font-family: var(--font-body) !important;
+  }
+</style>
+<style id="elevia-pot-size-adjustment">
+  /* O segundo pote fica discretamente maior, preservando o enquadramento do carrossel. */
+  .elevia-cream-carousel-slide img.elevia-jelly-image--pote2 {
+    transform: scale(1.08);
+    transform-origin: center center;
   }
 </style>
 </body>
