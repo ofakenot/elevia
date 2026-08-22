@@ -587,10 +587,10 @@ body {
                 <span data-i18n="serum_eyebrow">Alta Performance Skin</span>
                 <span class="inline-block h-[1px] w-6 bg-gradient-to-r from-[#c5a55a] to-transparent"></span>
             </div>
-            <h2 class="mb-0" style="font-family: var(--font-display) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+            <h2 class="mb-0 elevia-product-name-reference" style="font-family: var(--font-body) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.0; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_1">Sérum</span>
             </h2>
-            <h2 class="mb-4" style="font-family: var(--font-display) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
+            <h2 class="mb-4 elevia-product-name-reference" style="font-family: var(--font-body) !important; font-size: clamp(2.6rem, 5vw, 3.8rem); font-weight: 400; line-height: 1.1; color: #000000; background: none !important; -webkit-background-clip: unset !important; -webkit-text-fill-color: #000000 !important; background-clip: unset !important; letter-spacing: 0.01em;">
                 <span data-i18n="serum_title_2">GHK-CU &amp; PDRN</span>
             </h2>
             <p class="mb-6 text-sm font-normal leading-relaxed md:text-[15px]" style="color: #444444;">
@@ -2037,6 +2037,30 @@ document.addEventListener('DOMContentLoaded', () => {
   .el-popup-subtitle {
     font-family: var(--font-display) !important;
     font-weight: 400 !important;
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+  }
+</style>
+<style id="elevia-product-name-style">
+  /* Nomes de produtos: sans regular, caixa alta e espaçamento editorial como na referência. */
+  .elevia-editorial-copy h3,
+  .elevia-editorial-copy h3 span,
+  .elevia-radiance-copy h2,
+  .elevia-product-name-reference,
+  .elevia-product-name-reference span,
+  .elevia-faq-title,
+  .editorial-main-title,
+  .editorial-main-title span,
+  .elevia-science-title,
+  .ct-title,
+  .gallery-main-title,
+  .elevia-technology-title {
+    font-family: var(--font-body) !important;
+    font-size: clamp(2.1rem, 4.5vw, 3.6rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.05 !important;
+    letter-spacing: .02em !important;
+    text-transform: uppercase !important;
     color: #000000 !important;
     -webkit-text-fill-color: #000000 !important;
   }
